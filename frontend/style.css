@@ -1,9 +1,10 @@
 
 body{ background-color: white; margin: 0;}
-header{padding: 7px; box-shadow: 2px 2px 5px; background-color: rgb(58, 194, 194); text-align:center;}
+header{padding: 7px; box-shadow: 2px 2px 5px; background-color: #0c243c; text-align:center;}
 #para{color:  red;}
 .box{border: 2px solid; margin-bottom:5px; height: auto; width: 50%; padding: 15px;}
 #no1{text-align: center;}
+#titleThing{color : fdc500;}
 
 *{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
