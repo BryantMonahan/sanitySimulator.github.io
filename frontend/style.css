@@ -1,5 +1,5 @@
 
-body{ background-color: white; margin: 0;}
+body{ background-color: rgb(127, 163, 240); margin: 0;}
 header{padding: 7px; box-shadow: 2px 2px 5px; background-color: #0c243c; text-align:center;}
 #para{color:  red;}
 .box{border: 2px solid; margin-bottom:5px; height: auto; width: 50%; padding: 15px;}
@@ -35,6 +35,8 @@ main{margin: 25px;
 
 .navbar li{
     float: left;
+    margin-right: 6%;
+    margin-left: 6%;
 }
 
 .navbar a:hover{
