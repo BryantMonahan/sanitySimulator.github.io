@@ -68,8 +68,20 @@ main{margin: 25px;
     margin-bottom: 10%;
 }
 
+.center_elements{
+text-align: center;
+margin-left:12%; margin-right:12%;
+}
 
+.float_left{
+    float: right;
+    margin-left:12%; margin-right:12%;
+}
 
+.float_right{
+    float: left;
+    margin-left:12%; margin-right:12%;
+}
 
 .navbar a:hover{
     background-color: rgb(211, 211, 211);
@@ -92,4 +104,4 @@ a:visited{
     transform: scale(1.05);
     transition: 50% 0.5s;
 }
- 
+
