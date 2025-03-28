@@ -74,11 +74,6 @@ margin-left:12%; margin-right:12%;
 align-items: center;
 }
 
-#left_of_fred{
-    margin-left: 12%;
-    margin-right: 12%;
-    border: #D8315B 2px solid;
-}
 
 .float_left{
     float: left;
