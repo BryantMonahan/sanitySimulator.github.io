@@ -18,7 +18,13 @@ h1, h2{
 
 h3{
     color : #D8315B;
+    text-align: left;
 }
+
+p{
+    text-align: left;
+}
+
 
 .logo{
     width: 80px;
@@ -89,6 +95,9 @@ align-items: center;
     text-align: left;
 }
 
+.footer{
+    text-align: center;
+}
 
 .float_left{
     float: left;
