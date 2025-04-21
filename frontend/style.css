@@ -26,6 +26,13 @@ h3, h4{
     text-align: left;
 }
 
+#home_header{
+    text-align: center;
+}
+
+#mortgage_label{
+    text-align: center;
+}
 p{
     text-align: left;
     font-family: 'Work Sans';
@@ -84,13 +91,26 @@ main{margin: 25px;
 }
 .icons {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center; 
     height: 250px; 
     width: 250px;
-    margin-bottom: 10%;
+  /*  margin-bottom: 10%; */
 }
 
+.free_icons{
+    
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+}
+
+.label{
+    padding: 0%;
+    margin: 0%;
+}
 .center_elements{
 text-align: center;
 margin-left:12%; margin-right:12%;
