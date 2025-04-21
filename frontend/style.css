@@ -6,6 +6,9 @@ header{padding: 7px; box-shadow: 2px 2px 5px; background-color: #ffffff; text-al
 #no1{text-align: center;}
 footer{align-self: center; align-items: center; text-align: center;}
 
+li{
+    text-align: left;
+}
 *{
     font-family: 'Work Sans', Verdana, Geneva, Tahoma, sans-serif;
     color: rgb(0, 0, 0);
@@ -17,7 +20,7 @@ h1, h2{
     font-family: 'Work Sans', 'Times New Roman', Times, serif ;
 }
 
-h3{
+h3, h4{
     color : #000000;
     /*#D8315B*/
     text-align: left;
@@ -126,7 +129,7 @@ a:active{
     color: red;
 }
 a:visited{
-    color: grey;
+    color: rgb(0, 0, 0);
 }
 
 .windows:hover{
