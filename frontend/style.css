@@ -1,5 +1,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');body{ background-color: #ffffff; margin: 0;}
+
+/*This beautiful line of code hides the spinner for the number input in the most relevant browsers */
+/* Chrome, Safari, Edge, Opera */input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {-webkit-appearance: none;margin: 0;}/* Firefox */input[type=number] {-moz-appearance: textfield;}
+
 header{padding: 7px; box-shadow: 2px 2px 5px; background-color: #ffffff; text-align:center;}
 #para{color:  rgb(255, 255, 255);}
 .box{border: 2px solid; margin-bottom:5px; height: auto; width: 50%; padding: 15px;}
@@ -110,6 +114,10 @@ input[type=text]:focus {
     border: 3px solid #555;
   }
 
+.graph_input{
+    justify-content: left;
+    text-align: justify;
+}
 .label{
     padding: 0%;
     margin: 0%;

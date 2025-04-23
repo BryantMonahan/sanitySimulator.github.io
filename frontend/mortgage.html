@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html>
-<link rel="icon" type="images/png" href="/frontend/images/newLogoPng.png">
+<!DOCTYPE html >
+<html lang="en">
+    <link rel="icon" type="images/png" href="/frontend/images/newLogoPng.png">
     <body>
     <header>
         <title>Money Movement - Mortgages</title>
@@ -93,8 +93,40 @@
                 flat, showing only modest growth since the 1970s. This growing disparity indicates that home prices have far outpaced income growth, making housing less affordable 
                 for many Americans. 
                 <br><br>
-                This widening gap suggests increasing financial strain on homebuyers as wages fail to keep pace with rising housing costs.</p>
+                This widening gap suggests increasing financial strain on homebuyers as wages fail to keep pace with rising housing costs.
+            </p>
         </div>
+
+        <br><br>
+    <div class="graph_input">
+            <label for="inital">Initial Amount:</label>
+            <input type="number" id="inital" name="inital" min="0" required><br>
+          
+            <label for="interest">Interest:</label>
+            <input type="number" id="interest" name="interest" min="0" max="100" required><br>
+          
+            <label for="length">Length of Time:</label>
+            <input type="number" id="length" name="length" min="0" max="150" required><br>
+          
+            <label for="contribution">Monthly Contribution:</label>
+            <input type="number" id="contribution" name="contribution" min="0" max="10000000"><br>
+          
+            <label for="interval">Compounding Interval:</label>
+            <select id="interval" name="interval">
+              <option value="monthly">Monthly</option>
+              <option value="yearly">Yearly</option>
+              <option value="weekly">Weekly</option>
+              <option value="daily">Daily</option>
+            </select>
+            <br>
+          
+            <button id="compoundCalculate" type="submit">Calculate</button>
+          
+     </div>
+     <div class = "center_elements">
+         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    </div>
+            
         <br><br><br><br><br><br>
     <footer style="color:black; text-align:center;">
         <hr>
@@ -102,4 +134,6 @@
         <p class = "footer">Copyright © 2025</p>
     </footer>
     </body>
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+    <script src="mortgage.js"></script>
 </html>
