@@ -1,6 +1,6 @@
 const graphHeader = document.getElementById("graph_header");
 
-document.getElementById("compoundCalculate").onclick = function() {
+document.getElementById("compoundCalculate").onclick = function () {
     console.log("THIS RAAN");
 
     // Get the values from the input fields
@@ -18,26 +18,28 @@ document.getElementById("compoundCalculate").onclick = function() {
 
 }
 
-function calculatePoints(inital, rate, time, contribution, interval){
+// this may need to be used with callbacks to get the data points for the graph
+// ill need to play around with larger data sets to see how it performs
+function calculatePoints(inital, rate, time, contribution, interval) {
 
 }
 
-function loadChart(realDataPoints, contributedDataPoints){
+function loadChart(realDataPoints, contributedDataPoints) {
     var chart = new CanvasJS.Chart("chartContainer", {
         theme: "light2",
         title: {
             text: ""
         },
-        toolTip:{
+        toolTip: {
             shared: true
         },
-        options:{
+        options: {
             responsive: true
         },
-        axisX:{
+        axisX: {
             title: "Time in Months"
         },
-        axisY:{
+        axisY: {
             prefix: "$"
         },
         data: [{
@@ -47,7 +49,7 @@ function loadChart(realDataPoints, contributedDataPoints){
             toolTipContent: "Month:{x}<br>Value:${y}",
             dataPoints: realDataPoints
         }
-        , {
+            , {
             type: "line",
             lineColor: "#D8315B",
             markerColor: "maroon",
@@ -58,8 +60,8 @@ function loadChart(realDataPoints, contributedDataPoints){
     });
 
     // this changes the text above the graph to display the total amount after the specified time period
-    var time = Math.round(realDataPoints.length / 12);
-    if(length != 1){
+    var time = Math.round(realDataPoints.length / 12); // replace time with length once the creat points function is made
+    if (length != 1) {
         graphHeader.innerText = `Your total amount after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}`;
     } else {
         graphHeader.innerText = `Your total amount after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}`;
@@ -67,12 +69,11 @@ function loadChart(realDataPoints, contributedDataPoints){
     chart.render();
 }
 
-window.onload = function() {
+window.onload = function () {
 
-    var realDataPoints = [{"x":0,"y":10000},{"x":1,"y":10125},{"x":2,"y":10251.56},{"x":3,"y":10379.61}];
-    var contributedDataPoints = [{"x":0,"y":10000}, {"x":1,"y":10000},{"x":2,"y":10000},{"x":3,"y":10000}];
-    
+    var realDataPoints = [{ "x": 0, "y": 10000 }, { "x": 1, "y": 10125 }, { "x": 2, "y": 10251.56 }, { "x": 3, "y": 10379.61 }];
+    var contributedDataPoints = [{ "x": 0, "y": 10000 }, { "x": 1, "y": 10000 }, { "x": 2, "y": 10000 }, { "x": 3, "y": 10000 }];
+
     loadChart(realDataPoints, contributedDataPoints);
 }
 
-    

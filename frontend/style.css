@@ -1,75 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');body{ background-color: #ffffff; margin: 0;}
+body {
+    background-color: #ffffff;
+    margin: 0;
+}
 
 /*This beautiful line of code hides the spinner for the number input in the most relevant browsers */
-/* Chrome, Safari, Edge, Opera */input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {-webkit-appearance: none;margin: 0;}/* Firefox */input[type=number] {-moz-appearance: textfield;}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
-header{padding: 7px; box-shadow: 2px 2px 5px; background-color: #ffffff; text-align:center;}
-#para{color:  rgb(255, 255, 255);}
-.box{border: 2px solid; margin-bottom:5px; height: auto; width: 50%; padding: 15px;}
-#no1{text-align: center;}
-footer{align-self: center; align-items: center; text-align: center;}
-button{cursor: pointer;}
-#graph_header{
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+header {
+    padding: 7px;
+    box-shadow: 2px 2px 5px;
+    background-color: #ffffff;
     text-align: center;
-    margin-top: 5%;}
+}
 
-li{
+#para {
+    color: rgb(255, 255, 255);
+}
+
+.box {
+    border: 2px solid;
+    margin-bottom: 5px;
+    height: auto;
+    width: 50%;
+    padding: 15px;
+}
+
+#no1 {
+    text-align: center;
+}
+
+footer {
+    align-self: center;
+    align-items: center;
+    text-align: center;
+}
+
+button {
+    cursor: pointer;
+}
+
+#graph_header {
+    text-align: center;
+    margin-top: 5%;
+}
+
+li {
     text-align: left;
 }
-*{
+
+* {
     font-family: 'Work Sans', Verdana, Geneva, Tahoma, sans-serif;
     color: rgb(0, 0, 0);
     animation-name: slideLeft;
     animation-duration: .5s;
 }
 
-h1, h2{
-    font-family: 'Work Sans', 'Times New Roman', Times, serif ;
+h1,
+h2 {
+    font-family: 'Work Sans', 'Times New Roman', Times, serif;
 }
 
-h3, h4{
-    color : #000000;
+h3,
+h4 {
+    color: #000000;
     /*#D8315B*/
     text-align: left;
 }
 
-#home_header{
+#home_header {
     text-align: center;
 }
 
-#mortgage_label{
+#mortgage_label {
     text-align: center;
 }
-p{
+
+p {
     text-align: left;
     font-family: 'Work Sans';
 }
 
 
-.logo{
+.logo {
     width: 80px;
     height: 80px;
-    float:left;
+    float: left;
     margin: 0 auto;
     display: block;
 }
 
-main{margin: 25px;
+main {
+    margin: 25px;
 }
 
-.navbar ul{
+.navbar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color:darkgray;
+    background-color: darkgray;
     display: flex;
     justify-content: space-around;
     width: 100%;
 }
 
-.navbar a{
+.navbar a {
     text-decoration: none;
     display: block;
     padding: 5px;
@@ -77,10 +124,11 @@ main{margin: 25px;
 }
 
 
-.navbar li{
+.navbar li {
     margin: 0;
 }
-.options{
+
+.options {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -88,26 +136,28 @@ main{margin: 25px;
     min-height: 30vh;
     width: 100%;
     gap: 0px;
-   
+
 }
-.windows{
+
+.windows {
     width: 250px;
     height: 250px;
     background-color: rgb(201, 193, 193);
     margin: 10px;
     box-shadow: 0px 10px 10px 0px #ffffff;
 }
+
 .icons {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; 
-    height: 250px; 
+    align-items: center;
+    height: 250px;
     width: 250px;
-  /*  margin-bottom: 10%; */
+    /*  margin-bottom: 10%; */
 }
 
-.free_icons{
+.free_icons {
     justify-content: center;
     align-items: center;
     justify-self: center;
@@ -116,26 +166,30 @@ main{margin: 25px;
 
 input[type=text]:focus {
     border: 3px solid #555;
-  }
-.graph_holder{
+}
+
+.graph_holder {
     display: flex;
     border: #27b41d solid 1px;
 }
 
-#graph_header{
+#graph_header {
     align-self: center;
     width: 100%;
 }
 
-.graph{
+.graph {
     width: 100%;
 }
-#chartContainer{
+
+#chartContainer {
     border: #000000 solid 1px;
     align-self: center;
-    width: 100%;;
+    width: 100%;
+    ;
 }
-.graph_input{
+
+.graph_input {
     display: flex;
     justify-content: space-around;
     text-align: justify;
@@ -145,58 +199,64 @@ input[type=text]:focus {
     border: #000000 solid 1px;
 }
 
-.wrapped{
-        width: -moz-available;
-        width: -webkit-fill-available;
-        width: fill-available;
+.wrapped {
+    width: -moz-available;
+    width: -webkit-fill-available;
+    width: fill-available;
 }
-.label{
+
+.label {
     padding: 0%;
     margin: 0%;
 }
-.center_elements{
-text-align: center;
-margin-left:12%; margin-right:12%;
-align-items: center;
+
+.center_elements {
+    text-align: center;
+    margin-left: 12%;
+    margin-right: 12%;
+    align-items: center;
 }
 
-.pageHeader{
+.pageHeader {
     text-align: left;
 }
 
-.footer{
+.footer {
     text-align: center;
 }
 
-.float_left{
+.float_left {
     float: left;
-    margin-left:12%; margin-right:12%;
+    margin-left: 12%;
+    margin-right: 12%;
 }
 
-.float_right{
+.float_right {
     float: right;
-    margin-left:12%; margin-right:12%;
+    margin-left: 12%;
+    margin-right: 12%;
 }
 
-.navbar a:hover{
+.navbar a:hover {
     background-color: rgb(211, 211, 211);
 }
 
-a:hover{
-    color:#D8315B;
+a:hover {
+    color: #D8315B;
 }
-a:active{
+
+a:active {
     font-size: 1.1em;
     color: red;
 }
+
 /**
 a:visited{
     color: rgb(0, 0, 0);
 }
 **/
 
-.windows:hover{
+.windows:hover {
     transform: scale(1.05);
     transition: 50% 0.5s;
 }
-
