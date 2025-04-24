@@ -9,6 +9,10 @@ header{padding: 7px; box-shadow: 2px 2px 5px; background-color: #ffffff; text-al
 .box{border: 2px solid; margin-bottom:5px; height: auto; width: 50%; padding: 15px;}
 #no1{text-align: center;}
 footer{align-self: center; align-items: center; text-align: center;}
+button{cursor: pointer;}
+#graph_header{
+    text-align: center;
+    margin-top: 5%;}
 
 li{
     text-align: left;
