@@ -117,10 +117,38 @@ main{margin: 25px;
 input[type=text]:focus {
     border: 3px solid #555;
   }
+.graph_holder{
+    display: flex;
+    border: #27b41d solid 1px;
+}
 
+#graph_header{
+    align-self: center;
+    width: 100%;
+}
+
+.graph{
+    width: 100%;
+}
+#chartContainer{
+    border: #000000 solid 1px;
+    align-self: center;
+    width: 100%;;
+}
 .graph_input{
-    justify-content: left;
+    display: flex;
+    justify-content: space-around;
     text-align: justify;
+    width: 16%;
+    flex-direction: column;
+    float: left;
+    border: #000000 solid 1px;
+}
+
+.wrapped{
+        width: -moz-available;
+        width: -webkit-fill-available;
+        width: fill-available;
 }
 .label{
     padding: 0%;

@@ -98,21 +98,22 @@
         </div>
 
         <br><br>
+<div class ="graph_holder">
     <div class="graph_input">
-            <label for="inital">Initial Amount:</label>
-            <input type="number" id="inital" name="inital" min="0" required><br>
+            <!-- <label for="inital">Initial Amount:</label> -->
+            <input class="wrapped" type="number" id="inital" name="inital" min="0" placeholder="Inital Amount"><br>
           
-            <label for="interest">Interest:</label>
-            <input type="number" id="interest" name="interest" min="0" max="100" required><br>
+            <!-- <label for="interest">Interest:</label> -->
+            <input class="wrapped"type="number" id="interest" name="interest" min="0" max="100" placeholder="Interest Rate" required><br>
           
-            <label for="length">Length of Time:</label>
-            <input type="number" id="length" name="length" min="0" max="150" required><br>
+            <!-- <label for="length">Length of Time:</label> -->
+            <input class="wrapped" type="number" id="length" name="length" min="0" max="150" placeholder="# of Years" required><br>
           
-            <label for="contribution">Monthly Contribution:</label>
-            <input type="number" id="contribution" name="contribution" min="0" max="10000000"><br>
+            <!-- <label for="contribution">Monthly Contribution:</label> -->
+            <input class="wrapped" type="number" id="contribution" name="contribution" min="0" max="1000000" placeholder="Monthly Contribution"><br>
           
-            <label for="interval">Compounding Interval:</label>
-            <select id="interval" name="interval">
+           <!-- <label for="interval">Compound Frequency:</label><br> -->
+            <select class="wrapped" id="interval" name="interval" placeholder="Monthly">
               <option value="monthly">Monthly</option>
               <option value="yearly">Yearly</option>
               <option value="weekly">Weekly</option>
@@ -123,10 +124,11 @@
             <button id="compoundCalculate" type="submit">Calculate</button>
           
      </div>
-     <div class = "center_elements">
+     <div class="graph">
         <p id="graph_header"></p> <!--Leave this alone, the js file will use this to display to total accrued amount-->
-         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+         <div id="chartContainer" style="height: 370px;"></div>
     </div>
+</div>
             
         <br><br><br><br><br><br>
     <footer style="color:black; text-align:center;">

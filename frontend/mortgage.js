@@ -44,7 +44,7 @@ function loadChart(realDataPoints, contributedDataPoints){
             type: "line",
             lineColor: "#4BC0C0",
             yValueFormatString: "#,###",
-            toolTipContent: "Value:${y} | Month:{x}",
+            toolTipContent: "Month:{x}<br>Value:${y}",
             dataPoints: realDataPoints
         }
         , {
@@ -52,14 +52,17 @@ function loadChart(realDataPoints, contributedDataPoints){
             lineColor: "#D8315B",
             markerColor: "maroon",
             yValueFormatString: "#,###",
-            toolTipContent: "Contributed:${y} | Month:{x}",
+            toolTipContent: "Contributed:${y}",
             dataPoints: contributedDataPoints
         }]
     });
+
+    // this changes the text above the graph to display the total amount after the specified time period
+    var time = Math.round(realDataPoints.length / 12);
     if(length != 1){
-        graphHeader.innerText = `Your total amount after ${length} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}`;
+        graphHeader.innerText = `Your total amount after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}`;
     } else {
-        graphHeader.innerText = `Your total amount after ${length} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}`;
+        graphHeader.innerText = `Your total amount after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}`;
     }
     chart.render();
 }
