@@ -176,6 +176,22 @@ input[type=text]:focus {
 #graph_header {
     align-self: center;
     width: 100%;
+    opacity: 1;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 2s;
+}
+
+@keyframes fadeInOpacity {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
 }
 
 .graph {
@@ -197,6 +213,8 @@ input[type=text]:focus {
     flex-direction: column;
     float: left;
     border: #000000 solid 1px;
+    height: 370px;
+    margin-top: auto;
 }
 
 .wrapped {

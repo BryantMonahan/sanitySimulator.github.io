@@ -1,3 +1,6 @@
+let realDataPoints = [{ "x": 0, "y": 10000 }, { "x": 1, "y": 10125 }, { "x": 2, "y": 10251.56 }, { "x": 3, "y": 10379.61 }];
+let contributedDataPoints = [{ "x": 0, "y": 10000 }, { "x": 1, "y": 10000 }, { "x": 2, "y": 10000 }, { "x": 3, "y": 10000 }];
+
 const graphHeader = document.getElementById("graph_header");
 
 document.getElementById("compoundCalculate").onclick = function () {
@@ -15,16 +18,22 @@ document.getElementById("compoundCalculate").onclick = function () {
     var interval = intervalIn.value;
     console.log(`${inital} ${interest} ${length} ${interval}`);
 
+    loadChart(realDataPoints, contributedDataPoints);
+
 
 }
 
 // this may need to be used with callbacks to get the data points for the graph
 // ill need to play around with larger data sets to see how it performs
 function calculatePoints(inital, rate, time, contribution, interval) {
-
+    var dataPoints = [];
+    dataPoints.push({ x: 0, y: inital });
 }
 
 function loadChart(realDataPoints, contributedDataPoints) {
+    realDataPoints.push({ x: realDataPoints.length, y: 10000 });
+    contributedDataPoints.push({ x: realDataPoints.length, y: 10000 });
+
     var chart = new CanvasJS.Chart("chartContainer", {
         theme: "light2",
         title: {
@@ -61,19 +70,16 @@ function loadChart(realDataPoints, contributedDataPoints) {
 
     // this changes the text above the graph to display the total amount after the specified time period
     var time = Math.round(realDataPoints.length / 12); // replace time with length once the creat points function is made
+    // these use innerHTML to allow the text to fade in, if I use innerText it will not fade in
     if (length != 1) {
-        graphHeader.innerText = `Your total amount after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}`;
+        graphHeader.innerHTML = `<p id="graph_header">Your total amount after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
     } else {
-        graphHeader.innerText = `Your total amount after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}`;
+        graphHeader.innerHTML = `<p id="graph_header">Your total amount after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
     }
-    chart.render();
+    chart.render();S
 }
 
 window.onload = function () {
-
-    var realDataPoints = [{ "x": 0, "y": 10000 }, { "x": 1, "y": 10125 }, { "x": 2, "y": 10251.56 }, { "x": 3, "y": 10379.61 }];
-    var contributedDataPoints = [{ "x": 0, "y": 10000 }, { "x": 1, "y": 10000 }, { "x": 2, "y": 10000 }, { "x": 3, "y": 10000 }];
-
     loadChart(realDataPoints, contributedDataPoints);
 }
 
