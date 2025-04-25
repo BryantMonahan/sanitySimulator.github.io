@@ -1,5 +1,6 @@
-let realDataPoints = [{ "x": 0, "y": 10000 }, { "x": 1, "y": 10125 }, { "x": 2, "y": 10251.56 }, { "x": 3, "y": 10379.61 }];
-let contributedDataPoints = [{ "x": 0, "y": 10000 }, { "x": 1, "y": 10000 }, { "x": 2, "y": 10000 }, { "x": 3, "y": 10000 }];
+var realDataPoints = calculatePoints(10000, 0.05, 10, 1000, 12);
+var contributedDataPoints = calculatePoints(10000, 0, 10, 1000, 12);
+var interval = 12; // default to monthly
 
 const graphHeader = document.getElementById("graph_header");
 
@@ -10,13 +11,40 @@ document.getElementById("compoundCalculate").onclick = function () {
     const initalIn = document.getElementById("inital");
     const interestIn = document.getElementById("interest");
     const lengthIn = document.getElementById("length");
-    const intervalIn = document.getElementById("interval");
+    //  const intervalIn = document.getElementById("interval");
+    const contributionIn = document.getElementById("contribution");
 
-    var inital = initalIn.value;
-    var interest = interestIn.value;
-    var length = lengthIn.value;
+    /*
     var interval = intervalIn.value;
+    switch (interval) {
+        case "monthly":
+            interval = 12;
+            break;
+        case "daily":
+            interval = 365;
+            break;
+        case "weekly":
+            interval = 52;
+            break;
+        case "yearly":
+            interval = 1;
+            break;
+        default:
+            interval = 12;
+            break;
+    }
+    */
+
+
+    var inital = Number(initalIn.value);
+    var interest = Number(interestIn.value);
+    var length = Number(lengthIn.value);
+    var contribution = Number(contributionIn.value);
+
     console.log(`${inital} ${interest} ${length} ${interval}`);
+
+    realDataPoints = calculatePoints(inital, interest / 100, length, contribution, interval);
+    contributedDataPoints = calculatePoints(inital, 0, length, contribution, interval);
 
     loadChart(realDataPoints, contributedDataPoints);
 
@@ -26,13 +54,20 @@ document.getElementById("compoundCalculate").onclick = function () {
 // this may need to be used with callbacks to get the data points for the graph
 // ill need to play around with larger data sets to see how it performs
 function calculatePoints(inital, rate, time, contribution, interval) {
-    var dataPoints = [];
+    let dataPoints = [];
     dataPoints.push({ x: 0, y: inital });
+    let apy = ((1 + rate / interval) ** interval) - 1;
+
+    let previous = inital;
+    for (let i = 1; i <= interval * time; i++) {
+        previous = contribution + (previous * (1 + (rate / interval)));
+        dataPoints.push({ x: i, y: previous });
+    }
+    console.log(apy);
+    return dataPoints;
 }
 
 function loadChart(realDataPoints, contributedDataPoints) {
-    realDataPoints.push({ x: realDataPoints.length, y: 10000 });
-    contributedDataPoints.push({ x: realDataPoints.length, y: 10000 });
 
     var chart = new CanvasJS.Chart("chartContainer", {
         theme: "light2",
@@ -76,7 +111,7 @@ function loadChart(realDataPoints, contributedDataPoints) {
     } else {
         graphHeader.innerHTML = `<p id="graph_header">Your total amount after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
     }
-    chart.render();S
+    chart.render();
 }
 
 window.onload = function () {
