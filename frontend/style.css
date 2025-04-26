@@ -164,13 +164,16 @@ main {
     align-self: center;
 }
 
-input[type=text]:focus {
+
+input[type=number]:focus {
     border: 3px solid #555;
 }
 
 .graph_holder {
     display: flex;
-    border: #27b41d solid 1px;
+    background-color: hsla(0, 0%, 93%);
+    border-radius: 7px;
+    box-shadow: 5px 5px 5px 0px hsla(0, 0%, 0%, 0.2);
 }
 
 #graph_header {
@@ -180,7 +183,14 @@ input[type=text]:focus {
     animation-name: fadeInOpacity;
     animation-iteration-count: 1;
     animation-timing-function: ease-in;
-    animation-duration: 2s;
+    animation-duration: 1.8s;
+}
+
+.graph_input_label{
+    text-align: left;
+    font-size: .8em;
+    color: rgb(0, 0, 0);
+    margin: 0%;
 }
 
 @keyframes fadeInOpacity {
@@ -199,10 +209,9 @@ input[type=text]:focus {
 }
 
 #chartContainer {
-    border: #000000 solid 1px;
     align-self: center;
-    width: 100%;
-    ;
+    width: 99%;
+    padding-bottom: 1%;
 }
 
 .graph_input {
@@ -212,11 +221,13 @@ input[type=text]:focus {
     width: 16%;
     flex-direction: column;
     float: left;
-    border: #000000 solid 1px;
     height: 370px;
     margin-top: auto;
+    border-radius: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
-
+/*This exists to allow the number input for the charting to fill their entire div. Without it the boxes would be of different lengths and look*/
 .wrapped {
     width: -moz-available;
     width: -webkit-fill-available;

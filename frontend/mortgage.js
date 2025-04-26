@@ -1,12 +1,12 @@
-var realDataPoints = calculatePoints(10000, 0.05, 10, 1000, 12);
-var contributedDataPoints = calculatePoints(10000, 0, 10, 1000, 12);
+
+
+var realDataPoints = calculatePoints(10000, 0.05, 40, 100, 12);
+var contributedDataPoints = calculatePoints(10000, 0, 40, 100, 12);
 var interval = 12; // default to monthly
 
 const graphHeader = document.getElementById("graph_header");
 
 document.getElementById("compoundCalculate").onclick = function () {
-    console.log("THIS RAAN");
-
     // Get the values from the input fields
     const initalIn = document.getElementById("inital");
     const interestIn = document.getElementById("interest");
@@ -41,7 +41,7 @@ document.getElementById("compoundCalculate").onclick = function () {
     var length = Number(lengthIn.value);
     var contribution = Number(contributionIn.value);
 
-    console.log(`${inital} ${interest} ${length} ${interval}`);
+    //console.log(`${inital} ${interest} ${length} ${interval}`);
 
     realDataPoints = calculatePoints(inital, interest / 100, length, contribution, interval);
     contributedDataPoints = calculatePoints(inital, 0, length, contribution, interval);
@@ -64,12 +64,20 @@ function calculatePoints(inital, rate, time, contribution, interval) {
         dataPoints.push({ x: i, y: previous });
     }
     console.log(apy);
-    return dataPoints;
+    let newDataPoints = [];
+    newDataPoints.push({ x: 0, y: inital });
+    for (let i = 1; i <= interval * time; i++) {
+        if (i % interval == 0) {
+            newDataPoints.push({ x: i / 12, y: dataPoints[i].y });
+        }
+    }
+    return newDataPoints;
 }
 
 function loadChart(realDataPoints, contributedDataPoints) {
 
     var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
         theme: "light2",
         title: {
             text: ""
@@ -78,25 +86,29 @@ function loadChart(realDataPoints, contributedDataPoints) {
             shared: true
         },
         options: {
-            responsive: true
+            responsive: true,
         },
         axisX: {
-            title: "Time in Months"
+            title: "Time in Years"
         },
         axisY: {
             prefix: "$"
         },
         data: [{
-            type: "line",
+            type: "area",
+            color: "#4CAF50",
             lineColor: "#4BC0C0",
+            markerSize: 6,
             yValueFormatString: "#,###",
-            toolTipContent: "Month:{x}<br>Value:${y}",
-            dataPoints: realDataPoints
+            toolTipContent: "Year:{x}<br>Value:${y}",
+            dataPoints: realDataPoints,
         }
             , {
-            type: "line",
-            lineColor: "#D8315B",
-            markerColor: "maroon",
+            type: "area",
+            color: "#2196F3",
+            lineColor: "#065899",
+            markerSize: 6,
+            markerColor: "#065899 ",
             yValueFormatString: "#,###",
             toolTipContent: "Contributed:${y}",
             dataPoints: contributedDataPoints
@@ -104,7 +116,7 @@ function loadChart(realDataPoints, contributedDataPoints) {
     });
 
     // this changes the text above the graph to display the total amount after the specified time period
-    var time = Math.round(realDataPoints.length / 12); // replace time with length once the creat points function is made
+    var time = realDataPoints.length - 1; // replace time with length once the creat points function is made
     // these use innerHTML to allow the text to fade in, if I use innerText it will not fade in
     if (length != 1) {
         graphHeader.innerHTML = `<p id="graph_header">Your total amount after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
