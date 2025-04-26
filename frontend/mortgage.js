@@ -95,7 +95,11 @@ function loadChart(realDataPoints, contributedDataPoints) {
             prefix: "$"
         },
         data: [{
+             
             type: "area",
+            // the color fill from these lines bleed together so lowering the opacity makes it look better
+            // I believe the colors #4CAF50 and #2196F3 are the best for this 
+            fillOpacity: 0.5,
             color: "#4CAF50",
             lineColor: "#4BC0C0",
             markerSize: 6,
@@ -106,9 +110,10 @@ function loadChart(realDataPoints, contributedDataPoints) {
             , {
             type: "area",
             color: "#2196F3",
+            fillOpacity: 0.5,
             lineColor: "#065899",
             markerSize: 6,
-            markerColor: "#065899 ",
+            markerColor: "#065899",
             yValueFormatString: "#,###",
             toolTipContent: "Contributed:${y}",
             dataPoints: contributedDataPoints
