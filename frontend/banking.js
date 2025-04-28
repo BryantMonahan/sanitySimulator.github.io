@@ -7,48 +7,48 @@ var interval = 12; // default to monthly
 
 const graphHeader = document.getElementById("graph_header");
 
+
+/*
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!! MUST COME BACK TO VERIFY INFLATION ADJUSTMENT WORKS !!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
 document.getElementById("compoundCalculate").onclick = function () {
     // Get the values from the input fields
     const initalIn = document.getElementById("inital");
     const interestIn = document.getElementById("interest");
     const lengthIn = document.getElementById("length");
-    //  const intervalIn = document.getElementById("interval");
     const contributionIn = document.getElementById("contribution");
-
-    /*
-    var interval = intervalIn.value;
-    switch (interval) {
-        case "monthly":
-            interval = 12;
-            break;
-        case "daily":
-            interval = 365;
-            break;
-        case "weekly":
-            interval = 52;
-            break;
-        case "yearly":
-            interval = 1;
-            break;
-        default:
-            interval = 12;
-            break;
-    }
-    */
-
-
+    const inflationIn = document.getElementById("inflation");
     var inital = Number(initalIn.value);
     var interest = Number(interestIn.value);
     var length = Number(lengthIn.value);
     var contribution = Number(contributionIn.value);
-
-    //console.log(`${inital} ${interest} ${length} ${interval}`);
-
-    realDataPoints = calculateCompoundPoints(inital, interest / 100, length, contribution, interval);
-    simpleDataPoints = calculateSimplePoints(inital, interest / 100, length, contribution, interval);
+    var inflation;
+    if (inflationIn === "" || inflationIn === null) {
+        inflation = 0;
+        realDataPoints = calculateCompoundPoints(inital, interest / 100, length, contribution, interval);
+        simpleDataPoints = calculateSimplePoints(inital, interest / 100, length, contribution, interval);
+    } else {
+        inflation = Number(inflationIn.value);
+        realDataPoints = calculateCompoundPoints(inital, interest / 100, length, contribution, interval);
+        simpleDataPoints = calculateSimplePoints(inital, interest / 100, length, contribution, interval);
+        // im adjusting for inflation by going back after the points have been calculated normally and adjusting the y value of each point based on the year
+        realDataPoints = realDataPoints.map(point => {
+            return { x: point.x, y: adjustInflation(point.y, inflation, point.x) };
+        });
+        simpleDataPoints = simpleDataPoints.map(point => {
+            return { x: point.x, y: adjustInflation(point.y, inflation, point.x) };
+        });
+    }
     contributedDataPoints = calculateCompoundPoints(inital, 0, length, contribution, interval);
 
     loadChart(realDataPoints, simpleDataPoints, contributedDataPoints);
+}
+
+// this is used for the map function to adjust the y value of the data points to account for inflation
+function adjustInflation(point, inflation, year) {
+    return point * ((1 - inflation / 100) ** year);
 }
 
 function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {

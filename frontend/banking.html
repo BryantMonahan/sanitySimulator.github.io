@@ -9,7 +9,7 @@
         <h1 style="color: #D8315B" class="pageHeader">Money Movement</h1>
         <nav class="navbar">
             <ul>
-                <li><a href="home.html">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="mortgage.html">Mortgages</a></li>
                 <li><a href="credit.html">Credit/Credit Cards</a></li>
                 <li><a href="">About</a></li>
@@ -37,6 +37,7 @@
         <p>When saving money, it's important to know your APY. APY is the total amount of interest you'll earn on a
             savings or
             investment account taking compounding into account. There are two types of interest: simple and compound.
+            <br><br>
             Simple interest is
             calculated only on the principal amount, while compound interest is calculated on the principal and any
             interest that has already
@@ -59,12 +60,47 @@
             bank (insured by the FDIC)
             that offers a high-yield savings account with a competitive APY.
             <br><br>
-            I strongly encourage you to play around with the calculator below to see the impact of simple vs compounding
+            I strongly encourage you to play around with the calculator below to see the differnce between simple and
+            compounding
             interest and the impact
             that inflation has on the real value of your money.
 
             <!-- put the graphing calculator here with inflation-->
         </p>
+
+
+
+        <div class="graph_holder">
+            <div class="graph_input">
+                <label for="inital" class="graph_input_label">Initial Amount:</label>
+                <input class="wrapped" type="number" id="inital" name="inital" min="0" placeholder="10000"><br>
+
+                <label for="interest" class="graph_input_label">Interest %:</label>
+                <input class="wrapped" type="number" id="interest" name="interest" min="0" max="100" placeholder="6"
+                    required><br>
+
+                <label for="length" class="graph_input_label">Years:</label>
+                <input class="wrapped" type="number" id="length" name="length" min="0" max="150" placeholder="40"
+                    required><br>
+
+                <label for="contribution" class="graph_input_label">Monthly Contribution:</label>
+                <input class="wrapped" type="number" id="contribution" name="contribution" min="0" max="1000000"
+                    placeholder="100"><br>
+
+                <label for="inflation" class="graph_input_label">Inflation (Optional):</label>
+                <input class="wrapped" type="number" id="inflation" name="infaltion" min="0" max="100"
+                    placeholder="0"><br>
+
+                <button id="compoundCalculate" type="submit">Calculate</button>
+
+            </div>
+            <div class="graph">
+                <!--Leave this alone, the js file will use this to display to total accrued amount-->
+                <p id="graph_header"></p>
+                <div id="chartContainer" style="height: 370px;"></div>
+            </div>
+        </div>
+
     </div>
 
     <div class="center_elements">
@@ -105,6 +141,10 @@
             insured before opening an account.
         </p>
     </div>
+
+
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+    <script type="module" src="banking.js"></script>
     <br><br><br><br><br><br>
     <footer style="color:black; text-align:center;">
         <hr>
