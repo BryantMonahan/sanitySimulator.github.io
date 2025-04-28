@@ -1,6 +1,7 @@
-import { calculateCompoundPoints } from "./graphCalculations.js";
+import { calculateCompoundPoints, calculateSimplePoints } from "./graphCalculations.js";
 
-var realDataPoints = calculateCompoundPoints(10000, 0.05, 40, 100, 12);
+var realDataPoints = calculateCompoundPoints(10000, 0.06, 40, 100, 12);
+var simpleDataPoints = calculateSimplePoints(10000, 0.06, 40, 100, 12);
 var contributedDataPoints = calculateCompoundPoints(10000, 0, 40, 100, 12);
 var interval = 12; // default to monthly
 
@@ -44,12 +45,13 @@ document.getElementById("compoundCalculate").onclick = function () {
     //console.log(`${inital} ${interest} ${length} ${interval}`);
 
     realDataPoints = calculateCompoundPoints(inital, interest / 100, length, contribution, interval);
+    simpleDataPoints = calculateSimplePoints(inital, interest / 100, length, contribution, interval);
     contributedDataPoints = calculateCompoundPoints(inital, 0, length, contribution, interval);
 
-    loadChart(realDataPoints, contributedDataPoints);
+    loadChart(realDataPoints, simpleDataPoints, contributedDataPoints);
 }
 
-function loadChart(realDataPoints, contributedDataPoints) {
+function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
 
     var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
@@ -70,7 +72,7 @@ function loadChart(realDataPoints, contributedDataPoints) {
             prefix: "$"
         },
         data: [{
-             
+            label: "Compound",
             type: "area",
             // the color fill from these lines bleed together so lowering the opacity makes it look better
             // I believe the colors #4CAF50 and #2196F3 are the best for this 
@@ -79,16 +81,28 @@ function loadChart(realDataPoints, contributedDataPoints) {
             lineColor: "#4BC0C0",
             markerSize: 6,
             yValueFormatString: "#,###",
-            toolTipContent: "Year:{x}<br>Value:${y}",
+            toolTipContent: "Year:{x}<br>Compound:${y}",
             dataPoints: realDataPoints,
-        }
-            , {
+        },
+        {
+            label: "Simple",
             type: "area",
-            color: "#2196F3",
             fillOpacity: 0.5,
+            color: "#2196F3",
             lineColor: "#065899",
             markerSize: 6,
-            markerColor: "#065899",
+            yValueFormatString: "#,###",
+            toolTipContent: "Simple:${y}",
+            dataPoints: simpleDataPoints,
+        },
+        {
+            label: "Contributed",
+            type: "area",
+            color: "black",
+            fillOpacity: 0.5,
+            lineColor: "black",
+            markerSize: 6,
+            markerColor: "grey",
             yValueFormatString: "#,###",
             toolTipContent: "Contributed:${y}",
             dataPoints: contributedDataPoints
@@ -107,6 +121,6 @@ function loadChart(realDataPoints, contributedDataPoints) {
 }
 
 window.onload = function () {
-    loadChart(realDataPoints, contributedDataPoints);
+    loadChart(realDataPoints, simpleDataPoints, contributedDataPoints);
 }
 

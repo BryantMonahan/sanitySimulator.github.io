@@ -14,7 +14,26 @@ export function calculateCompoundPoints(inital, rate, time, contribution, interv
         previous = contribution + (previous * (1 + (rate / interval)));
         dataPoints.push({ x: i, y: previous });
     }
-    console.log(apy);
+    let newDataPoints = [];
+    newDataPoints.push({ x: 0, y: inital });
+    for (let i = 1; i <= interval * time; i++) {
+        if (i % interval == 0) {
+            newDataPoints.push({ x: i / 12, y: dataPoints[i].y });
+        }
+    }
+    return newDataPoints;
+}
+
+export function calculateSimplePoints(inital, rate, time, contribution, interval) {
+    let dataPoints = [];
+    dataPoints.push({ x: 0, y: inital });
+    let contributed = inital;
+    let previous = inital;
+    for (let i = 1; i <= interval * time; i++) {
+        contributed+= contribution;
+        previous += contribution + (contributed * ((rate / interval)));
+        dataPoints.push({ x: i, y: previous });
+    }
     let newDataPoints = [];
     newDataPoints.push({ x: 0, y: inital });
     for (let i = 1; i <= interval * time; i++) {
