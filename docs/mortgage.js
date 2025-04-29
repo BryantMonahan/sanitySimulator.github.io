@@ -17,7 +17,6 @@ var initalFilled = false;
 var interestFilled = false;
 var contributionFilled = false;
 
-
 function checkAndCalculate() {
     if (initalFilled && interestFilled) {
         calculate();
@@ -30,8 +29,11 @@ function checkAndCalculate() {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  */
 
+// this is decalred outside the function so the graph header can use it for proper formatting
+var contribution;
 // this takes in the user input and calculates the compound interest based on the formula
 function calculate() {
+    // this is used to reset the data points so the graph doesn't get cluttered with old data
     principalDataPoints = [];
     interestDataPoints = [];
     totalPaidDataPoints = [];
@@ -39,7 +41,12 @@ function calculate() {
     var inital = Number(initalIn.value);
     var interest = Number(interestIn.value);
     var length = Number(lengthIn.value);
-    var contribution = Number(contributionIn.value);
+    contribution = Number(contributionIn.value);
+    // this is important for upadting the graph header when there is no contribution
+    if (isNaN(contribution)) {
+        contributionFilled = false;
+        contribution = 0;
+    }
 
 
 
@@ -100,16 +107,34 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
             yValueFormatString: "#,###",
             toolTipContent: "Total:${y}",
             dataPoints: totalPaidDataPoints
-        }]
+        },
+        ]
     });
 
 
     // this handles bad graph formatting at lower time intervals
     //options.scales.y.beginAtZero = true;
     // chart.options.axisX.interval = 1;
+    let monthlyPayment = (Math.round((totalPaidDataPoints[2].y - totalPaidDataPoints[1].y) / 12)).toLocaleString("en-US");
+    let grandTotal = Math.round(totalPaidDataPoints[totalPaidDataPoints.length - 1].y).toLocaleString("en-US");
+    let time;
+    if (contributionFilled) {
+        // this if block is here pretty much only to handle when a user inputs a tiny contribution that messes with the formatting
+        if (!Number.isInteger(totalPaidDataPoints[totalPaidDataPoints.length - 1].x)) {
+            time = Math.floor((totalPaidDataPoints.length - 2)) + " years " + Math.round(((principalDataPoints[principalDataPoints.length - 1].x) % 1) * 12) + " months";
+        } else {
+            time = Math.floor((totalPaidDataPoints.length - 1)) + " years ";
+        }
+        graphHeader.innerHTML = `<p id="graph_header">With additional payments of $${contribution} it will take ${time} and $${grandTotal} to pay off the inital loan</p>`;
+    } else {
+        time = Math.floor((totalPaidDataPoints.length - 1)) + " years";
+        graphHeader.innerHTML = `<p id="graph_header">With monthly payments of $${monthlyPayment} it will take ${time} and $${grandTotal} to pay off the inital loan</p>`;
+    }
+
     chart.render();
 }
 
+// loads the graph with the default values assigned at the top of the file
 window.onload = function () {
     loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints);
 }
@@ -118,6 +143,9 @@ window.onload = function () {
 initalIn.addEventListener("input", function (event) {
     if (event.target.value !== "" && event.target.value !== null) {
         initalFilled = true;
+        if (event.target.value < 0) {
+            event.target.value = 0;
+        }
         checkAndCalculate();
     } else {
         initalFilled = false;
@@ -127,6 +155,9 @@ initalIn.addEventListener("input", function (event) {
 interestIn.addEventListener("input", function (event) {
     if (event.target.value !== "" && event.target.value !== null) {
         interestFilled = true;
+        if (event.target.value < 0) {
+            event.target.value = 0;
+        }
         checkAndCalculate();
     } else {
         interestFilled = false;
@@ -140,8 +171,12 @@ lengthIn.addEventListener("change", function (event) {
 contributionIn.addEventListener("input", function (event) {
     if (event.target.value !== "" && event.target.value !== null) {
         contributionFilled = true;
+        if (event.target.value < 0) {
+            event.target.value = 0;
+        }
         checkAndCalculate();
     } else {
         contributionFilled = false;
+        checkAndCalculate();
     }
 })

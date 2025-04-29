@@ -148,9 +148,13 @@ window.onload = function () {
 }
 
 // These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function
+// They also limit and adjust users' input
 initalIn.addEventListener("input", function (event) {
     if (event.target.value !== "" && event.target.value !== null) {
         initalFilled = true;
+        if (event.target.value < 0) {
+            event.target.value = 0;
+        }
         checkAndCalculate();
     } else {
         initalFilled = false;
@@ -160,6 +164,9 @@ initalIn.addEventListener("input", function (event) {
 interestIn.addEventListener("input", function (event) {
     if (event.target.value !== "" && event.target.value !== null) {
         interestFilled = true;
+        if (event.target.value < 0) {
+            event.target.value = 0;
+        }
         checkAndCalculate();
     } else {
         interestFilled = false;
@@ -169,6 +176,11 @@ interestIn.addEventListener("input", function (event) {
 lengthIn.addEventListener("input", function (event) {
     if (event.target.value !== "" && event.target.value !== null) {
         lengthFilled = true;
+        if (event.target.value > 400) {
+            event.target.value = 400;
+        } else if (event.target.value < 1) {
+            event.target.value = 1;
+        }
         checkAndCalculate();
     } else {
         lengthFilled = false;
@@ -178,6 +190,9 @@ lengthIn.addEventListener("input", function (event) {
 contributionIn.addEventListener("input", function (event) {
     if (event.target.value !== "" && event.target.value !== null) {
         contributionFilled = true;
+        if (event.target.value < 0) {
+            event.target.value = 0;
+        }
         checkAndCalculate();
     } else {
         contributionFilled = false;
@@ -185,5 +200,8 @@ contributionIn.addEventListener("input", function (event) {
 })
 
 inflationIn.addEventListener("input", function (event) {
+    if (event.target.value < 0) {
+        event.target.value = 0;
+    }
     checkAndCalculate();
 })
