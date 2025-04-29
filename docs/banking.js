@@ -19,6 +19,8 @@ var interestFilled = false;
 var lengthFilled = false;
 var contributionFilled = false;
 
+var inflation = 0;
+
 
 
 function checkAndCalculate() {
@@ -39,7 +41,6 @@ function calculate() {
     var interest = Number(interestIn.value);
     var length = Number(lengthIn.value);
     var contribution = Number(contributionIn.value);
-    var inflation;
     if (inflationIn === "" || inflationIn === null) {
         inflation = 0;
         realDataPoints = calculateCompoundPoints(inital, interest / 100, length, contribution, interval);
@@ -47,7 +48,7 @@ function calculate() {
     } else {
         /*
          Because the user inputs the inflation rate as ANNUAL, we can't just subtract it from the interest rate imediatly.
-        We first must convert it from annual to monthly by reverse engineering the APY formula.
+         We first must convert it from annual to monthly by reverse engineering the APY formula.
          */
         inflation = Number(inflationIn.value);
         inflation /= 100;
@@ -58,11 +59,6 @@ function calculate() {
     contributedDataPoints = calculateCompoundPoints(inital, 0, length, contribution, interval);
 
     loadChart(realDataPoints, simpleDataPoints, contributedDataPoints);
-}
-
-// this is used for the map function to adjust the y value of the data points to account for inflation
-function adjustInflation(point, inflation, year) {
-    return point * ((1 - inflation / 100) ** year);
 }
 
 function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
@@ -128,9 +124,17 @@ function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
     var time = realDataPoints.length - 1; // replace time with length once the creat points function is made
     // these use innerHTML to allow the text to fade in, if I use innerText it will not fade in
     if (time != 1) {
-        graphHeader.innerHTML = `<p id="graph_header">Your total amount after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+        if (inflation === 0) {
+            graphHeader.innerHTML = `<p id="graph_header">Your total amount after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+        } else {
+            graphHeader.innerHTML = `<p id="graph_header">Your inflation-adjusted total after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+        }
     } else {
-        graphHeader.innerHTML = `<p id="graph_header">Your total amount after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+        if (inflation === 0) {
+            graphHeader.innerHTML = `<p id="graph_header">Your total amount after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+        } else {
+            graphHeader.innerHTML = `<p id="graph_header">Your inflation-adjusted total after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+        }
     }
     // this handles bad graph formatting at lower time intervals
     if (time < 20) {
