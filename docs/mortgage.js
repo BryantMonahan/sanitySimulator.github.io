@@ -1,60 +1,57 @@
-import { calculateCompoundPoints, calculateSimplePoints } from "./graphCalculations.js";
+import { calculateAmortization } from "./graphCalculations.js";
 
-var realDataPoints = calculateCompoundPoints(10000, 0.06, 40, 100, 12);
-var simpleDataPoints = calculateSimplePoints(10000, 0.06, 40, 100, 12);
-var contributedDataPoints = calculateCompoundPoints(10000, 0, 40, 100, 12);
-var interval = 12; // default to monthly
+var principalDataPoints = [];
+var interestDataPoints = [];
+var totalPaidDataPoints = [];
+calculateAmortization(300000, 7, 30, 0, principalDataPoints, interestDataPoints, totalPaidDataPoints);
 
 const graphHeader = document.getElementById("graph_header");
 
-document.getElementById("compoundCalculate").onclick = function () {
-    // Get the values from the input fields
-    const initalIn = document.getElementById("inital");
-    const interestIn = document.getElementById("interest");
-    const lengthIn = document.getElementById("length");
-    //  const intervalIn = document.getElementById("interval");
-    const contributionIn = document.getElementById("contribution");
+// Get the values from the input fields
+const initalIn = document.getElementById("inital");
+const interestIn = document.getElementById("interest");
+const lengthIn = document.getElementById("length");
+const contributionIn = document.getElementById("contribution");
 
-    /*
-    var interval = intervalIn.value;
-    switch (interval) {
-        case "monthly":
-            interval = 12;
-            break;
-        case "daily":
-            interval = 365;
-            break;
-        case "weekly":
-            interval = 52;
-            break;
-        case "yearly":
-            interval = 1;
-            break;
-        default:
-            interval = 12;
-            break;
+var initalFilled = false;
+var interestFilled = false;
+var contributionFilled = false;
+
+
+function checkAndCalculate() {
+    if (initalFilled && interestFilled) {
+        calculate();
     }
-    */
+}
 
+/*
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!! MUST COME BACK TO VERIFY INFLATION ADJUSTMENT WORKS !!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+
+// this takes in the user input and calculates the compound interest based on the formula
+function calculate() {
+    principalDataPoints = [];
+    interestDataPoints = [];
+    totalPaidDataPoints = [];
 
     var inital = Number(initalIn.value);
     var interest = Number(interestIn.value);
     var length = Number(lengthIn.value);
     var contribution = Number(contributionIn.value);
 
-    //console.log(`${inital} ${interest} ${length} ${interval}`);
 
-    realDataPoints = calculateCompoundPoints(inital, interest / 100, length, contribution, interval);
-    simpleDataPoints = calculateSimplePoints(inital, interest / 100, length, contribution, interval);
-    contributedDataPoints = calculateCompoundPoints(inital, 0, length, contribution, interval);
 
-    loadChart(realDataPoints, simpleDataPoints, contributedDataPoints);
+    calculateAmortization(inital, interest, length, contribution, principalDataPoints, interestDataPoints, totalPaidDataPoints);
+    loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints);
 }
 
-function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
+function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints) {
 
     var chart = new CanvasJS.Chart("chartContainer", {
-        animationEnabled: true,
+        // set animation to false to prevent the graph from animating every time the user inputs a new value
+        animationEnabled: false,
         theme: "light2",
         title: {
             text: ""
@@ -63,64 +60,88 @@ function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
             shared: true
         },
         options: {
-            responsive: true
+            responsive: true,
         },
         axisX: {
-            title: "Time in Years"
+            title: "Time in Years",
         },
         axisY: {
             prefix: "$"
         },
         data: [{
-            label: "Compound",
-            type: "area",
+            label: "Principal",
+            type: "line",
             // the color fill from these lines bleed together so lowering the opacity makes it look better
             // I believe the colors #4CAF50 and #2196F3 are the best for this 
-            fillOpacity: 0.5,
-            color: "#4CAF50",
-            lineColor: "#4BC0C0",
-            markerSize: 6,
-            yValueFormatString: "#,###",
-            toolTipContent: "Year:{x}<br>Compound:${y}",
-            dataPoints: realDataPoints,
-        },
-        {
-            label: "Simple",
-            type: "area",
-            fillOpacity: 0.5,
             color: "#2196F3",
-            lineColor: "#065899",
+            lineColor: "#2196F3",
             markerSize: 6,
             yValueFormatString: "#,###",
-            toolTipContent: "Simple:${y}",
-            dataPoints: simpleDataPoints,
+            toolTipContent: "Year:{x}<br>Principal:${y}",
+            dataPoints: principalDataPoints,
         },
         {
-            label: "Contributed",
-            type: "area",
+            label: "Interest",
+            type: "line",
+            color: "#D8315B",
+            lineColor: "#D8315B",
+            markerSize: 6,
+            yValueFormatString: "#,###",
+            toolTipContent: "Interest Paid:${y}",
+            dataPoints: interestDataPoints,
+        },
+        {
+            label: "Toal Paid",
+            type: "line",
             color: "black",
-            fillOpacity: 0.5,
             lineColor: "black",
             markerSize: 6,
             markerColor: "black",
             yValueFormatString: "#,###",
-            toolTipContent: "Contributed:${y}",
-            dataPoints: contributedDataPoints
+            toolTipContent: "Total:${y}",
+            dataPoints: totalPaidDataPoints
         }]
     });
 
-    // this changes the text above the graph to display the total amount after the specified time period
-    var time = realDataPoints.length - 1; // replace time with length once the creat points function is made
-    // these use innerHTML to allow the text to fade in, if I use innerText it will not fade in
-    if (length != 1) {
-        graphHeader.innerHTML = `<p id="graph_header">Your total amount after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
-    } else {
-        graphHeader.innerHTML = `<p id="graph_header">Your total amount after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
-    }
+
+    // this handles bad graph formatting at lower time intervals
+    //options.scales.y.beginAtZero = true;
+    // chart.options.axisX.interval = 1;
     chart.render();
 }
 
 window.onload = function () {
-    loadChart(realDataPoints, simpleDataPoints, contributedDataPoints);
+    loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints);
 }
 
+// These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function
+initalIn.addEventListener("input", function (event) {
+    if (event.target.value !== "" && event.target.value !== null) {
+        initalFilled = true;
+        checkAndCalculate();
+    } else {
+        initalFilled = false;
+    }
+})
+
+interestIn.addEventListener("input", function (event) {
+    if (event.target.value !== "" && event.target.value !== null) {
+        interestFilled = true;
+        checkAndCalculate();
+    } else {
+        interestFilled = false;
+    }
+})
+
+lengthIn.addEventListener("change", function (event) {
+    checkAndCalculate();
+})
+
+contributionIn.addEventListener("input", function (event) {
+    if (event.target.value !== "" && event.target.value !== null) {
+        contributionFilled = true;
+        checkAndCalculate();
+    } else {
+        contributionFilled = false;
+    }
+})

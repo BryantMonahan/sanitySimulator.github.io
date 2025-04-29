@@ -129,34 +129,31 @@
         <div class="graph_holder">
             <div class="graph_input">
                 <label for="inital" class="graph_input_label">Initial Amount:</label>
-                <input class="wrapped" type="number" id="inital" name="inital" min="0" placeholder="10000"><br>
+                <input class="wrapped" type="number" id="inital" name="inital" min="0" placeholder="300000"><br>
 
                 <label for="interest" class="graph_input_label">Interest %:</label>
-                <input class="wrapped" type="number" id="interest" name="interest" min="0" max="100" placeholder="6"
+                <input class="wrapped" type="number" id="interest" name="interest" min="0" max="100" placeholder="7"
                     required><br>
 
-                <label for="length" class="graph_input_label">Years:</label>
+
+                <label for="length" class="graph_input_label">Length of Loan:</label>
+                <select class="wrapped" id="length" name="length" placeholder="30 years">
+                    <option value=30>30 years</option>
+                    <option value=15>15 years</option>
+                    <option value=10>10 years</option>
+                </select>
+                <br>
+
+                <!--   <label for="length" class="graph_input_label">Years:</label>
                 <input class="wrapped" type="number" id="length" name="length" min="0" max="150" placeholder="40"
                     required><br>
-
+                -->
                 <label for="contribution" class="graph_input_label">Monthly Contribution:</label>
                 <input class="wrapped" type="number" id="contribution" name="contribution" min="0" max="1000000"
-                    placeholder="100"><br>
+                    placeholder="0"><br>
 
                 <!-- <label for="interval">Compound Frequency:</label><br> -->
 
-
-                <!-- This is for compound frequency, but I cant get it to work, so I am leaving it out for now
-                <select class="wrapped" id="interval" name="interval" placeholder="Monthly">
-                    <option value="monthly">Monthly</option>
-                    <option value="yearly">Yearly</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="daily">Daily</option>
-                </select>
-                <br>
-                -->
-
-                <button id="compoundCalculate" type="submit">Calculate</button>
 
             </div>
             <div class="graph">

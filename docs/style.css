@@ -180,8 +180,10 @@ input[type=number]:focus {
     align-self: center;
     width: 100%;
     opacity: 1;
-    /* This WAS the animation for graph header but to prevent someone from getting sick from the animation
+    /* 
+    This WAS the animation for graph header but to prevent someone from getting sick from the animation
     I commented it out. I'm leaving it here in case I want to use it later.
+   
     animation-name: fadeInOpacity;
     animation-iteration-count: 1;
     animation-timing-function: ease-in;
@@ -195,7 +197,6 @@ input[type=number]:focus {
     color: rgb(0, 0, 0);
     margin: 0%;
     font-style: italic;
-    size: 2em
 }
 
 #compoundCalculate {
