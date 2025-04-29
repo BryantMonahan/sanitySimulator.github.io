@@ -45,16 +45,15 @@ function calculate() {
         realDataPoints = calculateCompoundPoints(inital, interest / 100, length, contribution, interval);
         simpleDataPoints = calculateSimplePoints(inital, interest / 100, length, contribution, interval);
     } else {
+        /*
+         Because the user inputs the inflation rate as ANNUAL, we can't just subtract it from the interest rate imediatly.
+        We first must convert it from annual to monthly by reverse engineering the APY formula.
+         */
         inflation = Number(inflationIn.value);
-        realDataPoints = calculateCompoundPoints(inital, interest / 100, length, contribution, interval);
-        simpleDataPoints = calculateSimplePoints(inital, interest / 100, length, contribution, interval);
-        // im adjusting for inflation by going back after the points have been calculated normally and adjusting the y value of each point based on the year
-        realDataPoints = realDataPoints.map(point => {
-            return { x: point.x, y: adjustInflation(point.y, inflation, point.x) };
-        });
-        simpleDataPoints = simpleDataPoints.map(point => {
-            return { x: point.x, y: adjustInflation(point.y, inflation, point.x) };
-        });
+        inflation /= 100;
+        inflation = 12 * ((inflation + 1) ** (1 / 12) - 1); // this is the formula to convert annual inflation to monthly inflation
+        realDataPoints = calculateCompoundPoints(inital, ((interest / 100) - inflation), length, contribution, interval);
+        simpleDataPoints = calculateSimplePoints(inital, ((interest / 100) - inflation), length, contribution, interval);
     }
     contributedDataPoints = calculateCompoundPoints(inital, 0, length, contribution, interval);
 
