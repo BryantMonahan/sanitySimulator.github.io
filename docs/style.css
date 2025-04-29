@@ -75,7 +75,7 @@ h2 {
 h3,
 h4 {
     color: #000000;
-    /*#D8315B*/
+    padding-top: 40px;
     text-align: left;
 }
 
@@ -180,13 +180,16 @@ input[type=number]:focus {
     align-self: center;
     width: 100%;
     opacity: 1;
+    /* This WAS the animation for graph header but to prevent someone from getting sick from the animation
+    I commented it out. I'm leaving it here in case I want to use it later.
     animation-name: fadeInOpacity;
     animation-iteration-count: 1;
     animation-timing-function: ease-in;
     animation-duration: 1.8s;
+*/
 }
 
-.graph_input_label{
+.graph_input_label {
     text-align: left;
     font-size: .8em;
     color: rgb(0, 0, 0);
@@ -194,13 +197,14 @@ input[type=number]:focus {
     font-style: italic;
 }
 
-#compoundCalculate{
+#compoundCalculate {
     background-color: #ffffff;
     padding: 5px;
     border: 1px solid #000000;
     border-radius: 3px;
 }
 
+/* This was the animation for the graph header but currently isn't in use */
 @keyframes fadeInOpacity {
     0% {
         opacity: 0;
@@ -235,6 +239,7 @@ input[type=number]:focus {
     padding-left: 10px;
     padding-right: 10px;
 }
+
 /*This exists to allow the number input for the charting to fill their entire div. Without it the boxes would be of different lengths and look*/
 .wrapped {
     width: -moz-available;
