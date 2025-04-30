@@ -100,7 +100,7 @@ export function calculateAmortization(principal, rate, time, contributions, prin
         }
         //console.log(principal);
     }
-    // console.log(`This ran at month ${month}`);
+    // this goes through the saved values and only keeps the data points at the end of each year
     principalDataPoints.splice(0, principalDataPoints.length, ...principalDataPoints.filter(point => point.x % 12 === 0));
     principalDataPoints.forEach(element => element.x = element.x / 12);
     interestDataPoints.splice(0, interestDataPoints.length, ...interestDataPoints.filter(point => point.x % 12 === 0));

@@ -98,7 +98,7 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
             dataPoints: interestDataPoints,
         },
         {
-            label: "Toal Paid",
+            label: "Total Paid",
             type: "line",
             color: "black",
             lineColor: "black",
