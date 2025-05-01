@@ -55,6 +55,16 @@ function calculate() {
 }
 
 function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints) {
+    // at some point I want to label the graph where half the principal has been paid off, so this will find x value for me
+    let halfPointFound = false;
+    let halfPoint = { x: 0, y: 50000 };
+    principalDataPoints.forEach(element => {
+        if (!halfPointFound && element.y < principalDataPoints[0].y / 2) {
+            halfPoint.x = element.x;
+            halfPointFound = true;
+        }
+    });
+    console.log(halfPoint);
 
     var chart = new CanvasJS.Chart("chartContainer", {
         // set animation to false to prevent the graph from animating every time the user inputs a new value
@@ -108,6 +118,7 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
             toolTipContent: "Total:${y}",
             dataPoints: totalPaidDataPoints
         },
+
         ]
     });
 
@@ -125,12 +136,11 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
         } else {
             time = Math.floor((totalPaidDataPoints.length - 1)) + " years ";
         }
-        graphHeader.innerHTML = `<p id="graph_header">With additional payments of $${contribution} it will take ${time} and $${grandTotal} to pay off the inital loan</p>`;
+        graphHeader.innerHTML = `<p id="graph_header">With monthly payments of $${monthlyPayment} it will take ${time} and $${grandTotal} to pay off the inital loan</p>`;
     } else {
         time = Math.floor((totalPaidDataPoints.length - 1)) + " years";
         graphHeader.innerHTML = `<p id="graph_header">With monthly payments of $${monthlyPayment} it will take ${time} and $${grandTotal} to pay off the inital loan</p>`;
     }
-
     chart.render();
 }
 
