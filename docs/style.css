@@ -177,6 +177,12 @@ input[type=number]:focus {
     padding: 20px;
 }
 
+@media screen and (max-width: 1200px) {
+    .normal_graph {
+        height: 300px;
+    }
+}
+
 .graph_holder {
     display: flex;
     background-color: hsla(0, 0%, 93%);
@@ -269,8 +275,13 @@ input[type=number]:focus {
 .center_elements {
     text-align: center;
     margin: 0 auto;
-    align-items: center;
-    max-width: 1200px;
+    max-width: 1000px;
+}
+
+@media screen and (max-width: 1200px) {
+    .center_elements {
+        margin: 0 5%;
+    }
 }
 
 .pageHeader {
