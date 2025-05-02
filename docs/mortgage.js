@@ -158,7 +158,8 @@ window.onload = function () {
     loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints);
     // its crucial that the charts are loaded after the DOM to prevent the page from breaking
     //graphSingleDataPoints("JSON_Data/homeSalePrice.json", "medianMortgageGraph", "", "Years", "Median New Home Sale Price");
-    graphDoubleDataPoints("JSON_Data/homeSalePrice.json", "JSON_Data/medianIncome.json", "medianMortgageGraph", "", "Years", "Median New Home Sale Price", "Median Annual Income");
+    graphDoubleDataPoints("JSON_Data/homeSalePrice.json", "JSON_Data/medianIncome.json", "medianMortgageGraph", "", "Years", "Median New Home Sale Price", "Median Household Income");
+    graphSingleDataPoints("JSON_Data/mortgageRates.json", "mortgageRatesGraph", "", "Years", "Median 30-Year Fixed Mortgage Rate");
 
 }
 

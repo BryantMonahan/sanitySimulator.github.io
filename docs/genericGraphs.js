@@ -1,3 +1,4 @@
+// this takes in a path name and a div id and loads the data from the path name into the div id
 export async function graphSingleDataPoints(pathName, divId, title, xAxisTitle, legendInfo) {
     const response = await fetch(pathName);
     try {
@@ -5,6 +6,7 @@ export async function graphSingleDataPoints(pathName, divId, title, xAxisTitle, 
             throw new Error("Failed to load data from " + pathName);
         }
         const data = await response.json();
+        // this just parses the data we want into a format that the graphing library can use
         const dataPoints = data.observations.map((entry) => {
             return { x: new Date(entry.date), y: Number(entry.value) };
         });
@@ -14,6 +16,7 @@ export async function graphSingleDataPoints(pathName, divId, title, xAxisTitle, 
     }
 }
 
+// this takes in two path names and a div id and loads the data from the path names into the div id
 export async function graphDoubleDataPoints(firstPathName, secondPathName, divId, title, xAxisTitle, legendInfoOne, legendInfoTwo) {
     const responseOne = await fetch(firstPathName);
     let firstDataPoints;
@@ -23,6 +26,7 @@ export async function graphDoubleDataPoints(firstPathName, secondPathName, divId
             throw new Error("Failed to load data from " + firstPathName);
         }
         const data = await responseOne.json();
+        // this just parses the data we want into a format that the graphing library can use
         firstDataPoints = data.observations.map((entry) => {
             return { x: new Date(entry.date), y: Number(entry.value) };
         });
@@ -36,6 +40,7 @@ export async function graphDoubleDataPoints(firstPathName, secondPathName, divId
             throw new Error("Failed to load data from " + secondPathName);
         }
         const data = await responseTwo.json();
+        // this just parses the data we want into a format that the graphing library can use
         secondDataPoints = data.observations.map((entry) => {
             return { x: new Date(entry.date), y: Number(entry.value) };
         });
@@ -46,6 +51,7 @@ export async function graphDoubleDataPoints(firstPathName, secondPathName, divId
     }
 }
 
+// this function takes in the data points, div id, title, x axis title, and legend info and loads the chart into the div id
 function loadSingleLineChart(plotPoints, divId, title, xAxisTitle, legendInfo) {
 
     let newChart = new CanvasJS.Chart(divId, {
@@ -66,7 +72,7 @@ function loadSingleLineChart(plotPoints, divId, title, xAxisTitle, legendInfo) {
             valueFormatString: "YYYY",
         },
         axisY: {
-            prefix: "$"
+            suffix: "%"
         },
         data: [{
             label: "Median",
@@ -74,9 +80,9 @@ function loadSingleLineChart(plotPoints, divId, title, xAxisTitle, legendInfo) {
             color: "#2196F3",
             lineColor: "#2196F3",
             markerSize: 0,
-            yValueFormatString: "#,###",
+            yValueFormatString: "#,###.##",
             xValueFormatString: "MM-YYYY",
-            toolTipContent: "{x}<br>${y}",
+            toolTipContent: "{x}<br>{y}%",
             showInLegend: true,
             legendText: legendInfo,
             dataPoints: plotPoints,
@@ -87,6 +93,7 @@ function loadSingleLineChart(plotPoints, divId, title, xAxisTitle, legendInfo) {
     newChart.render();
 }
 
+// this function takes in two arrays of data points, div id, title, x axis title, and legend info and loads the chart into the div id
 function loadDoubleLineChart(firstPoints, secondPoints, divId, title, xAxisTitle, legendInfoOne, legendInfoTwo) {
 
     let newChart = new CanvasJS.Chart(divId, {
@@ -133,7 +140,7 @@ function loadDoubleLineChart(firstPoints, secondPoints, divId, title, xAxisTitle
             lineColor: "#D8315B",
             markerSize: 7,
             yValueFormatString: "#,###",
-            xValueFormatString: "MM-YYYY",
+            xValueFormatString: "YYYY",
             toolTipContent: "{x}<br>${y}",
             showInLegend: true,
             legendText: legendInfoTwo,

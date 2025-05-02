@@ -2,42 +2,39 @@
 <html lang="en">
 <link rel="icon" type="images/png" href="images/newLogoPng.png">
 
+<header>
+    <title>Mortgages - Money Movement</title>
+    <img src="images/newLogoPng.png" alt="Logo" class="logo">
+    <h1 style="color: #D8315B" class="pageHeader">Money Movement</h1>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="mortgage.html">Mortgages</a></li>
+            <li><a href="credit.html">Credit/Credit Cards</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Feedback</a></li>
+        </ul>
+    </nav>
+</header>
+<title>Mortgages</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
 <body>
-    <header>
-        <title>Mortgages - Money Movement</title>
-        <img src="images/newLogoPng.png" alt="Logo" class="logo">
-        <h1 style="color: #D8315B" class="pageHeader">Money Movement</h1>
-        <nav class="navbar">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="mortgage.html">Mortgages</a></li>
-                <li><a href="credit.html">Credit/Credit Cards</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Feedback</a></li>
-            </ul>
-        </nav>
-    </header>
-    <title>Mortgages</title>
-    <link rel="stylesheet" href="style.css">
-    </head>
 
     <div class="center_elements">
         <h3>What is a Mortgage?</h3>
         <hr>
-        <p>A mortgage is a type loan that is used to buy a home. The loan is secured by the home itself, which means if
-            the borrower fails to repay the loan, the lender can take possession of the home through a process called
-            foreclosure. Mortgages are typically repaid over a period of 15 to 30 years, with fixed or adjustable
-            interest rates.
-        </p>
-    </div>
-
-    <div class="center_elements">
-        <h3>How Do Mortgages Work?</h3>
-        <hr>
-        <p>When a borrower applies for a mortgage, the lender will evaluate their creditworthiness, income, and other
+        <p>A mortgage is a type loan that is specifially used to buy a home. The loan is secured by the home itself,
+            which means if the borrower fails to repay the loan, the lender can take possession of the home through a
+            process called foreclosure. Mortgages are typically repaid over a period of 15 to 30 years, with fixed or
+            adjustable interest rates.
+            <br><br>
+            Mortgages are large loans which typically take between 15 to 30 years to pay off. When a borrower applies
+            for a mortgage, the lender will evaluate their credit history, income, debts and other
             financial factors to determine how much they can borrow and at what interest rate.
             <br><br>
-            The borrower will then make a down payment, which is a percentage of the home's
+            Typically, the borrower will then make a down payment, which is a percentage of the home's
             purchase price, and the lender will provide the remaining
             funds needed to buy the home. The borrower will then make monthly payments to the lender, which will include
             both principal and interest, until the loan is paid off.
@@ -53,19 +50,25 @@
         <br>
         <ul>
             <li><strong>Fixed-rate mortgage:</strong> A mortgage with a fixed interest rate for the entire term of the
-                loan.</li>
+                loan. This is also by far the most common type of mortgage.</li>
             <br>
-            <li><strong>Adjustable-rate mortgage (ARM):</strong> A mortgage with an interest rate that can change
-                periodically based on market conditions.</li>
+            <li><strong>Adjustable-rate mortgage (ARM):</strong> A mortgage with an interest rate that is initally
+                constant, then after a set time it changes based on market conditions. This could leave borrowers with
+                either higher or lower monthly payments than they began with.</li>
             <br>
             <li><strong>FHA loan:</strong> A government-backed mortgage designed for low-to-moderate-income borrowers.
+                This can be a great option for people with lower credit scores or first-time homebuyers, because it
+                typically requires a significantly smaller downpayment than a typical loan (as low as 3.5%).</li>
             </li>
             <br>
             <li><strong>VA loan:</strong> A government-backed mortgage available to eligible veterans and active-duty
-                service members.</li>
+                service members. To those who qualify, a VA loan can be incredibly enticing as they typically require no
+                down payment.</li>
             <br>
             <li><strong>Jumbo loan:</strong> A non-conforming loan that exceeds the limits set by the Federal Housing
-                Finance Agency (FHFA), typically used for financing high-value properties.</li>
+                Finance Agency (FHFA), typically used for financing high-value properties. This works similar to
+                conventioanl mortgages but lenders have more rigorous requirements. This is becasue when a loan becomes
+                large enough it is no longer backed by the government which causes the lender to take on more risk.</li>
             <br>
         </ul>
     </div>
@@ -85,9 +88,11 @@
             why they are closely monitored by homebuyers, real estate professionals, and policymakers.
         </p>
         <div class="center_elements">
-            <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1DzGx&width=670&height=475"
-                scrolling="no" frameborder="0" style="overflow:hidden; width:670px; height:525px;"
-                allowTransparency="true" loading="lazy"></iframe>
+            <div class="graph_holder">
+                <div class="graph">
+                    <div id="mortgageRatesGraph" class="normal_graph"></div>
+                </div>
+            </div>
         </div>
 
 
@@ -100,9 +105,11 @@
         </div>
 
         <div class="center_elements">
-            <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1FUAI&width=670&height=475"
-                scrolling="no" frameborder="0" style="overflow:hidden; width:670px; height:525px;"
-                allowTransparency="true" loading="lazy"></iframe>
+            <div class="graph_holder">
+                <div class="graph">
+                    <div id="medianMortgageGraph" class="normal_graph"></div>
+                </div>
+            </div>
         </div>
 
         <div class="center_elements">
@@ -121,6 +128,7 @@
 
         <br><br>
         <div class="graph_holder">
+
             <div class="graph_input">
                 <label for="inital" class="graph_input_label">Initial Loan:</label>
                 <input class="wrapped" type="number" id="inital" name="inital" min="0" placeholder="300000"><br>
@@ -156,20 +164,14 @@
                 <div id="chartContainer" style="height: 370px;"></div>
             </div>
         </div>
+    </div>
 
-
-        <br><br>
-        <div class="graph_holder">
-            <div class="graph">
-                <div id="medianMortgageGraph" class="normal_graph"></div>
-            </div>
-        </div>
-        <br><br><br><br><br><br>
-        <footer style="color:black; text-align:center;">
-            <hr>
-            <p class="footer">Bryant Monahan</p>
-            <p class="footer">Copyright © 2025</p>
-        </footer>
+    <br><br><br><br><br><br>
+    <footer style="color:black; text-align:center;">
+        <hr>
+        <p class="footer">Bryant Monahan</p>
+        <p class="footer">Copyright © 2025</p>
+    </footer>
 </body>
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <script type="module" src="mortgage.js"></script>
