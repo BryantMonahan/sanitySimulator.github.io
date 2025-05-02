@@ -93,6 +93,9 @@ function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
             markerSize: 6,
             yValueFormatString: "#,###",
             toolTipContent: "Year:{x}<br>Compound:${y}",
+            showInLegend: true,
+            legendText: "Compound",
+            legendMarkerType: "circle",
             dataPoints: realDataPoints,
         },
         {
@@ -104,10 +107,13 @@ function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
             markerSize: 6,
             yValueFormatString: "#,###",
             toolTipContent: "Simple:${y}",
+            showInLegend: true,
+            legendText: "Simple",
+            legendMarkerType: "circle",
             dataPoints: simpleDataPoints,
         },
         {
-            label: "Contributed",
+            label: "Principal",
             type: "area",
             color: "black",
             fillOpacity: 0.5,
@@ -115,7 +121,10 @@ function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
             markerSize: 6,
             markerColor: "black",
             yValueFormatString: "#,###",
-            toolTipContent: "Contributed:${y}",
+            toolTipContent: "Principal:${y}",
+            showInLegend: true,
+            legendText: "Principal",
+            legendMarkerType: "circle",
             dataPoints: contributedDataPoints
         }]
     });

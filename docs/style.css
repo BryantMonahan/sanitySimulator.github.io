@@ -169,6 +169,11 @@ input[type=number]:focus {
     border: 3px solid #555;
 }
 
+.normal_graph {
+    height: 370px;
+    padding: 20px;
+}
+
 .graph_holder {
     display: flex;
     background-color: hsla(0, 0%, 93%);
@@ -247,6 +252,9 @@ input[type=number]:focus {
     width: -moz-available;
     width: -webkit-fill-available;
     width: fill-available;
+    padding: 6px;
+    border: none;
+    border-radius: 5px;
 }
 
 .label {
@@ -259,6 +267,7 @@ input[type=number]:focus {
     margin-left: 12%;
     margin-right: 12%;
     align-items: center;
+    max-width: 1000px;
 }
 
 .pageHeader {

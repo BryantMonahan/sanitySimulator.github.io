@@ -1,4 +1,5 @@
 import { calculateAmortization } from "./graphCalculations.js";
+import { graphSingleDataPoints, graphDoubleDataPoints } from "./genericGraphs.js";
 
 var principalDataPoints = [];
 var interestDataPoints = [];
@@ -48,8 +49,6 @@ function calculate() {
         contribution = 0;
     }
 
-
-
     calculateAmortization(inital, interest, length, contribution, principalDataPoints, interestDataPoints, totalPaidDataPoints);
     loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints);
 }
@@ -57,14 +56,18 @@ function calculate() {
 function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints) {
     // at some point I want to label the graph where half the principal has been paid off, so this will find x value for me
     let halfPointFound = false;
-    let halfPoint = { x: 0, y: 50000 };
-    principalDataPoints.forEach(element => {
+    let halfPoint;
+
+    for (let i = 0; i < principalDataPoints.length; i++) {
+        let element = principalDataPoints[i];
         if (!halfPointFound && element.y < principalDataPoints[0].y / 2) {
-            halfPoint.x = element.x;
+            principalDataPoints[i] = { x: element.x, y: element.y, markerType: "triangle", markerColor: "black", markerSize: 10, indexLabel: "Half Paid", indexLabelFontSize: 9 };
             halfPointFound = true;
+            console.log("half point found at: " + element.x);
+            halfPoint = element.x;
+            break;
         }
-    });
-    console.log(halfPoint);
+    }
 
     var chart = new CanvasJS.Chart("chartContainer", {
         // set animation to false to prevent the graph from animating every time the user inputs a new value
@@ -95,6 +98,8 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
             markerSize: 6,
             yValueFormatString: "#,###",
             toolTipContent: "Year:{x}<br>Principal:${y}",
+            showInLegend: true,
+            legendText: "Principal Paid",
             dataPoints: principalDataPoints,
         },
         {
@@ -105,6 +110,8 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
             markerSize: 6,
             yValueFormatString: "#,###",
             toolTipContent: "Interest Paid:${y}",
+            showInLegend: true,
+            legendText: "Interest Paid",
             dataPoints: interestDataPoints,
         },
         {
@@ -116,6 +123,8 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
             markerColor: "black",
             yValueFormatString: "#,###",
             toolTipContent: "Total:${y}",
+            showInLegend: true,
+            legendText: "Total Paid",
             dataPoints: totalPaidDataPoints
         },
 
@@ -144,9 +153,13 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
     chart.render();
 }
 
-// loads the graph with the default values assigned at the top of the file
+// loads the graphs with the default values assigned at the top of the file
 window.onload = function () {
     loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints);
+    // its crucial that the charts are loaded after the DOM to prevent the page from breaking
+    //graphSingleDataPoints("JSON_Data/homeSalePrice.json", "medianMortgageGraph", "", "Years", "Median New Home Sale Price");
+    graphDoubleDataPoints("JSON_Data/homeSalePrice.json", "JSON_Data/medianIncome.json", "medianMortgageGraph", "", "Years", "Median New Home Sale Price", "Median Annual Income");
+
 }
 
 // These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function
