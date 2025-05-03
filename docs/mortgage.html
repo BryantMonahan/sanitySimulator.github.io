@@ -77,18 +77,25 @@
     </div>
 
     <div class="center_elements">
-        <h3>Why You Should Care</h3>
+        <h3>What Are Mortgage Rates?</h3>
         <hr>
-        <p> Mortgage rates play a critical role in home affordability, directly affecting the total
-            cost of borrowing for homeowners. Higher mortgage rates reduce purchasing power, making homes less
-            affordable and slowing demand in the housing market.
+        <p> A mortgage rate is the interest a lender charges on the amount of money borrowed to buy a home. Mortgage
+            rates play a critical role in home affordability, directly affecting the total cost of borrowing for
+            homeowners. Higher mortgage rates reduce purchasing power, making homes less affordable and slowing demand
+            in the housing market.
             <br><br>
-            Even a small change in the interest rate can have a significant financial impact over the life of a loan.
+            Even a small change in the interest rate can have a significant impact over the life of a loan.
             For example, on a $500,000 mortgage, an increase from 5% to 6% results in nearly $116,000 more in interest
             paid over 30 years.
             <br><br>
-            As rates continue to rise, the impact becomes even more pronnounced. This sensitivity to interest rates is
-            why they are closely monitored by homebuyers, real estate professionals, and policymakers.
+            Interest is most commonly felt in the first few years of a mortgage, as the majority of the monthly payment
+            goes towards interest rather than the principal. This means if you had an interest rate around 7% and paid
+            $20,000 towards your mortgage in the first year, only around $2,600 would actually go towards the principal.
+            Infact, at this rate, it would take about 22 years to pay off the first half of the inital loan.
+            <br><br>
+            This sensitivity to interest rates is why they are closely monitored by homebuyers, real estate
+            professionals, policymakers, and now you. If you decide to take out a mortgage with a high interest rate,
+            it's important to know that you can refinance your loan later on at a later date with a lower rate.
         </p>
         <div class="center_elements">
             <div class="graph_holder">
@@ -96,15 +103,6 @@
                     <div id="mortgageRatesGraph" class="normal_graph"></div>
                 </div>
             </div>
-        </div>
-
-
-
-        <div class="center_elements">
-            <p>Mortgage rates experienced a sharp increase in the late 1970s, peaking at nearly 18%. After this peak,
-                rates declined steadily over the following decades, reaching historic lows around 2020. However,
-                following this period, mortgage rates rose significantly.
-            </p>
         </div>
 
         <div class="center_elements">
@@ -133,38 +131,45 @@
         <div class="graph_holder">
 
             <div class="graph_input">
-                <label for="inital" class="graph_input_label">Initial Loan:</label>
-                <input class="wrapped" type="number" id="inital" name="inital" min="0" placeholder="300000"><br>
+                <div>
+                    <label for="inital" class="graph_input_label">Initial Loan:</label>
+                    <input class="wrapped" type="number" id="inital" name="inital" min="0" placeholder="300000"><br>
+                </div>
 
-                <label for="interest" class="graph_input_label">Interest %:</label>
-                <input class="wrapped" type="number" id="interest" name="interest" min="0" max="100" placeholder="7"
-                    required><br>
+                <div>
+                    <label for="interest" class="graph_input_label">Interest %:</label>
+                    <input class="wrapped" type="number" id="interest" name="interest" min="0" max="100" placeholder="7"
+                        required><br>
+                </div>
 
-
-                <label for="length" class="graph_input_label">Length of Loan:</label>
-                <select class="wrapped" id="length" name="length" placeholder="30 years">
-                    <option value=30>30 years</option>
-                    <option value=15>15 years</option>
-                    <option value=10>10 years</option>
-                </select>
-                <br>
+                <div>
+                    <label for="length" class="graph_input_label">Length of Loan:</label>
+                    <select class="wrapped" id="length" name="length" placeholder="30 years">
+                        <option value=30>30 years</option>
+                        <option value=15>15 years</option>
+                        <option value=10>10 years</option>
+                    </select>
+                </div>
 
                 <!--   <label for="length" class="graph_input_label">Years:</label>
-                <input class="wrapped" type="number" id="length" name="length" min="0" max="150" placeholder="40"
-                    required><br>
-                -->
-                <label for="contribution" class="graph_input_label">Additional Contribution:</label>
-                <input class="wrapped" type="number" id="contribution" name="contribution" min="0" max="1000000"
-                    placeholder="0"><br>
+                        <input class="wrapped" type="number" id="length" name="length" min="0" max="150" placeholder="40"
+                            required><br>
+                        -->
+                <div>
+                    <label for="contribution" class="graph_input_label">Additional Contribution (Optional):</label>
+                    <input class="wrapped" type="number" id="contribution" name="contribution" min="0" max="1000000"
+                        placeholder="0">
+                </div>
 
                 <!-- <label for="interval">Compound Frequency:</label><br> -->
 
 
             </div>
+
             <div class="graph">
                 <!--Leave this alone, the js file will use this to display to total accrued amount-->
                 <p id="graph_header"></p>
-                <div id="chartContainer" style="height: 370px;"></div>
+                <div id="chartContainer" class="normal_graph"></div>
             </div>
         </div>
     </div>

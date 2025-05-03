@@ -53,7 +53,7 @@ button {
 
 #graph_header {
     text-align: center;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 li {
@@ -119,6 +119,12 @@ main {
     width: 100%;
 }
 
+@media screen and (max-width: 650px) {
+    .navbar ul {
+        display: none;
+    }
+}
+
 .navbar a {
     text-decoration: none;
     display: block;
@@ -174,7 +180,7 @@ input[type=number]:focus {
 
 .normal_graph {
     height: 370px;
-    padding: 20px;
+    padding: 12px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -184,7 +190,6 @@ input[type=number]:focus {
 }
 
 .graph_holder {
-    display: flex;
     background-color: hsla(0, 0%, 93%);
     border-radius: 7px;
     box-shadow: 5px 5px 5px 0px hsla(0, 0%, 0%, 0.2);
@@ -195,22 +200,13 @@ input[type=number]:focus {
     align-self: center;
     width: 100%;
     opacity: 1;
-    /* 
-    This WAS the animation for graph header but to prevent someone from getting sick from the animation
-    I commented it out. I'm leaving it here in case I want to use it later.
-   
-    animation-name: fadeInOpacity;
-    animation-iteration-count: 1;
-    animation-timing-function: ease-in;
-    animation-duration: 1.8s;
-*/
 }
 
 .graph_input_label {
     text-align: left;
     font-size: .8em;
     color: rgb(0, 0, 0);
-    margin: 0%;
+    margin-left: 3%;
     font-style: italic;
 }
 
@@ -221,40 +217,28 @@ input[type=number]:focus {
     border-radius: 3px;
 }
 
-/* This was the animation for the graph header but currently isn't in use */
-@keyframes fadeInOpacity {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-
-}
 
 .graph {
     width: 100%;
 }
 
-#chartContainer {
-    align-self: center;
-    width: 99%;
-    padding-bottom: 1%;
-}
 
 .graph_input {
-    display: flex;
-    justify-content: space-around;
-    text-align: justify;
-    width: 16%;
-    flex-direction: column;
-    float: left;
-    height: 370px;
-    margin-top: auto;
-    border-radius: 7px;
-    padding-left: 10px;
-    padding-right: 10px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    text-align: left;
+    width: 98%;
+}
+
+@media screen and (max-width: 1200px) {
+    .graph_input {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: auto;
+        text-align: left;
+        width: 98%;
+    }
 }
 
 /*This exists to allow the number input for the charting to fill their entire div. Without it the boxes would be of different lengths and look*/
@@ -264,6 +248,7 @@ input[type=number]:focus {
     width: fill-available;
     padding: 6px;
     border: none;
+    margin-left: 3%;
     border-radius: 5px;
 }
 

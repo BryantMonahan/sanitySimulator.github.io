@@ -72,30 +72,40 @@
 
         <div class="graph_holder">
             <div class="graph_input">
-                <label for="inital" class="graph_input_label">Initial Amount:</label>
-                <input class="wrapped" type="number" id="inital" name="inital" min="0" placeholder="10000"><br>
+                <div>
+                    <label for="inital" class="graph_input_label">Initial Amount:</label>
+                    <input class="wrapped" type="number" id="inital" name="inital" min="0" placeholder="10000"><br>
+                </div>
 
-                <label for="interest" class="graph_input_label">Interest %:</label>
-                <input class="wrapped" type="number" id="interest" name="interest" min="0" max="100" placeholder="6"
-                    required><br>
+                <div>
+                    <label for="interest" class="graph_input_label">Interest %:</label>
+                    <input class="wrapped" type="number" id="interest" name="interest" min="0" max="100" placeholder="6"
+                        required><br>
+                </div>
 
-                <label for="length" class="graph_input_label">Years:</label>
-                <input class="wrapped" type="number" id="length" name="length" min="0" max="150" placeholder="40"
-                    required><br>
+                <div>
+                    <label for="length" class="graph_input_label">Years:</label>
+                    <input class="wrapped" type="number" id="length" name="length" min="0" max="150" placeholder="40"
+                        required><br>
+                </div>
 
-                <label for="contribution" class="graph_input_label">Monthly Contribution:</label>
-                <input class="wrapped" type="number" id="contribution" name="contribution" min="0" max="1000000"
-                    placeholder="100"><br>
+                <div>
+                    <label for="contribution" class="graph_input_label">Monthly Contribution:</label>
+                    <input class="wrapped" type="number" id="contribution" name="contribution" min="0" max="1000000"
+                        placeholder="100"><br>
+                </div>
 
-                <label for="inflation" class="graph_input_label">Inflation (Optional):</label>
-                <input class="wrapped" type="number" id="inflation" name="infaltion" min="0" max="100"
-                    placeholder="0"><br>
+                <div>
+                    <label for="inflation" class="graph_input_label">Inflation (Optional):</label>
+                    <input class="wrapped" type="number" id="inflation" name="infaltion" min="0" max="100"
+                        placeholder="0"><br>
+                </div>
 
             </div>
             <div class="graph">
                 <!--Leave this alone, the js file will use this to display to total accrued amount-->
                 <p id="graph_header"></p>
-                <div id="chartContainer" style="height: 370px;"></div>
+                <div id="chartContainer" class="normal_graph"></div>
             </div>
         </div>
 
