@@ -29,12 +29,6 @@ function checkAndCalculate() {
     }
 }
 
-/*
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!! MUST COME BACK TO VERIFY INFLATION ADJUSTMENT WORKS !!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- */
-
 // this takes in the user input and calculates the compound interest based on the formula
 function calculate() {
     var inital = Number(initalIn.value);

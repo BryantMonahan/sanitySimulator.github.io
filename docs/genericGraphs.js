@@ -1,3 +1,4 @@
+
 // this takes in a path name and a div id and loads the data from the path name into the div id
 export async function graphSingleDataPoints(pathName, divId, title, xAxisTitle, legendInfo) {
     const response = await fetch(pathName);
@@ -10,6 +11,7 @@ export async function graphSingleDataPoints(pathName, divId, title, xAxisTitle, 
         const dataPoints = data.observations.map((entry) => {
             return { x: new Date(entry.date), y: Number(entry.value) };
         });
+
         loadSingleLineChart(dataPoints, divId, title, xAxisTitle, legendInfo);
     } catch (error) {
         console.error(error);
@@ -47,8 +49,30 @@ export async function graphDoubleDataPoints(firstPathName, secondPathName, divId
             time.setFullYear(time.getFullYear() + 1);
             return { x: time, y: Number(entry.value) };
         });
-        console.log(secondDataPoints);
         loadDoubleLineChart(firstDataPoints, secondDataPoints, divId, title, xAxisTitle, legendInfoOne, legendInfoTwo);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function graphSingleCSVDataPoints(pathName, divId, legendInfo) {
+    const response = await fetch("JSON_Data/HOAM_US_Affordability_Index.csv");
+    let dataPoints;
+    try {
+        if (!response.ok) {
+            throw new Error("Failed to load data from " + pathName);
+        }
+        const csvString = await response.text();
+        let results = Papa.parse(csvString);
+        dataPoints = results.data.map((entry) => {
+            return { x: new Date(entry[0]), y: Number(entry[1]) };
+        });
+
+        // remove bad data points
+        dataPoints.shift();
+        dataPoints.pop();
+        console.log(dataPoints);
+        loadDoubleAreaChart(dataPoints, divId, "", "", legendInfo);
     } catch (error) {
         console.error(error);
     }
@@ -148,6 +172,51 @@ function loadDoubleLineChart(firstPoints, secondPoints, divId, title, xAxisTitle
             showInLegend: true,
             legendText: legendInfoTwo,
             dataPoints: secondPoints,
+        }
+        ]
+    });
+
+    newChart.render();
+}
+
+
+function loadDoubleAreaChart(dataPoints, divId, title, xAxisTitle, legendInfo) {
+
+    let newChart = new CanvasJS.Chart(divId, {
+        animationEnabled: true,
+        connectNullData: false,
+        responsive: true,
+        theme: "light2",
+        title: {
+            text: title
+        },
+        toolTip: {
+            shared: true
+        },
+        options: {
+            responsive: true,
+        },
+        axisX: {
+            title: xAxisTitle,
+            valueFormatString: "YYYY",
+        },
+        axisY: {
+            prefix: "$",
+        },
+        data: [{
+            label: "Median",
+            type: "area",
+            color: "#2196F3",
+            lineColor: "#2196F3",
+            fillOpacity: 0.2,
+            markerSize: 0,
+            yValueFormatString: "#,###.##",
+            xValueFormatString: "MM-YYYY",
+            toolTipContent: "{x}<br>${y}",
+            showInLegend: true,
+            legendMarkerType: "circle",
+            legendText: legendInfo,
+            dataPoints: dataPoints,
         }
         ]
     });

@@ -1,5 +1,5 @@
 import { calculateAmortization } from "./graphCalculations.js";
-import { graphSingleDataPoints, graphDoubleDataPoints } from "./genericGraphs.js";
+import { graphSingleDataPoints, graphDoubleDataPoints, graphSingleCSVDataPoints } from "./genericGraphs.js";
 
 var principalDataPoints = [];
 var interestDataPoints = [];
@@ -160,7 +160,7 @@ window.onload = function () {
     //graphSingleDataPoints("JSON_Data/homeSalePrice.json", "medianMortgageGraph", "", "Years", "Median New Home Sale Price");
     graphDoubleDataPoints("JSON_Data/homeSalePrice.json", "JSON_Data/medianIncome.json", "medianMortgageGraph", "", "", "Median New Home Sale Price", "Median Household Income");
     graphSingleDataPoints("JSON_Data/mortgageRates.json", "mortgageRatesGraph", "", "", "30-Year Fixed Mortgage Rate");
-
+    graphSingleCSVDataPoints("", "homeAffordabilityGraph", "Income Gap");
 }
 
 // These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function
