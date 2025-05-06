@@ -42,9 +42,12 @@ export async function graphDoubleDataPoints(firstPathName, secondPathName, divId
         const data = await responseTwo.json();
         // this just parses the data we want into a format that the graphing library can use
         secondDataPoints = data.observations.map((entry) => {
-            return { x: new Date(entry.date), y: Number(entry.value) };
+            // be very careful with this, this is needed for median income ONLY. It increases the year by 1 to match the data set
+            let time = new Date(entry.date);
+            time.setFullYear(time.getFullYear() + 1);
+            return { x: time, y: Number(entry.value) };
         });
-
+        console.log(secondDataPoints);
         loadDoubleLineChart(firstDataPoints, secondDataPoints, divId, title, xAxisTitle, legendInfoOne, legendInfoTwo);
     } catch (error) {
         console.error(error);
