@@ -313,3 +313,8 @@ a:visited{
     transform: scale(1.05);
     transition: 50% 0.5s;
 }
+
+#affordOutput {
+    text-align: center;
+    padding-bottom: 1%;
+}

@@ -7,12 +7,22 @@ var totalPaidDataPoints = [];
 calculateAmortization(300000, 7, 30, 0, principalDataPoints, interestDataPoints, totalPaidDataPoints);
 
 const graphHeader = document.getElementById("graph_header");
+const affordOutput = document.getElementById("affordOutput");
 
 // Get the values from the input fields
 const initalIn = document.getElementById("inital");
 const interestIn = document.getElementById("interest");
 const lengthIn = document.getElementById("length");
 const contributionIn = document.getElementById("contribution");
+
+const incomeIn = document.getElementById("income");
+const affordInterestIn = document.getElementById("affordInterest");
+const affordLengthIn = document.getElementById("affordLength");
+const additionalIn = document.getElementById("additional");
+
+var incomeFilled = false;
+var affordInterestFilled = false;
+var additionalFilled = false;
 
 var initalFilled = false;
 var interestFilled = false;
@@ -63,7 +73,6 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
         if (!halfPointFound && element.y < principalDataPoints[0].y / 2) {
             principalDataPoints[i] = { x: element.x, y: element.y, markerType: "triangle", markerColor: "black", markerSize: 10, indexLabel: "Half Paid", indexLabelFontSize: 9 };
             halfPointFound = true;
-            console.log("half point found at: " + element.x);
             halfPoint = element.x;
             break;
         }
@@ -145,10 +154,10 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
         } else {
             time = Math.floor((totalPaidDataPoints.length - 1)) + " years ";
         }
-        graphHeader.innerHTML = `<p id="graph_header">With monthly payments of $${monthlyPayment} it will take ${time} and $${grandTotal} to pay off the inital loan</p>`;
+        graphHeader.innerHTML = `<p id="graph_header">With monthly payments of <span style="color:rgb(13, 143, 20)">$${monthlyPayment}</span> it will take <span style="color:rgb(0, 135, 245)">${time}</span> and <span style="color: #D8315B">$${grandTotal}</span> to pay off the inital loan</p>`;
     } else {
         time = Math.floor((totalPaidDataPoints.length - 1)) + " years";
-        graphHeader.innerHTML = `<p id="graph_header">With monthly payments of $${monthlyPayment} it will take ${time} and $${grandTotal} to pay off the inital loan</p>`;
+        graphHeader.innerHTML = `<p id="graph_header">With monthly payments of <span style="color:rgb(13, 143, 20)">$${monthlyPayment}</span> it will take <span style="color:rgb(0, 135, 245)">${time}</span> and <span style="color: #D8315B">$${grandTotal}</span> to pay off the inital loan</p>`;
     }
     chart.render();
 }
@@ -204,3 +213,62 @@ contributionIn.addEventListener("input", function (event) {
         checkAndCalculate();
     }
 })
+
+// the code for the affordability calculator will be kept below this line
+function checkAndCalculateAffordability() {
+    if (incomeFilled && affordInterestFilled) {
+        let monthlyIncome = Number(incomeIn.value) / 12;
+        let maxPayment = monthlyIncome * 0.28;
+        if (additionalFilled) {
+            maxPayment -= Number(additionalIn.value);
+        }
+        let months = Number(affordLengthIn.value) * 12;
+        console.log(months);
+        console.log(maxPayment);
+        let interest = Number(affordInterestIn.value) / 100;
+        console.log(interest);
+        let total = maxPayment * ((1 - Math.pow(1 + interest / 12, -months)) / (interest / 12));
+        isNaN(total) ? total = 0 : total;
+        affordOutput.innerHTML = `You can afford a loan of <span style="color:rgb(13, 143, 20)">$${Math.round(total).toLocaleString("en-US")}</span>`;
+    }
+}
+
+incomeIn.addEventListener("input", function (event) {
+    if (event.target.value !== "" && event.target.value !== null) {
+        if (event.target.value < 0) {
+            event.target.value = 0;
+        }
+        incomeFilled = true;
+        checkAndCalculateAffordability();
+    } else {
+        incomeFilled = false;
+    }
+});
+affordInterestIn.addEventListener("input", function (event) {
+    if (event.target.value !== "" && event.target.value !== null) {
+        if (event.target.value < 0) {
+            event.target.value = 0;
+        }
+        affordInterestFilled = true;
+        checkAndCalculateAffordability();
+    } else {
+        affordInterestFilled = false;
+    }
+});
+
+affordLengthIn.addEventListener("input", function (event) {
+    checkAndCalculateAffordability();
+});
+
+additionalIn.addEventListener("input", function (event) {
+    if (event.target.value !== "" && event.target.value !== null) {
+        if (event.target.value < 0) {
+            event.target.value = 0;
+        }
+        additionalFilled = true;
+        checkAndCalculateAffordability();
+    } else {
+        additonalFilled = false;
+    }
+});
+

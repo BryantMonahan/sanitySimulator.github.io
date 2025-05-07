@@ -177,20 +177,21 @@
         </div>
         <br>
         <p>Graphs can be used to mislead just as easily as they can be used to inform. Take for instance the graph
-            above, it shows the widing gap between home prices and median wage but if fails to account for the impact of
+            above, it shows the widing gap between home prices and median wage. However, if fails to account for the
+            impact of
             changing mortgage rates.
             <br><br>
             In order to better understand home affordability we will look at the difference between median income and
             qualified income. Qualified income is the amount of money needed to keep the median annual cost of
             homeownership below 30% of a persons income.
             <br><br>
-            When reading the graph below, it's important to keep in mind that this is median income - qualified income.
-            This means negative values indicate the median income is enough to comfortably afford a home, while positive
-            values indicate the opposite.
+            When reading the graph below, it's important to keep in mind that this is (median income - qualified
+            income). This means negative values indicate the median income is enough to comfortably afford a home, while
+            positive values indicate the opposite.
             <br><br>
-            While 2009 to 2021 was a period of stability between needed and actual income,
-            the market following the COVID-19 pandemic has become so expensive the median American needs to make
-            anywhere between $30,000 and $45,000 more a year to afford a new home.
+            While 2009 to 2021 was a period of stability between qualified and actual income,
+            the market following the COVID-19 pandemic has become much more expensive. The median American needs to make
+            an additional $30,000 to $45,000 more a year to afford a new home.
         </p>
         <br>
         <div class="graph_holder">
@@ -199,6 +200,59 @@
             </div>
         </div>
         <br>
+    </div>
+
+    <div class="center_elements">
+        <h3>What can I afford?</h3>
+        <hr>
+        <p>To understand what you can afford, you first must become familiar with two important concepts: The 28/36 Rule
+            and your debt-to-income ratio.
+            <br><br>
+            The 28/36 Rule is a general guideline used by many lenders to determine if a borrower will be able to repay
+            a loan. It states that a borrower's monthly housing costs (mortgage payment, property taxes, insurance)
+            shouldn't exceed 28% of their gross monthly income.
+            <br><br>
+            Furthermore, a borrower's total monthly debt payments (including housing costs, credit cards, student loans,
+            etc.) shouldn't exceed 36% of their gross monthly income. A borrowers total monthly debt payments divided by
+            their gross monthly income is their debt-to-income ratio (DTI).
+            <br><br>
+            The calculator below allows you to see your suggested loan amount based on loan length, interest rate, and
+            income. This calculator assumes you want to use 28% of your income to pay for montly housing costs, and
+            allows you to add on estimated monthly expenses of your choosing.
+        </p>
+
+        <!--Even though they're for different things i'm just going to reuse the input I have up top-->
+        <div class="graph_holder">
+            <div class="graph_input">
+                <div>
+                    <label for="income" class="graph_input_label">Yearly Gross Income:</label>
+                    <input class="wrapped" type="number" id="income" name="income" min="0" placeholder="70000"><br>
+                </div>
+
+                <div>
+                    <label for="affordInterest" class="graph_input_label">Interest %:</label>
+                    <input class="wrapped" type="number" id="affordInterest" name="affordInterest" min="0" max="100"
+                        placeholder="7" required><br>
+                </div>
+
+                <div>
+                    <label for="affordLength" class="graph_input_label">Length of Loan:</label>
+                    <select class="wrapped" id="affordLength" name="affordLength" placeholder="30 years">
+                        <option value=30>30 years</option>
+                        <option value=15>15 years</option>
+                        <option value=10>10 years</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="additional" class="graph_input_label">Property Taxes / Insurance (Optional):</label>
+                    <input class="wrapped" type="number" id="additional" name="additional" min="0" max="1000000"
+                        placeholder="0">
+                </div>
+
+            </div>
+            <p id="affordOutput">You can afford a loan of <span style="color:rgb(13, 143, 20)">$245,502</span></p>
+        </div>
     </div>
 
 
