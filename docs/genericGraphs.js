@@ -8,11 +8,13 @@ export async function graphSingleDataPoints(pathName, divId, title, xAxisTitle, 
         }
         const data = await response.json();
         // this just parses the data we want into a format that the graphing library can use
-        const dataPoints = data.observations.map((entry) => {
+        let dataPoints = data.observations.map((entry) => {
             return { x: new Date(entry.date), y: Number(entry.value) };
         });
-
-        loadSingleLineChart(dataPoints, divId, title, xAxisTitle, legendInfo);
+        // due to fred's API, some of the data points are null, so we need to remove them
+        dataPoints = dataPoints.filter((entry) => !(isNaN(entry.y)));
+        const chart = loadSingleLineChart(dataPoints, divId, title, xAxisTitle, legendInfo);
+        chart.render();
     } catch (error) {
         console.error(error);
     }
@@ -79,7 +81,7 @@ export async function graphSingleCSVDataPoints(pathName, divId, legendInfo) {
 }
 
 // this function takes in the data points, div id, title, x axis title, and legend info and loads the chart into the div id
-function loadSingleLineChart(plotPoints, divId, title, xAxisTitle, legendInfo) {
+export function loadSingleLineChart(plotPoints, divId, title, xAxisTitle, legendInfo) {
 
     let newChart = new CanvasJS.Chart(divId, {
         animationEnabled: true,
@@ -116,8 +118,8 @@ function loadSingleLineChart(plotPoints, divId, title, xAxisTitle, legendInfo) {
         }
         ]
     });
-
-    newChart.render();
+    return newChart;
+    // newChart.render();
 }
 
 // this function takes in two arrays of data points, div id, title, x axis title, and legend info and loads the chart into the div id

@@ -2,6 +2,12 @@
 <html>
 <link rel="icon" type="images/png" href="images/newLogoPng.png">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
 <body>
     <header>
         <title>Money Movement - Auto</title>
@@ -18,8 +24,6 @@
         </nav>
     </header>
     <title>Auto Loans</title>
-    <link rel="stylesheet" href="style.css">
-    </head>
 
     <div class="center_elements">
         <h3>What is an Auto Loan?</h3>
@@ -35,6 +39,44 @@
     </div>
 
     <div class="center_elements">
+        <h3>Depreciation</h3>
+        <hr>
+        <p>
+            A car is not an investment, and it will lose value over time. This loss in value is called depreciation and
+            is typically quite steep for newer vehicles.
+            <br><br>
+            On average, a new car loses about 20% of its value in the first year and 10%-15% each subsequent year.
+            It's important for potential buyers to understand that vehicles are not investments and will cost money to
+            maintain while losing value over time.
+        </p>
+        <div class="graph_holder">
+            <div class="graph">
+                <div id="depreciationGraph" class="normal_graph"></div>
+            </div>
+        </div>
+        <p>
+            However, depreciation can be used in a buyer's advantage if they wait to buy a car until it is a few years
+            old, as the price will be significantly lower than the original MSRP. For example, a car that costs $40,000
+            new may be available for around $25,000 after only three years.
+            <br><br>
+            It's important to note that depreciation is not linear, and that most loss (or gain depending on if you're
+            buying) occurs in the first few years. The value lost after the seventh year is nowhere near the same as in
+            the first.
+            <br><br>
+            <!--https://caredge.com/ranks/depreciation/popular/5-year/best source for this data-->
+            Furthermore, different cars depreciate at different rates, and some cars even appreciate in value
+            over time. For example, on average, after 5 years a Toyota will have retained around 63% of its value,
+            while a Jeep will have only retained about 46%.
+            <br><br>
+            Typically, a cars depreciation can be linked to its reliability, and the more reliable cars depreciate less.
+            This is why reliable brands like Toyota, Lexus (owned by Toyota), and Honda tend to have a better resale
+            value. If you're interested in comparing brands and models, <a
+                href="https://caredge.com/ranks/depreciation/popular/5-year/best" target="_blank">this website</a> may
+            be helpful.
+        </p>
+    </div>
+
+    <div class="center_elements">
         <h3>Why You Should Care</h3>
         <hr>
         <p>For example, an average new car loan with a loan amount of $40,000 and an average interest rate of 7.2% over
@@ -45,40 +87,34 @@
             By understanding the costs associated with auto loans, borrowers can make more informed decisions about
             their financing options and potentially save money in the long run.
         </p>
-        </p>
     </div>
 
     <!-- https://www.kbb.com/car-depreciation/ use this for deprecation stats and hopefully create a depreciation caluclator :) -->
 
     <div class="center_elements">
-        <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1GWFj&width=670&height=475" scrolling="no"
-            frameborder="0" style="overflow:hidden; width:670px; height:525px;" allowTransparency="true"
-            loading="lazy"></iframe>
+        <div class="graph_holder">
+            <div class="graph">
+                <div id="autoRatesGraph" class="normal_graph"></div>
+            </div>
+        </div>
     </div>
 
 
     <!-- Set up car loan calculator here-->
 
-    <div class="center_elements">
-        <h3>Depreciation</h3>
-        <hr>
-        <p>
-            Deprecation is the decrease in value of a vehicle over time. It is important to consider depreciation when
-            purchasing a car, as it can significantly impact the overall cost of ownership.
-            <br><br>
-            On average, a new car loses about 20% of its value in the first year and about 15% each subsequent year.
-            It's important for potential buyers to understand that vehicles are not investments and will cost money to
-            maintain while losing value over time.
-            <br><br>
-            However, depreciation can be used in a buyer's advantage if they wait to buy a car until it is a few years
-            old, as the price will be significantly lower than the original MSRP.
-            For example, a car that costs $40,000 new may be available for around $25,000 after three years.
-        </p>
-    </div>
-
 
     <!-- Set up depreciation calculator here-->
-    include("footer.php");
+    <br><br><br><br><br><br>
+    <footer style="color:black; text-align:center;">
+        <hr>
+        <p class="footer">Bryant Monahan</p>
+        <p class="footer">Copyright © 2025</p>
+    </footer>
 </body>
+
+<!-- Need these to libraries to make things easier and pretty -->
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+<script type="module" src="auto.js"></script>
 
 </html>
