@@ -1,16 +1,16 @@
 // this function is used to calculate compound interest
-export function calculateCompoundPoints(inital, rate, time, contribution, interval) {
+export function calculateCompoundPoints(initial, rate, time, contribution, interval) {
     let dataPoints = [];
-    dataPoints.push({ x: 0, y: inital });
+    dataPoints.push({ x: 0, y: initial });
     let apy = ((1 + rate / interval) ** interval) - 1;
 
-    let previous = inital;
+    let previous = initial;
     for (let i = 1; i <= interval * time; i++) {
         previous = contribution + (previous * (1 + (rate / interval)));
         dataPoints.push({ x: i, y: previous });
     }
     let newDataPoints = [];
-    newDataPoints.push({ x: 0, y: inital });
+    newDataPoints.push({ x: 0, y: initial });
     for (let i = 1; i <= interval * time; i++) {
         if (i % interval == 0) {
             newDataPoints.push({ x: i / 12, y: dataPoints[i].y });
@@ -20,18 +20,18 @@ export function calculateCompoundPoints(inital, rate, time, contribution, interv
 }
 
 // this function is used to calculate simple interest 
-export function calculateSimplePoints(inital, rate, time, contribution, interval) {
+export function calculateSimplePoints(initial, rate, time, contribution, interval) {
     let dataPoints = [];
-    dataPoints.push({ x: 0, y: inital });
-    let contributed = inital;
-    let previous = inital;
+    dataPoints.push({ x: 0, y: initial });
+    let contributed = initial;
+    let previous = initial;
     for (let i = 1; i <= interval * time; i++) {
         contributed += contribution;
         previous += contribution + (contributed * ((rate / interval)));
         dataPoints.push({ x: i, y: previous });
     }
     let newDataPoints = [];
-    newDataPoints.push({ x: 0, y: inital });
+    newDataPoints.push({ x: 0, y: initial });
     for (let i = 1; i <= interval * time; i++) {
         if (i % interval == 0) {
             newDataPoints.push({ x: i / 12, y: dataPoints[i].y });

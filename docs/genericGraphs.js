@@ -225,3 +225,106 @@ function loadDoubleAreaChart(dataPoints, divId, title, xAxisTitle, legendInfo) {
 
     newChart.render();
 }
+
+// this is a modified version of the mortgage calculator that can be used in multiple places
+// the object passed in is a reference to the div id that the graph will be loaded into
+export function amortizationGraph(divId, principalDataPoints, interestDataPoints, totalPaidDataPoints, graphHeaderObj, contributionFilled) {
+    // at some point I want to label the graph where half the principal has been paid off, so this will find x value for me
+    let halfPointFound = false;
+    let halfPoint;
+
+    for (let i = 0; i < principalDataPoints.length; i++) {
+        let element = principalDataPoints[i];
+        if (!halfPointFound && element.y < principalDataPoints[0].y / 2) {
+            principalDataPoints[i] = { x: element.x, y: element.y, markerType: "triangle", markerColor: "black", markerSize: 10, indexLabel: "Half Paid", indexLabelFontSize: 9 };
+            halfPointFound = true;
+            halfPoint = element.x;
+            break;
+        }
+    }
+
+    let chart = new CanvasJS.Chart(divId, {
+        // set animation to false to prevent the graph from animating every time the user inputs a new value
+        animationEnabled: false,
+        theme: "light2",
+        title: {
+            text: ""
+        },
+        toolTip: {
+            shared: true
+        },
+        options: {
+            responsive: true,
+        },
+        axisX: {
+            title: "Time in Years",
+            minimum: 0,
+            interval: 1,
+        },
+        axisY: {
+            prefix: "$"
+        },
+        data: [{
+            label: "Principal",
+            type: "line",
+            // the color fill from these lines bleed together so lowering the opacity makes it look better
+            // I believe the colors #4CAF50 and #2196F3 are the best for this 
+            color: "#2196F3",
+            lineColor: "#2196F3",
+            markerSize: 6,
+            yValueFormatString: "#,###",
+            toolTipContent: "Year:{x}<br>Principal:${y}",
+            showInLegend: true,
+            legendText: "Principal Paid",
+            dataPoints: principalDataPoints,
+        },
+        {
+            label: "Interest",
+            type: "line",
+            color: "#D8315B",
+            lineColor: "#D8315B",
+            markerSize: 6,
+            yValueFormatString: "#,###",
+            toolTipContent: "Interest Paid:${y}",
+            showInLegend: true,
+            legendText: "Interest Paid",
+            dataPoints: interestDataPoints,
+        },
+        {
+            label: "Total Paid",
+            type: "line",
+            color: "black",
+            lineColor: "black",
+            markerSize: 6,
+            markerColor: "black",
+            yValueFormatString: "#,###",
+            toolTipContent: "Total:${y}",
+            showInLegend: true,
+            legendText: "Total Paid",
+            dataPoints: totalPaidDataPoints
+        },
+
+        ]
+    });
+
+
+    // this handles bad graph formatting at lower time intervals
+    //options.scales.y.beginAtZero = true;
+    // chart.options.axisX.interval = 1;
+    let monthlyPayment = (Math.round((totalPaidDataPoints[2].y - totalPaidDataPoints[1].y) / 12)).toLocaleString("en-US");
+    let grandTotal = Math.round(totalPaidDataPoints[totalPaidDataPoints.length - 1].y).toLocaleString("en-US");
+    let time;
+    if (contributionFilled) {
+        // this if block is here pretty much only to handle when a user inputs a tiny contribution that messes with the formatting
+        if (!Number.isInteger(totalPaidDataPoints[totalPaidDataPoints.length - 1].x)) {
+            time = Math.floor((totalPaidDataPoints.length - 2)) + " years " + Math.round(((principalDataPoints[principalDataPoints.length - 1].x) % 1) * 12) + " months";
+        } else {
+            time = Math.floor((totalPaidDataPoints.length - 1)) + " years ";
+        }
+        graphHeaderObj.text = `<p id="graph_header" class="graph_headers">With monthly payments of <span style="color:rgb(13, 143, 20)">$${monthlyPayment}</span> it will take <span style="color:rgb(0, 135, 245)">${time}</span> and <span style="color: #D8315B">$${grandTotal}</span> to pay off the initial loan</p>`;
+    } else {
+        time = Math.floor((totalPaidDataPoints.length - 1)) + " years";
+        graphHeaderObj.text = `<p id="graph_header" class="graph_headers">With monthly payments of <span style="color:rgb(13, 143, 20)">$${monthlyPayment}</span> it will take <span style="color:rgb(0, 135, 245)">${time}</span> and <span style="color: #D8315B">$${grandTotal}</span> to pay off the initial loan</p>`;
+    }
+    return chart;
+}

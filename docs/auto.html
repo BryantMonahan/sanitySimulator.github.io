@@ -98,6 +98,38 @@
             </div>
         </div>
     </div>
+    <br><br>
+    <div class="center_elements">
+        <div class="graph_holder">
+            <div class="graph_input">
+                <div>
+                    <label for="initial" class="graph_input_label">Initial Loan:</label>
+                    <input class="wrapped" type="number" id="initial" name="initial" min="0" placeholder="35000"><br>
+                </div>
+
+                <div>
+                    <label for="interest" class="graph_input_label">Interest %:</label>
+                    <input class="wrapped" type="number" id="interest" name="interest" min="0" max="100" placeholder="9"
+                        required><br>
+                </div>
+
+                <div>
+                    <label for="length" class="graph_input_label">Length of Loan:</label>
+                    <select class="wrapped" id="length" name="length" placeholder="60 months">
+                        <option value=2>24 months</option>
+                        <option value=3>36 months</option>
+                        <option value=4>48 months</option>
+                        <option value=5>60 months</option>
+                        <option value=6>72 months</option>
+                        <option value=7>84 months</option>
+                    </select>
+                </div>
+
+            </div>
+            <p id="graph_header" class="graph_headers"></p>
+            <div id="amortizationGraph" class="normal_graph"></div>
+        </div>
+    </div>
 
 
     <!-- Set up car loan calculator here-->

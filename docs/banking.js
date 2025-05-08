@@ -1,44 +1,44 @@
 import { calculateCompoundPoints, calculateSimplePoints } from "./graphCalculations.js";
 
-var realDataPoints = calculateCompoundPoints(10000, 0.06, 40, 100, 12);
-var simpleDataPoints = calculateSimplePoints(10000, 0.06, 40, 100, 12);
-var contributedDataPoints = calculateCompoundPoints(10000, 0, 40, 100, 12);
-var interval = 12; // default to monthly
+let realDataPoints = calculateCompoundPoints(10000, 0.06, 40, 100, 12);
+let simpleDataPoints = calculateSimplePoints(10000, 0.06, 40, 100, 12);
+let contributedDataPoints = calculateCompoundPoints(10000, 0, 40, 100, 12);
+let interval = 12; // default to monthly
 
 const graphHeader = document.getElementById("graph_header");
 
 // Get the values from the input fields
-const initalIn = document.getElementById("inital");
+const initialIn = document.getElementById("initial");
 const interestIn = document.getElementById("interest");
 const lengthIn = document.getElementById("length");
 const contributionIn = document.getElementById("contribution");
 const inflationIn = document.getElementById("inflation");
 
-var initalFilled = false;
-var interestFilled = false;
-var lengthFilled = false;
-var contributionFilled = false;
+let initialFilled = false;
+let interestFilled = false;
+let lengthFilled = false;
+let contributionFilled = false;
 
-var inflation = 0;
+let inflation = 0;
 
 
 
 function checkAndCalculate() {
-    if (initalFilled && interestFilled && lengthFilled && contributionFilled) {
+    if (initialFilled && interestFilled && lengthFilled && contributionFilled) {
         calculate();
     }
 }
 
 // this takes in the user input and calculates the compound interest based on the formula
 function calculate() {
-    var inital = Number(initalIn.value);
-    var interest = Number(interestIn.value);
-    var length = Number(lengthIn.value);
-    var contribution = Number(contributionIn.value);
+    let initial = Number(initialIn.value);
+    let interest = Number(interestIn.value);
+    let length = Number(lengthIn.value);
+    let contribution = Number(contributionIn.value);
     if (inflationIn === "" || inflationIn === null) {
         inflation = 0;
-        realDataPoints = calculateCompoundPoints(inital, interest / 100, length, contribution, interval);
-        simpleDataPoints = calculateSimplePoints(inital, interest / 100, length, contribution, interval);
+        realDataPoints = calculateCompoundPoints(initial, interest / 100, length, contribution, interval);
+        simpleDataPoints = calculateSimplePoints(initial, interest / 100, length, contribution, interval);
     } else {
         /*
          Because the user inputs the inflation rate as ANNUAL, we can't just subtract it from the interest rate imediatly.
@@ -47,17 +47,17 @@ function calculate() {
         inflation = Number(inflationIn.value);
         inflation /= 100;
         inflation = 12 * ((inflation + 1) ** (1 / 12) - 1); // this is the formula to convert annual inflation to monthly inflation
-        realDataPoints = calculateCompoundPoints(inital, ((interest / 100) - inflation), length, contribution, interval);
-        simpleDataPoints = calculateSimplePoints(inital, ((interest / 100) - inflation), length, contribution, interval);
+        realDataPoints = calculateCompoundPoints(initial, ((interest / 100) - inflation), length, contribution, interval);
+        simpleDataPoints = calculateSimplePoints(initial, ((interest / 100) - inflation), length, contribution, interval);
     }
-    contributedDataPoints = calculateCompoundPoints(inital, 0, length, contribution, interval);
+    contributedDataPoints = calculateCompoundPoints(initial, 0, length, contribution, interval);
 
     loadChart(realDataPoints, simpleDataPoints, contributedDataPoints);
 }
 
 function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
 
-    var chart = new CanvasJS.Chart("chartContainer", {
+    let chart = new CanvasJS.Chart("chartContainer", {
         // set animation to false to prevent the graph from animating every time the user inputs a new value
         animationEnabled: false,
         theme: "light2",
@@ -124,7 +124,7 @@ function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
     });
 
     // this changes the text above the graph to display the total amount after the specified time period
-    var time = realDataPoints.length - 1; // replace time with length once the creat points function is made
+    let time = realDataPoints.length - 1; // replace time with length once the creat points function is made
     // these use innerHTML to allow the text to fade in, if I use innerText it will not fade in
     if (time != 1) {
         if (inflation === 0) {
@@ -152,15 +152,15 @@ window.onload = function () {
 
 // These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function
 // They also limit and adjust users' input
-initalIn.addEventListener("input", function (event) {
+initialIn.addEventListener("input", function (event) {
     if (event.target.value !== "" && event.target.value !== null) {
-        initalFilled = true;
+        initialFilled = true;
         if (event.target.value < 0) {
             event.target.value = 0;
         }
         checkAndCalculate();
     } else {
-        initalFilled = false;
+        initialFilled = false;
     }
 })
 

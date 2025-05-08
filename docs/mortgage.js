@@ -1,16 +1,16 @@
 import { calculateAmortization } from "./graphCalculations.js";
 import { graphSingleDataPoints, graphDoubleDataPoints, graphSingleCSVDataPoints } from "./genericGraphs.js";
 
-var principalDataPoints = [];
-var interestDataPoints = [];
-var totalPaidDataPoints = [];
+let principalDataPoints = [];
+let interestDataPoints = [];
+let totalPaidDataPoints = [];
 calculateAmortization(300000, 7, 30, 0, principalDataPoints, interestDataPoints, totalPaidDataPoints);
 
 const graphHeader = document.getElementById("graph_header");
 const affordOutput = document.getElementById("affordOutput");
 
 // Get the values from the input fields
-const initalIn = document.getElementById("inital");
+const initialIn = document.getElementById("initial");
 const interestIn = document.getElementById("interest");
 const lengthIn = document.getElementById("length");
 const contributionIn = document.getElementById("contribution");
@@ -20,16 +20,16 @@ const affordInterestIn = document.getElementById("affordInterest");
 const affordLengthIn = document.getElementById("affordLength");
 const additionalIn = document.getElementById("additional");
 
-var incomeFilled = false;
-var affordInterestFilled = false;
-var additionalFilled = false;
+let incomeFilled = false;
+let affordInterestFilled = false;
+let additionalFilled = false;
 
-var initalFilled = false;
-var interestFilled = false;
-var contributionFilled = false;
+let initialFilled = false;
+let interestFilled = false;
+let contributionFilled = false;
 
 function checkAndCalculate() {
-    if (initalFilled && interestFilled) {
+    if (initialFilled && interestFilled) {
         calculate();
     }
 }
@@ -41,7 +41,7 @@ function checkAndCalculate() {
  */
 
 // this is decalred outside the function so the graph header can use it for proper formatting
-var contribution;
+let contribution;
 // this takes in the user input and calculates the compound interest based on the formula
 function calculate() {
     // this is used to reset the data points so the graph doesn't get cluttered with old data
@@ -49,9 +49,9 @@ function calculate() {
     interestDataPoints = [];
     totalPaidDataPoints = [];
 
-    var inital = Number(initalIn.value);
-    var interest = Number(interestIn.value);
-    var length = Number(lengthIn.value);
+    let initial = Number(initialIn.value);
+    let interest = Number(interestIn.value);
+    let length = Number(lengthIn.value);
     contribution = Number(contributionIn.value);
     // this is important for upadting the graph header when there is no contribution
     if (isNaN(contribution)) {
@@ -59,7 +59,7 @@ function calculate() {
         contribution = 0;
     }
 
-    calculateAmortization(inital, interest, length, contribution, principalDataPoints, interestDataPoints, totalPaidDataPoints);
+    calculateAmortization(initial, interest, length, contribution, principalDataPoints, interestDataPoints, totalPaidDataPoints);
     loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints);
 }
 
@@ -78,7 +78,7 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
         }
     }
 
-    var chart = new CanvasJS.Chart("chartContainer", {
+    let chart = new CanvasJS.Chart("chartContainer", {
         // set animation to false to prevent the graph from animating every time the user inputs a new value
         animationEnabled: false,
         theme: "light2",
@@ -105,7 +105,7 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
             color: "#2196F3",
             lineColor: "#2196F3",
             markerSize: 6,
-            yValueFormatString: "#,###0",
+            yValueFormatString: "#,###",
             toolTipContent: "Year:{x}<br>Principal:${y}",
             showInLegend: true,
             legendText: "Principal Paid",
@@ -117,7 +117,7 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
             color: "#D8315B",
             lineColor: "#D8315B",
             markerSize: 6,
-            yValueFormatString: "#,###0",
+            yValueFormatString: "#,###",
             toolTipContent: "Interest Paid:${y}",
             showInLegend: true,
             legendText: "Interest Paid",
@@ -130,7 +130,7 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
             lineColor: "black",
             markerSize: 6,
             markerColor: "black",
-            yValueFormatString: "#,###0",
+            yValueFormatString: "#,###",
             toolTipContent: "Total:${y}",
             showInLegend: true,
             legendText: "Total Paid",
@@ -154,10 +154,10 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
         } else {
             time = Math.floor((totalPaidDataPoints.length - 1)) + " years ";
         }
-        graphHeader.innerHTML = `<p id="graph_header">With monthly payments of <span style="color:rgb(13, 143, 20)">$${monthlyPayment}</span> it will take <span style="color:rgb(0, 135, 245)">${time}</span> and <span style="color: #D8315B">$${grandTotal}</span> to pay off the inital loan</p>`;
+        graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">With monthly payments of <span style="color:rgb(13, 143, 20)">$${monthlyPayment}</span> it will take <span style="color:rgb(0, 135, 245)">${time}</span> and <span style="color: #D8315B">$${grandTotal}</span> to pay off the initial loan</p>`;
     } else {
         time = Math.floor((totalPaidDataPoints.length - 1)) + " years";
-        graphHeader.innerHTML = `<p id="graph_header">With monthly payments of <span style="color:rgb(13, 143, 20)">$${monthlyPayment}</span> it will take <span style="color:rgb(0, 135, 245)">${time}</span> and <span style="color: #D8315B">$${grandTotal}</span> to pay off the inital loan</p>`;
+        graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">With monthly payments of <span style="color:rgb(13, 143, 20)">$${monthlyPayment}</span> it will take <span style="color:rgb(0, 135, 245)">${time}</span> and <span style="color: #D8315B">$${grandTotal}</span> to pay off the initial loan</p>`;
     }
     chart.render();
 }
@@ -173,15 +173,15 @@ window.onload = function () {
 }
 
 // These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function
-initalIn.addEventListener("input", function (event) {
+initialIn.addEventListener("input", function (event) {
     if (event.target.value !== "" && event.target.value !== null) {
-        initalFilled = true;
+        initialFilled = true;
         if (event.target.value < 0) {
             event.target.value = 0;
         }
         checkAndCalculate();
     } else {
-        initalFilled = false;
+        initialFilled = false;
     }
 })
 

@@ -51,7 +51,7 @@ button {
     cursor: pointer;
 }
 
-#graph_header {
+.graph_headers {
     text-align: center;
     margin-top: 2%;
 }
