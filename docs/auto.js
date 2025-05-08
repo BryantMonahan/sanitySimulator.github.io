@@ -10,13 +10,14 @@ let depreciationPoints = [
     { x: 4, y: 52 },
     { x: 5, y: 45 },
 ];
-let chart = loadSingleLineChart(depreciationPoints, "depreciationGraph", "", "", "% Of Original MSRP");
+let chart = loadSingleLineChart(depreciationPoints, "depreciationGraph", "", "", "Value %");
 chart.options.data[0].xValueFormatString = "Year #0";
 chart.options.data[0].markerSize = 7;
 chart.options.axisX.valueFormatString = "Year #0";
 chart.options.axisX.minimum = 0;
 chart.options.axisY.maximum = 100;
 chart.options.axisX.maximum = 5;
+chart.options.axisY.title = "% Of Original Value";
 
 let headerObject = new Object();
 headerObject.text = "<p>Placeholder Text<\p>";
@@ -25,7 +26,6 @@ let interestDataPoints = [];
 let totalPaidDataPoints = [];
 calculateAmortization(35000, 9, 5, 0, principalDataPoints, interestDataPoints, totalPaidDataPoints);
 let amortizationGraphDiv = amortizationGraph("amortizationGraph", principalDataPoints, interestDataPoints, totalPaidDataPoints, headerObject, false);
-amortizationGraphDiv.options.axisX.maximum = 5;
 amortizationGraphDiv.options.data[0].markerSize = 8;
 amortizationGraphDiv.options.data[1].markerSize = 8;
 amortizationGraphDiv.options.data[2].markerSize = 8;
