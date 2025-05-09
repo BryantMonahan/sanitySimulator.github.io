@@ -57,7 +57,6 @@ function checkAndCalculate() {
         let initial = Number(initialInput.value);
         let interest = Number(interestInput.value);
         let length = Number(lengthInput.value);
-        console.log(initial, interest, length);
         calculateAmortization(initial, interest, length, 0, principalDataPoints, interestDataPoints, totalPaidDataPoints);
         amortizationGraphDiv = amortizationGraph("amortizationGraph", principalDataPoints, interestDataPoints, totalPaidDataPoints, headerObject, false);
         graphHeader.innerHTML = headerObject.text;

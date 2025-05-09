@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<link rel="icon" type="images/png" href="images/newLogoPng.png">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <title>Credit Cards</title>
+
+        <img src="images/newLogoPng.png" alt="Logo" class="logo">
+        <h1 style="color: #D8315B" class="pageHeader">Money Movement</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mortgage.html">Mortgages</a></li>
+                <li><a href="credit.html">Credit/Credit Cards</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+    </head>
+
+    <div class="center_elements">
+        <h3>What Are Credit Cards?</h3>
+        <hr>
+        <p>
+            A credit card is a form of payment that a consumer can use to buy things. However, the money used isn't the
+            consumer's but instead money borrowed from the issuer of the card. At the end of each billing cycle,
+            (typically the end of the month) the consumer will receive a statement outlining all the purchases made and
+            the amount they borrowed.
+            <br><br>
+            Once the borrower has received their statement they can either choose to pay it off in full, pay off the
+            minimum and begin accruing interest, or some amount between minimum and full and still be charged interest.
+            <br><br>
+            Why use a credit card? For many people, the "buy now pay later" can be a lifesaver when living paycheck to
+            paycheck. More importantly, credit cards can be used to build your credit score to make future loans for
+            homes or cars more affordable. Even if you pay off your credit card in full every month, your credit score
+            will improve.
+            <br><br>
+            In fact, putting purchases on credit cards can be used to <i>save</i> money. This is because
+            many credit card companies offer discounts, cash back, and point based rewards systems that encourage you
+            to make transactions using their cards.
+        </p>
+    </div>
+
+
+    <div class="center_elements">
+        <h3>The Minimum Payment Trap</h3>
+        <hr>
+        <p>
+            The minimum monthly payment is an amount of money decided by a lender that a borrower needs to pay to keep
+            their account in good standing and avoid late fees and negative impacts on their credit score. This is
+            usually the interest owed plus a small percentage of the total balance, typically 2%.
+            <br><br>
+            While this may seem like a good option to someone in financial trouble, it will probably only keep them in
+            debt. This is because the minimum payment is rarely enough to pay off the balance in a reasonable amount
+            of time.
+            <br><br>
+            Many people either aren't financially literate enough to understand the consequences of only paying
+            the minimum payment, or they are in a situation where they can't afford to pay any more.
+            Credit card companies are aware of this and will often advertise the minimum payment as a way to entice
+            people to take on more debt.
+            <br><br>
+            Use the graph below to better understand just how bad minimum monthly payments are for long term success.
+            Don't forget to change the % of balance to see how much money you can save just by paying a tiny bit more.
+        </p>
+        <div class="graph_holder">
+            <div class="graph_input">
+                <div>
+                    <label for="balance" class="graph_input_label">Balance:</label>
+                    <input class="wrapped" type="number" id="balance" name="balance" min="0" placeholder="6730"><br>
+                </div>
+
+                <div>
+                    <label for="interest" class="graph_input_label">Interest %:</label>
+                    <input class="wrapped" type="number" id="interest" name="interest" min="0" max="100"
+                        placeholder="21" required><br>
+                </div>
+
+                <div>
+                    <label for="pay" class="graph_input_label">Pay % of Balance:</label>
+                    <select class="wrapped" id="pay" name="pay" placeholder="2%">
+                        <option value=2>2%</option>
+                        <option value=2.5>2.5%</option>
+                        <option value=3>3%</option>
+                        <option value=3.5>3.5%</option>
+                        <option value=4>4%</option>
+
+                    </select>
+                </div>
+
+                <div>
+                    <p id="error" class="error_msg">Interest must be larger than 0 and less than 23</p>
+                </div>
+            </div>
+            <p id="graph_header" class="graph_headers"></p>
+            <div id="amortizationGraph" class="normal_graph"></div>
+        </div>
+    </div>
+
+    <div class="center_elements">
+        <h3>What is APR?</h3>
+        <hr>
+        <p>
+            APR stands for Annual Percentage Rate and is the total cost of borrowing money from a lender per year.
+            This includes the interest rate and any fees associated with the loan.
+            <br><br>
+            For example, if you have a $10,000 loan from one lender at 20% APR, you'll end up paying around $2,000 in
+            one
+            year on fees and interest. All lenders are required to disclose this number and it's a good way to compare
+            different loans.
+            <br><br>
+            The graph below shows the average interest rate for credit cards. This does not include any fees that may be
+            associated with the cards so the APR is likely higher than what is shown in the graph. While your APR will
+            depend on your credit score, it will still increase and decrease with the average.
+        </p>
+        <div class="graph_holder">
+            <div class="graph">
+                <div id="creditCardRatesGraph" class="normal_graph"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="center_elements">
+        <h3>Different Kinds of Cards</h3>
+        <hr>
+        <p>
+            There are hundreds of cards out there, each with their own rates, fees, and rewards. To help you navigate
+            all these choices, we're going to break down the most common types you'll run into.
+        </p>
+        <br>
+        <ul>
+            <li><strong>Secured Cards:</strong> These cards require a security deposit incase the borrower fails to make
+                payments. This card is most commonly used by borrowers with little or poor credit history to build or
+                rebuild their credit score.</li>
+            <br>
+            <li><strong>Rewards Cards:</strong> As the name suggests these cards offer rewards like cash back, points,
+                or travel miles based on the amount of money you spend. The rewards offered by cards can vary
+                considerably, so it's important to shop around for cards that best fit your spending. </li>
+            <br>
+            <li><strong>Balance Transfer Cards:</strong> These cards are designed to move debt from an account with high
+                APR to low. These cards typically offer an introductory period where they'll charge 0% interest,
+                allowing a borrower to make progress on repayment. However, there is typically a fee of around 3% of the
+                balance charged in order to transfer the debt. </li>
+            </li>
+            <br>
+            <li><strong>Student Cards:</strong> Targeted towards students, these cards require lower credit scores and
+                may offer special rewards. However, they typically come with lower credit limits.</li>
+            <br>
+            <li><strong>Store Cards:</strong> Unlike rewards cards, these cards' rewards are specific to one store.
+                However, the discounts and rewards are usually higher than generic rewards cards. This may be useful if
+                you shop at one store a lot.</li>
+            <br>
+        </ul>
+    </div>
+
+
+
+    <!-- Need these to libraries to make things easier and pretty -->
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+    <script type="module" src="creditCard.js"></script>
+    <br><br><br><br><br><br>
+    <footer style="color:black; text-align:center;">
+        <hr>
+        <p class="footer">Bryant Monahan</p>
+        <p class="footer">Copyright © 2025</p>
+    </footer>
+</body>
+
+</html>

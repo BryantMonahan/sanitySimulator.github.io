@@ -32,7 +32,7 @@ window.onload = function () {
     amortizationGraphDiv.render();
     graphHeader = document.getElementById("graph_header");
     time = (principalDataPoints.length - 1) / 12;
-    graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">With minimum payments it will take <span style="color:rgb(0, 135, 245)">${Math.floor(time)}</span> years and <span style="color: #D8315B">$${Math.round(totalPaidDataPoints[totalPaidDataPoints.length - 1].y).toLocaleString("en-US")}</span> to pay off the balance of <span style="color:rgb(13, 143, 20)">$${Math.round(principalDataPoints[0].y).toLocaleString("en-US")}</span></p>`;
+    graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">With minimum payments it will take <span style="color:rgb(0, 135, 245)">${Math.floor(time)} years</span> and <span style="color: #D8315B">$${Math.round(totalPaidDataPoints[totalPaidDataPoints.length - 1].y).toLocaleString("en-US")}</span> to pay off the balance of <span style="color:rgb(13, 143, 20)">$${Math.round(principalDataPoints[0].y).toLocaleString("en-US")}</span></p>`;
     balanceInput = document.getElementById("balance");
     interestInput = document.getElementById("interest");
     error = document.getElementById("error");
@@ -88,7 +88,7 @@ function checkAndCalculate() {
         calculateCardAmortizationPoints(balance, interest, pay, principalDataPoints, interestDataPoints, totalPaidDataPoints);
         amortizationGraphDiv = amortizationGraph("amortizationGraph", principalDataPoints, interestDataPoints, totalPaidDataPoints, headerObject, false);
         time = (principalDataPoints.length - 1) / 12;
-        graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">With minimum payments it will take <span style="color:rgb(0, 135, 245)">${Math.floor(time)}</span> years and <span style="color: #D8315B">$${Math.round(totalPaidDataPoints[totalPaidDataPoints.length - 1].y).toLocaleString("en-US")}</span> to pay off the balance of <span style="color:rgb(13, 143, 20)">$${Math.round(principalDataPoints[0].y).toLocaleString("en-US")}</span></p>`;
+        graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">With minimum payments it will take <span style="color:rgb(0, 135, 245)">${Math.floor(time)} years</span> and <span style="color: #D8315B">$${Math.round(totalPaidDataPoints[totalPaidDataPoints.length - 1].y).toLocaleString("en-US")}</span> to pay off the balance of <span style="color:rgb(13, 143, 20)">$${Math.round(principalDataPoints[0].y).toLocaleString("en-US")}</span></p>`;
         amortizationGraphDiv.options.data[0].markerSize = 0;
         amortizationGraphDiv.options.data[1].markerSize = 0;
         amortizationGraphDiv.options.data[2].markerSize = 0;

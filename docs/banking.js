@@ -128,15 +128,15 @@ function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
     // these use innerHTML to allow the text to fade in, if I use innerText it will not fade in
     if (time != 1) {
         if (inflation === 0) {
-            graphHeader.innerHTML = `<p id="graph_header">Your total amount after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+            graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your total amount after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
         } else {
-            graphHeader.innerHTML = `<p id="graph_header">Your inflation-adjusted total after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+            graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your inflation-adjusted total after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
         }
     } else {
         if (inflation === 0) {
-            graphHeader.innerHTML = `<p id="graph_header">Your total amount after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+            graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your total amount after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
         } else {
-            graphHeader.innerHTML = `<p id="graph_header">Your inflation-adjusted total after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+            graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your inflation-adjusted total after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
         }
     }
     // this handles bad graph formatting at lower time intervals

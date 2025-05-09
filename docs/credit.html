@@ -2,6 +2,12 @@
 <html>
 <link rel="icon" type="images/png" href="images/newLogoPng.png">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
 <body>
     <header>
         <title>Money Movement - Credit</title>
@@ -18,7 +24,6 @@
         </nav>
     </header>
     <title>Auto Loans</title>
-    <link rel="stylesheet" href="style.css">
     </head>
 
     <div class="center_elements">
@@ -31,14 +36,22 @@
             also determine the interest rate you will pay on these loans. A higher score means a lower interest rate,
             which can save you thousands of dollars over the life of a loan.
             <br><br>
-            For some jobs having a good credit score is a requirement. This is especially true for jobs in finance,
-            banking, insurance, and law enforcement.
+            There are two main types of credit scores, FICO and Vantage, and three credit bureaus that determine credit
+            scores: Equifax, Experian, and TransUnion. Due to FICO scores being the go-to for 90% of lenders we'll be
+            focusing on that. However, if you're interested in Vantage or would like to explore more <a
+                href="https://www.debt.org/credit/report/scoring-models/" target="_blank">this</a> website may be of
+            interest.
+            <br><br>
+            If you're interested in seeing how you stack up against the general population, you can always get a free
+            credit report at <a href="www.annualcreditreport.com" target="_blank">www.annualcreditreport.com</a> or
+            any other trusted source like Experian, Equifax, or CreditKarma. Furthermore, these reports will show you
+            what accounts have been opened under your name and could reveal unknown fraud.
         </p>
         <table>
             <tr>
                 <th>Rating</th>
                 <th>Credit Score</th>
-                <th>Population %</th>
+                <th>Share of Population</th>
             </tr>
             <tr>
                 <td>Excellent</td>
@@ -105,91 +118,6 @@
         </p>
     </div>
 
-    <div class="center_elements">
-        <h3>What is APR?</h3>
-        <hr>
-        <p>
-            APR stands for Annual Percentage Rate and is the total cost of borrowing money from a lender per year.
-            This includes the interest rate and any fees associated with the loan.
-            <br><br>
-            For example, if you have a $10,000 loan from one lender at 30% APR, you'll end up paying them $3,000 in one
-            year on fees and interest. All lenders are required to disclose this number and it's a good way to compare
-            different loans.
-            <br><br>
-            The graph below shows the average interest rate for credit cards. This does not include any fees that may be
-            associated with the cards so the APR is likely higher than what is shown in the graph. While your APR will
-            depend on your credit score, it will still increase and decrease with the average.
-        </p>
-    </div>
-
-    <div class="center_elements">
-        <div class="graph_holder">
-            <div class="graph">
-                <div id="creditCardRatesGraph" class="normal_graph"></div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="center_elements">
-        <h3>The Minimum Payment Trap</h3>
-        <hr>
-        <p>
-            The minimum monthly payment is an amount of money decided by a lender that a borrower needs to pay to keep
-            their account in good standing and avoid late fees and negative impacts on their credit score. This is
-            usually the interest owed plus a small percentage of the total balance, typically between 1% and 4%.
-            <br><br>
-            While this may seem like a good option to someone in financial trouble, it will probably only keep them in
-            debt. This is because the minimum payment is rarely enough to pay off the balance in a reasonable amount
-            of time.
-            <br><br>
-            Many people either aren't financially literate enough to understand the consequences of only paying
-            the minimum payment, or they are in a situation where they can't afford to pay any more.
-            Credit card companies are aware of this and will often advertise the minimum payment as a way to entice
-            people to take on more debt.
-            <br><br>
-        </p>
-        <div class="graph_holder">
-            <div class="graph_input">
-                <div>
-                    <label for="balance" class="graph_input_label">Balance:</label>
-                    <input class="wrapped" type="number" id="balance" name="balance" min="0" placeholder="6730"><br>
-                </div>
-
-                <div>
-                    <label for="interest" class="graph_input_label">Interest %:</label>
-                    <input class="wrapped" type="number" id="interest" name="interest" min="0" max="100"
-                        placeholder="21" required><br>
-                </div>
-
-                <div>
-                    <label for="pay" class="graph_input_label">Pay % of Balance:</label>
-                    <select class="wrapped" id="pay" name="pay" placeholder="2%">
-                        <option value=1>1%</option>
-                        <option value=1.5>1.5%</option>
-                        <option value=2>2%</option>
-                        <option value=2.5>2.5%</option>
-                        <option value=3>3%</option>
-                        <option value=3.5>3.5%</option>
-                        <option value=4>4%</option>
-
-                    </select>
-                </div>
-
-                <div>
-                    <p id="error" class="error_msg">Interest must be larger than 0 and less than 23</p>
-                </div>
-            </div>
-            <p id="graph_header" class="graph_headers"></p>
-            <div id="amortizationGraph" class="normal_graph"></div>
-        </div>
-    </div>
-
-    <!-- Insert payment calculator here -->
-
-    <!-- Need these to libraries to make things easier and pretty -->
-    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-    <script type="module" src="credit.js"></script>
     <br><br><br><br><br><br>
     <footer style="color:black; text-align:center;">
         <hr>
