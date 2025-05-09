@@ -108,7 +108,7 @@ function loadChart(principalDataPoints, interestDataPoints, totalPaidDataPoints)
             yValueFormatString: "#,###",
             toolTipContent: "Year:{x}<br>Principal:${y}",
             showInLegend: true,
-            legendText: "Principal Paid",
+            legendText: "Principal Left",
             dataPoints: principalDataPoints,
         },
         {
@@ -170,6 +170,7 @@ window.onload = function () {
     graphDoubleDataPoints("JSON_Data/homeSalePrice.json", "JSON_Data/medianIncome.json", "medianMortgageGraph", "", "", "Median New Home Sale Price", "Median Household Income");
     graphSingleDataPoints("JSON_Data/mortgageRates.json", "mortgageRatesGraph", "", "", "30-Year Fixed Mortgage Rate");
     graphSingleCSVDataPoints("", "homeAffordabilityGraph", "Income Gap");
+    lengthIn.value = 30;
 }
 
 // These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function

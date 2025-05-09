@@ -259,7 +259,6 @@ export function amortizationGraph(divId, principalDataPoints, interestDataPoints
         axisX: {
             title: "Time in Years",
             minimum: 0,
-            interval: 1,
         },
         axisY: {
             prefix: "$"
@@ -275,7 +274,7 @@ export function amortizationGraph(divId, principalDataPoints, interestDataPoints
             yValueFormatString: "#,###",
             toolTipContent: "Year:{x}<br>Principal:${y}",
             showInLegend: true,
-            legendText: "Principal Paid",
+            legendText: "Principal Left",
             dataPoints: principalDataPoints,
         },
         {

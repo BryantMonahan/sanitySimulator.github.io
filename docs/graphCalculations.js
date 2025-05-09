@@ -115,3 +115,40 @@ export function calculateAmortization(principal, rate, time, contributions, prin
     }
 
 }
+
+export function calculateCardAmortizationPoints(principal, interest, minimum, principalDataPoints, interestDataPoints, totalPaidDataPoints) {
+    // initializing my variables 
+    let interestPaid = 0;
+    interestDataPoints.push({ x: 0, y: interestPaid });
+    let totalPaid = 0;
+    totalPaidDataPoints.push({ x: 0, y: totalPaid });
+    let month = 1;
+    principalDataPoints.push({ x: 0, y: principal });
+    let rate = (interest / 100) / 12;
+    let minRate = minimum / 100;
+    let minAmount;
+
+    // runs while the principal is greater than 0 
+    while (Math.floor(principal) > 0) {
+        minAmount = principal * minRate;
+        interestPaid += principal * rate;
+        principal *= 1 + rate;
+        // when the principal is less than the minimum payment amount, we need to start paying the minimum amount
+        if (minAmount < 25) {
+            if (principal >= 25) {
+                totalPaid += 25;
+                principal -= 25;
+            } else {
+                totalPaid += principal;
+                principal = 0;
+            }
+        } else {
+            totalPaid += minAmount;
+            principal -= minAmount;
+        }
+        interestDataPoints.push({ x: month, y: interestPaid });
+        totalPaidDataPoints.push({ x: month, y: totalPaid });
+        principalDataPoints.push({ x: month, y: principal });
+        month++;
+    }
+}

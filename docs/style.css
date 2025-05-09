@@ -25,6 +25,26 @@ header {
     text-align: center;
 }
 
+table {
+    border-collapse: collapse;
+    justify-self: center;
+    background-color: hsla(0, 0%, 93%);
+    border-radius: 7px;
+    box-shadow: 5px 5px 5px 0px hsla(0, 0%, 0%, 0.2);
+    width: 80%;
+}
+
+table tbody td {
+    border-top: #000000 dashed 1px;
+}
+
+.error_msg {
+    text-align: center;
+    justify-self: center;
+    color: red;
+    font-size: .9em;
+}
+
 #para {
     color: rgb(255, 255, 255);
 }
@@ -173,6 +193,9 @@ main {
     align-self: center;
 }
 
+.hide_me {
+    visibility: hidden;
+}
 
 input[type=number]:focus {
     border: 3px solid #555;
@@ -194,6 +217,14 @@ input[type=number]:focus {
     border-radius: 7px;
     box-shadow: 5px 5px 5px 0px hsla(0, 0%, 0%, 0.2);
     width: 100%;
+}
+
+.table_holder {
+    justify-self: center;
+    background-color: hsla(0, 0%, 93%);
+    border-radius: 7px;
+    box-shadow: 5px 5px 5px 0px hsla(0, 0%, 0%, 0.2);
+    width: 80%;
 }
 
 #graph_header {

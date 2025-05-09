@@ -135,11 +135,60 @@
     <!-- https://www.kbb.com/car-depreciation/ use this for deprecation stats and hopefully create a depreciation caluclator :) -->
 
     <div class="center_elements">
-        <h3>Interest Rates</h3>
+        <h3>Auto Rates</h3>
         <hr>
         <p>
-            Interest rates for auto loans can vary dramatically based on a number of factors, including the...
+            Interest rates for auto loans can vary dramatically based on a number of factors, including the borrower's
+            income, down payment, length of loan, credit score, and whether the vehicle is new or used. Typically,
+            higher credit scores will be offered lower interest rates and so will loans on new vehicles.
         </p>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Credit Score</th>
+                    <th>Avg APR, New</th>
+                    <th>Avg APR, Used</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>781-850</td>
+                    <td>4.77%</td>
+                    <td>7.67%</td>
+                </tr>
+                <tr>
+                    <td>661-780</td>
+                    <td>6.40%</td>
+                    <td>9.95%</td>
+                </tr>
+                <tr>
+                    <td>601-660</td>
+                    <td>9.59%</td>
+                    <td>14.46%</td>
+                </tr>
+                <tr>
+                    <td>501-600</td>
+                    <td>13.08%</td>
+                    <td>19.38%</td>
+                </tr>
+                <tr>
+                    <td>300-500</td>
+                    <td>15.75%</td>
+                    <td>21.81%</td>
+                </tr>
+            </tbody>
+            <!--Source: Experian data as of Q4 2024; VantageScore 4.0 used-->
+        </table>
+        <br>
+        <p>
+            As you can see, both credit score and the whether the vehicle is new or used have dramatic affects on APR.
+            The rate a borrower can get is also affected by market lending rates, which can vary dramatically based on
+            the Federal Reserve. Below you'll find a graph of the average auto loan rates for 5 year terms on new cars.
+            Unfortunately, it's difficult to find public data for used cars, but you can infer the used-rates based on
+            the table above.
+        </p>
+        <br>
         <div class="graph_holder">
             <div class="graph">
                 <div id="autoRatesGraph" class="normal_graph"></div>
@@ -160,7 +209,6 @@
 </body>
 
 <!-- Need these to libraries to make things easier and pretty -->
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <script type="module" src="auto.js"></script>
 

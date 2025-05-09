@@ -1,6 +1,5 @@
 import { graphSingleDataPoints, loadSingleLineChart, amortizationGraph } from "./genericGraphs.js";
 import { calculateAmortization } from "./graphCalculations.js";
-graphSingleDataPoints("JSON_Data/autoRates.json", "autoRatesGraph", "", "", "60-Month Auto Rate");
 
 let depreciationPoints = [
     { x: 0, y: 100 },
@@ -29,6 +28,7 @@ let amortizationGraphDiv = amortizationGraph("amortizationGraph", principalDataP
 amortizationGraphDiv.options.data[0].markerSize = 8;
 amortizationGraphDiv.options.data[1].markerSize = 8;
 amortizationGraphDiv.options.data[2].markerSize = 8;
+amortizationGraphDiv.options.axisX.interval = 1;
 
 const initialInput = document.getElementById("initial");
 const interestInput = document.getElementById("interest");
@@ -43,6 +43,7 @@ window.onload = function () {
     chart.render();
     amortizationGraphDiv.render();
     graphHeader.innerHTML = headerObject.text;
+    graphSingleDataPoints("JSON_Data/autoRates.json", "autoRatesGraph", "", "", "60-Month Auto Rate, New");
 };
 
 
