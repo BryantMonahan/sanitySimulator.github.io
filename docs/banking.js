@@ -41,7 +41,7 @@ function calculate() {
         simpleDataPoints = calculateSimplePoints(initial, interest / 100, length, contribution, interval);
     } else {
         /*
-         Because the user inputs the inflation rate as ANNUAL, we can't just subtract it from the interest rate imediatly.
+         Because the user inputs the inflation rate as ANNUAL, we can't just subtract it from the interest rate immediately.
          We first must convert it from annual to monthly by reverse engineering the APY formula.
          */
         inflation = Number(inflationIn.value);
@@ -124,19 +124,20 @@ function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
     });
 
     // this changes the text above the graph to display the total amount after the specified time period
-    let time = realDataPoints.length - 1; // replace time with length once the creat points function is made
+    let time = realDataPoints.length - 1; // replace time with length once the create points function is made
     // these use innerHTML to allow the text to fade in, if I use innerText it will not fade in
     if (time != 1) {
         if (inflation === 0) {
-            graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your total amount after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+            // `<p id="graph_header" class="graph_headers">With monthly payments of <span style="color:rgb(13, 143, 20)">$${monthlyPayment}</span> it will take <span style="color:rgb(0, 135, 245)">${time}</span> and <span style="color: #D8315B">$${grandTotal}</span> to pay off the initial loan</p>`
+            graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your total amount after <span style="color:rgb(0, 135, 245)">${time} years</span> is <span style="color:rgb(13, 143, 20)">$${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</span></p>`;
         } else {
-            graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your inflation-adjusted total after ${time} years is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+            graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your <span style="color: #D8315B">inflation-adjusted</span> total after <span style="color:rgb(0, 135, 245)">${time} years</span> is <span style="color:rgb(13, 143, 20)">$${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</span></p>`;
         }
     } else {
         if (inflation === 0) {
-            graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your total amount after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+            graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your total amount after <span style="color:rgb(0, 135, 245)">${time} year</span> is <span style="color:rgb(13, 143, 20)">$${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</span></p>`;
         } else {
-            graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your inflation-adjusted total after ${time} year is $${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</p>`;
+            graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your <span style="color: #D8315B">inflation-adjusted</span> total after <span style="color:rgb(0, 135, 245)">${time} year</span> is <span style="color:rgb(13, 143, 20)">$${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</span></p>`;
         }
     }
     // this handles bad graph formatting at lower time intervals
