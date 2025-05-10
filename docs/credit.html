@@ -47,39 +47,7 @@
             any other trusted source like Experian, Equifax, or CreditKarma. Furthermore, these reports will show you
             what accounts have been opened under your name and could reveal unknown fraud.
         </p>
-        <table>
-            <tr>
-                <th>Rating</th>
-                <th>Credit Score</th>
-                <th>Share of Population</th>
-            </tr>
-            <tr>
-                <td>Excellent</td>
-                <td>800-850</td>
-                <td>21.2%</td>
-            </tr>
-            <tr>
-                <td>Very Good</td>
-                <td>740-799</td>
-                <td>28.1%</td>
-            </tr>
-            <tr>
-                <td>Good</td>
-                <td>670-739</td>
-                <td>22.9%</td>
-            </tr>
-            <tr>
-                <td>Fair</td>
-                <td>580-669</td>
-                <td>16.6%</td>
-            </tr>
-            <tr>
-                <td>Very Poor</td>
-                <td>300-579</td>
-                <td>12.1%</td>
-
-            </tr>
-        </table>
+        <div id="scoreGraph" style="height: 300px; width: 100%;"></div>
     </div>
 
     <div class="center_elements">
@@ -89,41 +57,111 @@
             have a larger impact on your score than others.
             The five factors are:
         </p>
-        <!-- I'd like to add a pretty pie chart here once I get more comfortable with JS-->
         <ul>
             <li><strong>Payment History (35%):</strong> This is the most important factor. It shows if you pay your
                 bills on time.</li>
             <br>
             <li><strong>Credit Utilization (30%):</strong> This is the amount of credit you are using compared to the
-                amount of credit you have available.</li>
+                amount of credit you have available across all accounts.</li>
             <br>
             <li><strong>Length of Credit History (15%):</strong> This is how long you've had credit accounts open.</li>
             <br>
-            <li><strong>Types of Credit (10%):</strong> This is the different types of credit accounts you have, such as
+            <li><strong>Credit Mix (10%):</strong> This is the different types of credit accounts you have, such as
                 credit cards, mortgages, and auto loans.</li>
             <br>
             <li><strong>New Credit (10%):</strong> This is the number of new credit accounts you've opened recently.
             </li>
             <br>
         </ul>
+        <div id="factorGraph" style="height: 300px; width: 100%;"></div>
+    </div>
+
+    <div class="center_elements">
+        <h3>How To Raise Your Credit Score?</h3>
+        <hr>
         <p>
-            As of writing this article, credit utilization is based on the most recent month so your credit score can
-            seem volatile if you are using more credit than usual. However, once you pay off your credit card, your
-            score should return to normal within a month or two.
+            Credit scores can be confusing and even volatile at times. The number one thing is to
+            <strong>never miss a payment</strong>. Payment history has the strongest impact on your
+            score, and missed payments can stay on your credit reports for up to 7 years.
             <br><br>
-            If you are looking to improve your credit score, the best thing you can do is pay your bills on time. This
-            will have the largest impact on your score and if possible, it may be better for your credit score to keep
-            line of credits open even if you are not using them. This will help your credit utilization ratio and length
-            of credit history (assuming it's not costing money to keep them open).
+            It's important to remember that credit utilization is calculated monthly. A spike in usage can cause your
+            score to drop, but the good news is that paying off your balance or lowering your utilization can quickly
+            reverse that drop. Most experts recommend keeping your utilization under 30%.
+            <br><br>
+            Lenders look at your oldest, newest, and the average age of all accounts. Since time is the only thing that
+            can improve this, it's best to keep your oldest accounts open.
+            <br><br>
+            Credit mix benefits from having multiple types of loans at the same time (mortgage, auto loan, credit
+            cards).
+            <br><br>
+            Finally, new credit includes both recently opened accounts and hard inquiries. A hard inquiry typically
+            happens when you apply for a new loan or credit card. While these can temporarily lower your score, they're
+            a normal part of building credit. If you're curious about the difference between hard and soft inquiries, <a
+                href="https://www.creditkarma.com/credit/i/hard-credit-inquiries-and-soft-credit-inquiries"
+                target="_blank">this website</a> may be helpful.
         </p>
     </div>
 
+    <!--Used for the pie charts-->
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
     <br><br><br><br><br><br>
     <footer style="color:black; text-align:center;">
         <hr>
         <p class="footer">Bryant Monahan</p>
         <p class="footer">Copyright © 2025</p>
     </footer>
+    <script>
+        window.onload = function () {
+
+            let factorChart = new CanvasJS.Chart("factorGraph", {
+                animationEnabled: true,
+                title: {
+                    text: "FICO Credit Score Factors",
+                    fontFamily: "Work Sans",
+                    fontWeight: "bold"
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 240,
+                    yValueFormatString: "##0.\"%\"",
+                    indexLabel: "{label} {y}",
+                    dataPoints: [
+                        { y: 35, label: "Payment History" },
+                        { y: 30, label: "Utilization" },
+                        { y: 15, label: "Credit Length" },
+                        { y: 10, label: "New Credit" },
+                        { y: 10, label: "Credit Mix" }
+                    ]
+                }]
+            });
+            factorChart.render();
+
+            let scoreChart = new CanvasJS.Chart("scoreGraph", {
+                animationEnabled: true,
+                title: {
+                    text: "FICO Credit Score Factors",
+                    fontFamily: "Work Sans",
+                    fontWeight: "bold"
+
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 240,
+                    yValueFormatString: "##0.#\"%\"",
+                    indexLabel: "{label} {y}",
+                    dataPoints: [
+                        { y: 21.2, label: "Excellent (800-850)" },
+                        { y: 28.1, label: "Very Good (740-799)" },
+                        { y: 22.9, label: "Good (670-739)" },
+                        { y: 16.6, label: "Fair (580-699)" },
+                        { y: 12.1, label: "Very Poor (300-579)" }
+                    ]
+                }]
+            });
+            scoreChart.render();
+
+        }
+    </script>
 </body>
 
 </html>
