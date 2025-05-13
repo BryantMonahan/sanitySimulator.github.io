@@ -2,9 +2,15 @@
 <html>
 <link rel="icon" type="images/png" href="images/newLogoPng.png">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
 <body>
     <header>
-        <title>Money Movement - Banking & Saving</title>
+        <title>Saving & Banking</title>
         <img src="images/newLogoPng.png" alt="Logo" class="logo">
         <h1 style="color: #D8315B" class="pageHeader">Money Movement</h1>
         <nav class="navbar">
@@ -18,53 +24,47 @@
         </nav>
     </header>
     <title>Auto Loans</title>
-    <link rel="stylesheet" href="style.css">
     </head>
 
     <div class="center_elements">
-        <h3>Saving: The 50/30/20 rule</h3>
+        <h3>Saving</h3>
         <hr>
-        <p>The 50/30/20 rule isn't so much as a rule as it is a general go-to budgeting guideline. The idea is that
+        <p>
+            Knowing how to save money is necessary to achieve financial security and independence. Building a healthy
+            savings account protects you from unexpected expenses such as medical emergencies, car repairs, or even job
+            loss. Furthermore, saving allows you to minimize or even eliminate high-interest debt on larger purchases
+            such as cars.
+            <br><br>
+            If you're starting with nothing, building an emergency fund is your top priority. An emergency fund is meant
+            to safety net to protect you from unexpected expenses. It's typically recommended to put away 3-6 months
+            worth of expenses into an emergency fund. So, if your monthly expenses are $4,000 you should aim to save
+            between $12,000 and $24,000.
+            <br><br>
+            After building an emergency fund, your excess income should be used to pay off debt, starting with the
+            highest interest rate first. However, if given the choice between paying towards a debt with 3% APR and
+            investing into an account with 5% APY, it may be better to invest your money as you would gain more through
+            investment than you would pay in interest.
+            <br><br>
+            The 50/30/20 rule isn't so much a rule as it is a general go-to budgeting guideline. The idea is that
             you should spend 50% of your income on needs, 30% on wants, and 20% on savings or paying back debt. However,
-            it is important
-            to remember that this is just a guideline and you should adjust it to fit your own financial situation.
+            it is important to remember that this is just a guideline and you should adjust it to fit your own financial
+            situation.
         </p>
     </div>
 
     <div class="center_elements">
-        <h3>Simple vs Compound Interest & Inflation</h3>
+        <h3>Simple vs Compound Interest</h3>
         <hr>
         <p>When saving money, it's important to know your APY. APY is the total amount of interest you'll earn on a
-            savings or
-            investment account taking compounding into account. There are two types of interest: simple and compound.
+            savings or investment account, taking compounding into account. There are two types of interest: simple and
+            compound.
             <br><br>
-            Simple interest is
-            calculated only on the principal amount, while compound interest is calculated on the principal and any
-            interest that has already
-            been added to the account.
+            Simple interest is calculated only on the principal amount, while compound interest is calculated on the
+            principal and any interest added to the account. This allows compound interest to grow much quicker,
+            especially over long periods of time.
             <br><br>
-            Another factor to take into account when saving money is inflation. Inflation is the rate at which the
-            general level of prices
-            for goods and services is rising, which subsequently decreases the worth of your money. This generally
-            averages out to around 3%
-            per year, but can vary based on the economy.
-            <br><br>
-            If your APY is lower than the inflation rate, you are losing money over time. The average savings rate is
-            around .41% APY which is
-            significantly lower than the average inflation rate. The solution to this is a high-yield savings account or
-            a money market account
-            which can offer APYs of 4% or higher.
-            <br><br>
-            These accounts are typically offered by online banks and credit unions, and they can help you
-            keep up with inflation while still earning interest on your savings. A simple Google search can find you a
-            bank (insured by the FDIC)
-            that offers a high-yield savings account with a competitive APY.
-            <br><br>
-            I strongly encourage you to play around with the calculator below to see the differnce between simple and
-            compounding
-            interest and inflations impact on the real value of your money.
-
-            <!-- put the graphing calculator here with inflation-->
+            I strongly encourage you to play around with the calculator below to see the difference between simple and
+            compounding interest.
         </p>
 
 
@@ -96,7 +96,7 @@
 
                 <div>
                     <label for="inflation" class="graph_input_label">Inflation (Optional):</label>
-                    <input class="wrapped" type="number" id="inflation" name="infaltion" min="0" max="100"
+                    <input class="wrapped" type="number" id="inflation" name="inflation" min="0" max="100"
                         placeholder="0"><br>
                 </div>
 
@@ -108,56 +108,82 @@
             </div>
         </div>
 
-    </div>
+        <div class="center_elements">
+            <h3>Inflation</h3>
+            <hr>
+            <p>
+                Another factor to take into account when saving money is inflation. Inflation is the rate at which
+                prices for goods and services rise, which subsequently decreases the value of your money. This generally
+                averages out to around 3% per year, but can vary based on the economy.
+                <br><br>
+                If your APY is lower than the inflation rate, you are losing money over time. The average savings rate
+                is around .41% APY which is significantly lower than the average inflation rate. To avoid loss, invest
+                into a high-yield savings account or a money market account which may offer APYs of 4% or higher.
+                <br><br>
+                These accounts are typically offered by online banks and credit unions, and they can help you
+                keep up with inflation while still earning interest on your savings. A simple Google search can find you
+                a banks (insured by the FDIC) that offer high-yield savings accounts with competitive APYs.
+            </p>
+            <div class="graph_holder">
+                <div class="graph">
+                    <div id="inflationGraph" class="normal_graph"></div>
+                </div>
+            </div>
 
-    <div class="center_elements">
-        <h3>Banks vs Credit Unions</h3>
-        <hr>
-        <p>Banks and credit unions are both financial institutions that offer similar services, such as checking and
-            savings accounts,
-            loans, and credit cards. However, there are some key differences between the two.
-            <br><br>
-            Banks are for-profit institutions that are owned by shareholders, while credit unions are non-profit
-            organizations that
-            are owned by their members. This means that credit unions typically offer lower fees and better interest
-            rates than banks.
-            <br><br>
-            Furthermore, some credit unions have membership requirements, such as living in a certain area or working
-            for a specific employer.
-            This can make it more difficult to join a credit union than a bank.
-            <br><br>
-            If you're looking for a new bank or credit union, I recommend doing some research to find one that fits your
-            needs.
-            You can use websites like Bankrate or NerdWallet to compare rates and fees.
-        </p>
-    </div>
+        </div>
 
-    <div class="center_elements">
-        <h3>What does FDIC insured mean?</h3>
-        <hr>
-        <p>The FDIC is the Federal Deposit Insurance Corporation, an independent agency of the United States government
-            that provides
-            deposit insurance to depositors in U.S. commercial banks and savings institutions.
-            <br><br>
-            This means that if your bank fails, the FDIC will reimburse you for your deposits up to $250,000 per
-            depositor, per insured bank.
-            This insurance is funded by premiums paid by banks and savings institutions, not taxpayers.
-            <br><br>
-            It's important to note that not all financial institutions are FDIC insured. Be sure to check if your bank
-            or credit union is
-            insured before opening an account.
-        </p>
-    </div>
+        <div class="center_elements">
+            <h3>Banks vs Credit Unions</h3>
+            <hr>
+            <p>Banks and credit unions are both financial institutions that offer similar services, such as checking and
+                savings accounts,
+                loans, and credit cards. However, there are some key differences between the two.
+                <br><br>
+                Banks are for-profit institutions that are owned by shareholders, while credit unions are non-profit
+                organizations that
+                are owned by their members. This means that credit unions typically offer lower fees and better interest
+                rates than banks.
+                <br><br>
+                Furthermore, some credit unions have membership requirements, such as living in a certain area or
+                working
+                for a specific employer.
+                This can make it more difficult to join a credit union than a bank.
+                <br><br>
+                If you're looking for a new bank or credit union, I recommend doing some research to find one that fits
+                your
+                needs.
+                You can use websites like Bankrate or NerdWallet to compare rates and fees.
+            </p>
+        </div>
+
+        <div class="center_elements">
+            <h3>What does FDIC insured mean?</h3>
+            <hr>
+            <p>The FDIC is the Federal Deposit Insurance Corporation, an independent agency of the United States
+                government
+                that provides
+                deposit insurance to depositors in U.S. commercial banks and savings institutions.
+                <br><br>
+                This means that if your bank fails, the FDIC will reimburse you for your deposits up to $250,000 per
+                depositor, per insured bank.
+                This insurance is funded by premiums paid by banks and savings institutions, not taxpayers.
+                <br><br>
+                It's important to note that not all financial institutions are FDIC insured. Be sure to check if your
+                bank
+                or credit union is
+                insured before opening an account.
+            </p>
+        </div>
 
 
-    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-    <script type="module" src="banking.js"></script>
-    <br><br><br><br><br><br>
-    <footer style="color:black; text-align:center;">
-        <hr>
-        <p class="footer">Bryant Monahan</p>
-        <p class="footer">Copyright © 2025</p>
-    </footer>
+        <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+        <script type="module" src="banking.js"></script>
+        <br><br><br><br><br><br>
+        <footer style="color:black; text-align:center;">
+            <hr>
+            <p class="footer">Bryant Monahan</p>
+            <p class="footer">Copyright © 2025</p>
+        </footer>
 </body>
 
 </html>

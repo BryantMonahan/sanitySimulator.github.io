@@ -40,7 +40,7 @@ function checkAndCalculate() {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  */
 
-// this is decalred outside the function so the graph header can use it for proper formatting
+// this is declared outside the function so the graph header can use it for proper formatting
 let contribution;
 // this takes in the user input and calculates the compound interest based on the formula
 function calculate() {
@@ -53,7 +53,7 @@ function calculate() {
     let interest = Number(interestIn.value);
     let length = Number(lengthIn.value);
     contribution = Number(contributionIn.value);
-    // this is important for upadting the graph header when there is no contribution
+    // this is important for updating the graph header when there is no contribution
     if (isNaN(contribution)) {
         contributionFilled = false;
         contribution = 0;
@@ -269,7 +269,7 @@ additionalIn.addEventListener("input", function (event) {
         additionalFilled = true;
         checkAndCalculateAffordability();
     } else {
-        additonalFilled = false;
+        additionalFilled = false;
     }
 });
 

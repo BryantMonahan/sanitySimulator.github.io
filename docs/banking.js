@@ -1,4 +1,5 @@
 import { calculateCompoundPoints, calculateSimplePoints } from "./graphCalculations.js";
+import { graphSingleDataPoints } from "./genericGraphs.js";
 
 let realDataPoints = calculateCompoundPoints(10000, 0.06, 40, 100, 12);
 let simpleDataPoints = calculateSimplePoints(10000, 0.06, 40, 100, 12);
@@ -149,6 +150,8 @@ function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
 
 window.onload = function () {
     loadChart(realDataPoints, simpleDataPoints, contributedDataPoints);
+    graphSingleDataPoints("JSON_Data/inflation.json", "inflationGraph", "", "", "Inflation Rate");
+
 }
 
 // These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function
