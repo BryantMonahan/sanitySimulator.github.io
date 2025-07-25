@@ -1,0 +1,31 @@
+{
+  "name": "sanitysimulator",
+  "version": "1.0.0",
+  "description": "This is meant to be a guide for those wanting to learn the basics of personal finance. This site's name is currently undecided as Money Movement \r is way too expensive to buy the domain name for. A main focus of this website is to be visually pleasing and for users to enjoy playing around with\r the graphs/calculators in hopes that they gain some interest and pursue more information outside of sanitySimulator.",
+  "homepage": "https://github.com/BryantMonahan/sanitySimulator.github.io#readme",
+  "bugs": {
+    "url": "https://github.com/BryantMonahan/sanitySimulator.github.io/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BryantMonahan/sanitySimulator.github.io.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
