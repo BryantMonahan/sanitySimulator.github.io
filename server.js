@@ -41,6 +41,6 @@ async function getApiData() {
 }
 
 getApiData()
-app.listen(4200, () => {
+app.listen(10000, () => {
     console.log('app has started')
 })
