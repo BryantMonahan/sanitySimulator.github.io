@@ -6,7 +6,7 @@ require('dotenv').config();
 const fs = require('fs')
 const { Buffer } = require('buffer')
 const XLSX = require('xlsx')
-
+const cron = require('node-cron')
 async function getHomeAff() {
     try {
         let response = await fetch('https://www.atlantafed.org/-/media/documents/research/housing-and-policy/hoam/HOAM_US_Affordability_Index.xlsx')
@@ -36,13 +36,24 @@ async function getStLouisApiData(series_id, path) {
     }
 }
 
-getHomeAff()
-getStLouisApiData('MSPNHSUS', './public/JSON_Data/homeSalePrice.json')
-getStLouisApiData('FPCPITOTLZGUSA', './public/JSON_Data/inflation.json')
-getStLouisApiData('MEHOINUSA646N', './public/JSON_Data/medianIncome.json')
-getStLouisApiData('RIFLPBCIANM60NM', './public/JSON_Data/autoRates.json')
-getStLouisApiData('TERMCBCCALLNS', './public/JSON_Data/creditCardRates.json')
-getStLouisApiData('MORTGAGE30US', './public/JSON_Data/mortgageRates.json')
+function refreshFiles() {
+    getHomeAff()
+    getStLouisApiData('MSPNHSUS', './public/JSON_Data/homeSalePrice.json')
+    getStLouisApiData('FPCPITOTLZGUSA', './public/JSON_Data/inflation.json')
+    getStLouisApiData('MEHOINUSA646N', './public/JSON_Data/medianIncome.json')
+    getStLouisApiData('RIFLPBCIANM60NM', './public/JSON_Data/autoRates.json')
+    getStLouisApiData('TERMCBCCALLNS', './public/JSON_Data/creditCardRates.json')
+    getStLouisApiData('MORTGAGE30US', './public/JSON_Data/mortgageRates.json')
+    console.log('Data updated')
+}
+
+refreshFiles()
+
+cron.schedule('0 0 * * *', async (ctx) => {
+    console.log(`Task started at ${ctx.triggeredAt.toISOString()}`);
+    console.log(`Scheduled for: ${ctx.dateLocalIso}`);
+    refreshFiles()
+});
 
 app.listen(10000, () => {
     console.log('app has started')
