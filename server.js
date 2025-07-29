@@ -7,6 +7,7 @@ const fs = require('fs')
 const { Buffer } = require('buffer')
 const XLSX = require('xlsx')
 const cron = require('node-cron')
+
 async function getHomeAff() {
     try {
         let response = await fetch('https://www.atlantafed.org/-/media/documents/research/housing-and-policy/hoam/HOAM_US_Affordability_Index.xlsx')
@@ -47,8 +48,9 @@ function refreshFiles() {
     console.log('Data updated')
 }
 
-refreshFiles()
+// refreshFiles()
 
+// runs at midnight once a day
 cron.schedule('0 0 * * *', async (ctx) => {
     console.log(`Task started at ${ctx.triggeredAt.toISOString()}`);
     console.log(`Scheduled for: ${ctx.dateLocalIso}`);

@@ -330,7 +330,7 @@ a:hover {
 }
 
 a:active {
-    font-size: 1.1em;
+    /* font-size: 1.1em; */
     color: red;
 }
 
@@ -348,4 +348,9 @@ a:visited{
 #affordOutput {
     text-align: center;
     padding-bottom: 1%;
+}
+
+.hide_link {
+    display: block;
+    text-decoration: none;
 }

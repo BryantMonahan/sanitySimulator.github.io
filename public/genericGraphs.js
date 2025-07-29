@@ -72,7 +72,6 @@ export async function graphSingleCSVDataPoints(pathName, divId, legendInfo) {
 
         // remove bad data points
         dataPoints.shift();
-        dataPoints.pop();
         console.log(dataPoints);
         loadDoubleAreaChart(dataPoints, divId, "", "", legendInfo);
     } catch (error) {
