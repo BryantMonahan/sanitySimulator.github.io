@@ -21,7 +21,7 @@
             <ul>
                 <li><a href="credit.html">Credit Score</a></li>
                 <li><a href="mortgage.html">Mortgages</a></li>
-                <li><a href="creditCard.html">Credit/Credit Cards</a></li>
+                <li><a href="creditCard.html">Credit Cards</a></li>
                 <li><a href="auto.html">Auto</a></li>
                 <li><a href="retirement.html">Retirement</a></li>
                 <li><a href="banking.html">Banking & Saving</a></li>
@@ -32,7 +32,7 @@
     </head>
 
     <div class="center_elements">
-        <h3>What is Credit/Credit Score?</h3>
+        <h3>What is Credit Score?</h3>
         <hr>
         <p>Credit is how likely you are to repay borrowed money. This is often displayed as a number between 300 and
             850. Think of it as your financial GPA. The higher the number, the better your credit is.
@@ -48,7 +48,8 @@
             interest.
             <br><br>
             If you're interested in seeing how you stack up against the general population, you can always get a free
-            credit report at <a href="www.annualcreditreport.com" target="_blank">www.annualcreditreport.com</a> or
+            credit report at <a href="https://www.annualcreditreport.com" target="_blank">www.annualcreditreport.com</a>
+            or
             any other trusted source like Experian, Equifax, or CreditKarma. Furthermore, these reports will show you
             what accounts have been opened under your name and could reveal unknown fraud.
         </p>
@@ -113,9 +114,10 @@
     <footer style="color:black; text-align:center;">
         <hr>
         <p class="footer">Bryant Monahan</p>
-        <p class="footer">Copyright © 2025</p>
+        <p class="footer">Copyright © <span id="year"></p>
     </footer>
     <script>
+        document.getElementById('year').textContent = new Date().getFullYear()
         window.onload = function () {
 
             let factorChart = new CanvasJS.Chart("factorGraph", {

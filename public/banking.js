@@ -212,3 +212,5 @@ inflationIn.addEventListener("input", function (event) {
     }
     checkAndCalculate();
 })
+
+document.getElementById('year').textContent = new Date().getFullYear()

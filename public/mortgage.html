@@ -5,10 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="output.css">
+    <title>Mortgages - Mooka Money</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 <header>
-    <title>Mortgages - Mooka Money</title>
     <a href="index.html">
         <img src="images/logo.png" alt="Logo" class="logo">
     </a>
@@ -19,7 +20,7 @@
         <ul>
             <li><a href="credit.html">Credit Score</a></li>
             <li><a href="mortgage.html">Mortgages</a></li>
-            <li><a href="creditCard.html">Credit/Credit Cards</a></li>
+            <li><a href="creditCard.html">Credit Cards</a></li>
             <li><a href="auto.html">Auto</a></li>
             <li><a href="retirement.html">Retirement</a></li>
             <li><a href="banking.html">Banking & Saving</a></li>
@@ -33,7 +34,8 @@
     <div class="center_elements">
         <h3>Mortgage Amortization Calculator</h3>
         <hr>
-        <p>Use the calculator below to find out what a mortgage will really cost you. Compare the affects of interest
+        <p>Use the calculator below to find out what a mortgage will really cost
+            you. Compare the affects of interest
             rate and loan length on total cost and interest paid. Finally, don't forget to see how much an extra $100 a
             month can save you.</p>
         <div class="graph_holder">
@@ -164,6 +166,8 @@
         <div class="graph_holder">
             <div class="graph">
                 <div id="mortgageRatesGraph" class="normal_graph"></div>
+                <span class="source"><a style='text-decoration: none;'
+                        href="https://fred.stlouisfed.org/series/MORTGAGE30US" target="_blank">Source: FRED</a></span>
             </div>
         </div>
         <br><br>
@@ -171,7 +175,8 @@
     <div class="center_elements">
         <h3>Home Affordability</h3>
         <hr>
-        <p>In recent years home affordability has become a major issue for many Americans. As home prices have grown
+        <p>In recent years home affordability has become a major issue for many Americans. As home
+            prices have grown
             quicker than wages, many people feel dissuaded and worry if they'll ever be able to afford a home. As you
             can
             see below, home prices surged post 2020 and have yet to return to pre-pandemic levels.
@@ -182,6 +187,8 @@
         <div class="graph_holder">
             <div class="graph">
                 <div id="medianMortgageGraph" class="normal_graph"></div>
+                <a href="https://fred.stlouisfed.org/series/MSPUS" target="_blank" class="no-underline italic"><span
+                        class="source">Source: Fred</span></a>
             </div>
         </div>
         <br>
@@ -206,6 +213,9 @@
         <div class="graph_holder">
             <div class="graph">
                 <div id="homeAffordabilityGraph" class="normal_graph"></div>
+                <a href="https://www.atlantafed.org/research/data-and-tools/home-ownership-affordability-monitor#Tab1"
+                    target="_blank" class="no-underline italic"><span class="source">Source: Federal Reserve Bank of
+                        Atlanta</span></a>
             </div>
         </div>
         <br>
@@ -271,7 +281,8 @@
     <footer style="color:black; text-align:center;">
         <hr>
         <p class="footer">Bryant Monahan</p>
-        <p class="footer">Copyright © 2025</p>
+        <p class="footer">Copyright © <span id="year"></span>
+        </p>
     </footer>
 </body>
 

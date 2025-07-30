@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+@tailwind utilities;
 
 body {
     background-color: #ffffff;
@@ -204,6 +205,8 @@ input[type=number]:focus {
 .normal_graph {
     height: 370px;
     padding: 12px;
+    padding-bottom: 0px;
+
 }
 
 @media screen and (max-width: 1200px) {
@@ -334,13 +337,11 @@ a:active {
     color: red;
 }
 
-/**
-a:visited{
+* a:visited {
     color: rgb(0, 0, 0);
 }
-**/
 
-.windows:hover {
+* .windows:hover {
     transform: scale(1.05);
     transition: 50% 0.5s;
 }
@@ -353,4 +354,16 @@ a:visited{
 .hide_link {
     display: block;
     text-decoration: none;
+}
+
+.canvasjs-chart-credit {
+    display: none;
+}
+
+.source {
+    font-style: italic;
+    font-size: x-small;
+    text-decoration: none;
+    text-align: left;
+    padding: 0px;
 }

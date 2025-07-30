@@ -92,3 +92,5 @@ interestInput.addEventListener("input", function (event) {
 lengthInput.addEventListener("change", function (event) {
     checkAndCalculate();
 })
+
+document.getElementById('year').textContent = new Date().getFullYear()

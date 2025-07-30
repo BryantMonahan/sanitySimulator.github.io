@@ -97,3 +97,5 @@ function checkAndCalculate() {
         amortizationGraphDiv.render();
     }
 }
+
+document.getElementById('year').textContent = new Date().getFullYear()

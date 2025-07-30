@@ -273,3 +273,4 @@ additionalIn.addEventListener("input", function (event) {
     }
 });
 
+document.getElementById('year').textContent = new Date().getFullYear()
