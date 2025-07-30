@@ -17,16 +17,15 @@
         <a href="index.html" class="hide_link">
             <h1 style="color: #D8315B" class="pageHeader">ooka Money</h1>
         </a>
-        <nav class="navbar">
-            <ul>
-                <li><a href="credit.html">Credit Score</a></li>
-                <li><a href="mortgage.html">Mortgages</a></li>
-                <li><a href="creditCard.html">Credit Cards</a></li>
-                <li><a href="auto.html">Auto</a></li>
-                <li><a href="retirement.html">Retirement</a></li>
-                <li><a href="banking.html">Banking & Saving</a></li>
-            </ul>
-        </nav>
+        <div class="flex [&>*]:no-underline"
+            style="background-color: hsla(0, 0%, 70%); padding-top: 5px; padding-bottom: 5px;">
+            <a href="mortgage.html" class="navlink">Mortgages</a>
+            <a href="auto.html" class="navlink">Auto</a>
+            <a href="creditCard.html" class="navlink">Credit Cards</a>
+            <a href="banking.html" class="navlink">Banking & Saving</a>
+            <a href="retirement.html" class="navlink">Retirement</a>
+            <a href="credit.html" class="navlink">Credit Score</a>
+        </div>
     </header>
     <title>Auto Loans</title>
 
@@ -57,6 +56,7 @@
         <div class="graph_holder">
             <div class="graph">
                 <div id="depreciationGraph" class="normal_graph"></div>
+                &nbsp;
             </div>
         </div>
         <p>
@@ -120,6 +120,7 @@
             </div>
             <p id="graph_header" class="graph_headers"></p>
             <div id="amortizationGraph" class="normal_graph"></div>
+            &nbsp;
         </div>
         <p>
             When deciding how on large of a loan you can afford, it can be helpful to remember that your debt-to-income

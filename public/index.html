@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="images/webp" href="images/newLogPngo.png">
     <script src="https://kit.fontawesome.com/ba51857e96.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="output.css">
     <title>Mooka Money</title>
 </head>
 
@@ -128,6 +128,9 @@
         <hr>
         <p class="footer">Bryant Monahan</p>
         <p class="footer">Copyright © <span id="year"></p>
+        <script>
+            document.getElementById('year').textContent = new Date().getFullYear();
+        </script>
     </footer>
 </body>
 
