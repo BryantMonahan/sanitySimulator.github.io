@@ -23,8 +23,8 @@ let payInput;
 let time;
 let error;
 
-let balanceFilled = false;
-let interestFilled = false;
+let balanceFilled = true;
+let interestFilled = true;
 
 window.onload = function () {
     graphSingleDataPoints("JSON_Data/creditCardRates.json", "creditCardRatesGraph", "", "", "Avg Credit Card Interest Rate");

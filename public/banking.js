@@ -15,10 +15,10 @@ const lengthIn = document.getElementById("length");
 const contributionIn = document.getElementById("contribution");
 const inflationIn = document.getElementById("inflation");
 
-let initialFilled = false;
-let interestFilled = false;
-let lengthFilled = false;
-let contributionFilled = false;
+let initialFilled = true;
+let interestFilled = true;
+let lengthFilled = true;
+let contributionFilled = true;
 
 let inflation = 0;
 

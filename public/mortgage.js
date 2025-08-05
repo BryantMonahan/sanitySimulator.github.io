@@ -20,13 +20,13 @@ const affordInterestIn = document.getElementById("affordInterest");
 const affordLengthIn = document.getElementById("affordLength");
 const additionalIn = document.getElementById("additional");
 
-let incomeFilled = false;
-let affordInterestFilled = false;
-let additionalFilled = false;
+let incomeFilled = true;
+let affordInterestFilled = true;
+let additionalFilled = true;
 
-let initialFilled = false;
-let interestFilled = false;
-let contributionFilled = false;
+let initialFilled = true;
+let interestFilled = true;
+let contributionFilled = true;
 
 function checkAndCalculate() {
     if (initialFilled && interestFilled) {

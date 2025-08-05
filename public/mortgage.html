@@ -41,18 +41,18 @@
             <div class="graph_input">
                 <div>
                     <label for="initial" class="graph_input_label">Initial Loan:</label>
-                    <input class="wrapped" type="text" id="initial" name="initial" min="0" placeholder="300000"><br>
+                    <input class="wrapped" type="text" id="initial" name="initial" min="0" value="300,000"><br>
                 </div>
 
                 <div>
                     <label for="interest" class="graph_input_label">Interest %:</label>
-                    <input class="wrapped" type="number" id="interest" name="interest" min="0" max="100" placeholder="7"
+                    <input class="wrapped" type="number" id="interest" name="interest" min="0" max="100" value="7"
                         required><br>
                 </div>
 
                 <div>
                     <label for="length" class="graph_input_label">Length of Loan:</label>
-                    <select class="wrapped" id="length" name="length" placeholder="30 years">
+                    <select class="wrapped" id="length" name="length" value="30 years">
                         <option value=10>10 years</option>
                         <option value=15>15 years</option>
                         <option value=30>30 years</option>
@@ -62,13 +62,13 @@
                 </div>
 
                 <!--   <label for="length" class="graph_input_label">Years:</label>
-                                <input class="wrapped" type="number" id="length" name="length" min="0" max="150" placeholder="40"
+                                <input class="wrapped" type="number" id="length" name="length" min="0" max="150" value="40"
                                     required><br>
                                 -->
                 <div>
                     <label for="contribution" class="graph_input_label">Additional Contribution (Optional):</label>
                     <input class="wrapped" type="text" id="contribution" name="contribution" min="0" max="1000000"
-                        placeholder="0">
+                        value="0">
                 </div>
 
                 <!-- <label for="interval">Compound Frequency:</label><br> -->
@@ -248,18 +248,18 @@
             <div class="graph_input">
                 <div>
                     <label for="income" class="graph_input_label">Yearly Gross Income:</label>
-                    <input class="wrapped" type="text" id="income" name="income" min="0" placeholder="70000"><br>
+                    <input class="wrapped" type="text" id="income" name="income" min="0" value="70,000"><br>
                 </div>
 
                 <div>
                     <label for="affordInterest" class="graph_input_label">Interest %:</label>
                     <input class="wrapped" type="number" id="affordInterest" name="affordInterest" min="0" max="100"
-                        placeholder="7" required><br>
+                        value="7" required><br>
                 </div>
 
                 <div>
                     <label for="affordLength" class="graph_input_label">Length of Loan:</label>
-                    <select class="wrapped" id="affordLength" name="affordLength" placeholder="30 years">
+                    <select class="wrapped" id="affordLength" name="affordLength" value="30 years">
                         <option value=30>30 years</option>
                         <option value=15>15 years</option>
                         <option value=10>10 years</option>
@@ -269,7 +269,7 @@
                 <div>
                     <label for="additional" class="graph_input_label">Property Taxes / Insurance (Optional):</label>
                     <input class="wrapped" type="text" id="additional" name="additional" min="0" max="1000000"
-                        placeholder="0">
+                        value="0">
                 </div>
 
             </div>
@@ -283,7 +283,7 @@
     <footer style="color:black; text-align:center;">
         <hr>
         <p class="footer">Bryant Monahan</p>
-        <p class="footer">Copyright © <span id="year"></span>
+        <p class="footer"> <span id="year"></span>
         </p>
     </footer>
 </body>

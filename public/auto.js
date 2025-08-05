@@ -35,8 +35,8 @@ const interestInput = document.getElementById("interest");
 const lengthInput = document.getElementById("length");
 const graphHeader = document.getElementById("graph_header");
 
-let initialFilled = false;
-let interestFilled = false;
+let initialFilled = true;
+let interestFilled = true;
 
 window.onload = function () {
     lengthInput.value = 5;
