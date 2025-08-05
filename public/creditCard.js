@@ -26,7 +26,6 @@ let error;
 let balanceFilled = false;
 let interestFilled = false;
 
-console.log(principalDataPoints.length, principalDataPoints);
 window.onload = function () {
     graphSingleDataPoints("JSON_Data/creditCardRates.json", "creditCardRatesGraph", "", "", "Avg Credit Card Interest Rate");
     amortizationGraphDiv.render();
@@ -44,12 +43,15 @@ window.onload = function () {
 
     // These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function
     balanceInput.addEventListener("input", function (event) {
+        const raw = event.target.value.replace(/[a-zA-Z,]/g, '')
+        balanceInput.value = raw
         if (event.target.value !== "" && event.target.value !== null) {
             balanceFilled = true;
             if (event.target.value < 0) {
                 event.target.value = 0;
             }
             checkAndCalculate();
+            balanceInput.value = Number(balanceInput.value).toLocaleString('en-US')
         } else {
             balanceFilled = false;
         }
@@ -82,7 +84,7 @@ function checkAndCalculate() {
         interestDataPoints = [];
         totalPaidDataPoints = [];
 
-        let balance = Number(balanceInput.value);
+        let balance = Number(balanceInput.value.replace(/[a-zA-Z,]/g, ''));
         let interest = Number(interestInput.value);
         let pay = Number(payInput.value);
         calculateCardAmortizationPoints(balance, interest, pay, principalDataPoints, interestDataPoints, totalPaidDataPoints);

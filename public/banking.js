@@ -32,10 +32,10 @@ function checkAndCalculate() {
 
 // this takes in the user input and calculates the compound interest based on the formula
 function calculate() {
-    let initial = Number(initialIn.value);
+    let initial = Number(initialIn.value.replace(/[a-zA-Z,]/g, ''));
     let interest = Number(interestIn.value);
     let length = Number(lengthIn.value);
-    let contribution = Number(contributionIn.value);
+    let contribution = Number(contributionIn.value.replace(/[a-zA-Z,]/g, ''));
     if (inflationIn === "" || inflationIn === null) {
         inflation = 0;
         realDataPoints = calculateCompoundPoints(initial, interest / 100, length, contribution, interval);
@@ -157,12 +157,15 @@ window.onload = function () {
 // These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function
 // They also limit and adjust users' input
 initialIn.addEventListener("input", function (event) {
+    const raw = event.target.value.replace(/[a-zA-Z,]/g, '')
+    initialIn.value = raw
     if (event.target.value !== "" && event.target.value !== null) {
         initialFilled = true;
         if (event.target.value < 0) {
             event.target.value = 0;
         }
         checkAndCalculate();
+        initialIn.value = Number(initialIn.value).toLocaleString('en-US')
     } else {
         initialFilled = false;
     }
@@ -195,12 +198,15 @@ lengthIn.addEventListener("input", function (event) {
 })
 
 contributionIn.addEventListener("input", function (event) {
+    const raw = event.target.value.replace(/[a-zA-Z,]/g, '')
+    contributionIn.value = raw
     if (event.target.value !== "" && event.target.value !== null) {
         contributionFilled = true;
         if (event.target.value < 0) {
             event.target.value = 0;
         }
         checkAndCalculate();
+        contributionIn.value = Number(contributionIn.value).toLocaleString('en-US')
     } else {
         contributionFilled = false;
     }

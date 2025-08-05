@@ -16,6 +16,12 @@
 .grow {
   flex-grow: 1;
 }
+.px-\[5px\] {
+  padding-inline: 5px;
+}
+.px-\[10px\] {
+  padding-inline: 10px;
+}
 .italic {
   font-style: italic;
 }

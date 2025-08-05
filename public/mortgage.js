@@ -49,7 +49,7 @@ function calculate() {
     interestDataPoints = [];
     totalPaidDataPoints = [];
 
-    let initial = Number(initialIn.value);
+    let initial = Number(initialIn.value.replace(/,/g, ''));
     let interest = Number(interestIn.value);
     let length = Number(lengthIn.value);
     contribution = Number(contributionIn.value);
@@ -175,12 +175,15 @@ window.onload = function () {
 
 // These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function
 initialIn.addEventListener("input", function (event) {
+    const raw = event.target.value.replace(/[a-zA-Z,]/g, '');
+    initialIn.value = raw
     if (event.target.value !== "" && event.target.value !== null) {
         initialFilled = true;
         if (event.target.value < 0) {
             event.target.value = 0;
         }
         checkAndCalculate();
+        initialIn.value = Number(initialIn.value).toLocaleString('en-US')
     } else {
         initialFilled = false;
     }
@@ -203,12 +206,15 @@ lengthIn.addEventListener("change", function (event) {
 })
 
 contributionIn.addEventListener("input", function (event) {
+    const raw = event.target.value.replace(/[a-zA-Z,]/g, '');
+    contributionIn.value = raw
     if (event.target.value !== "" && event.target.value !== null) {
         contributionFilled = true;
         if (event.target.value < 0) {
             event.target.value = 0;
         }
         checkAndCalculate();
+        contributionIn.value = Number(contributionIn.value).toLocaleString('en-US')
     } else {
         contributionFilled = false;
         checkAndCalculate();
@@ -218,16 +224,13 @@ contributionIn.addEventListener("input", function (event) {
 // the code for the affordability calculator will be kept below this line
 function checkAndCalculateAffordability() {
     if (incomeFilled && affordInterestFilled) {
-        let monthlyIncome = Number(incomeIn.value) / 12;
+        let monthlyIncome = Number(incomeIn.value.replace(/[a-zA-Z,]/g, '')) / 12;
         let maxPayment = monthlyIncome * 0.28;
         if (additionalFilled) {
-            maxPayment -= Number(additionalIn.value);
+            maxPayment -= Number(additionalIn.value.replace(/[a-zA-Z,]/g, ''));
         }
         let months = Number(affordLengthIn.value) * 12;
-        console.log(months);
-        console.log(maxPayment);
         let interest = Number(affordInterestIn.value) / 100;
-        console.log(interest);
         let total = maxPayment * ((1 - Math.pow(1 + interest / 12, -months)) / (interest / 12));
         isNaN(total) ? total = 0 : total;
         affordOutput.innerHTML = `You can afford a loan of <span style="color:rgb(13, 143, 20)">$${Math.round(total).toLocaleString("en-US")}</span>`;
@@ -235,16 +238,20 @@ function checkAndCalculateAffordability() {
 }
 
 incomeIn.addEventListener("input", function (event) {
+    const raw = event.target.value.replace(/[a-zA-Z,]/g, '');
+    incomeIn.value = raw
     if (event.target.value !== "" && event.target.value !== null) {
         if (event.target.value < 0) {
             event.target.value = 0;
         }
         incomeFilled = true;
         checkAndCalculateAffordability();
+        incomeIn.value = Number(incomeIn.value).toLocaleString('en-US')
     } else {
         incomeFilled = false;
     }
 });
+
 affordInterestIn.addEventListener("input", function (event) {
     if (event.target.value !== "" && event.target.value !== null) {
         if (event.target.value < 0) {
@@ -262,12 +269,16 @@ affordLengthIn.addEventListener("input", function (event) {
 });
 
 additionalIn.addEventListener("input", function (event) {
+    const raw = event.target.value.replace(/[a-zA-Z,]/g, '');
+    additionalIn.value = raw
+
     if (event.target.value !== "" && event.target.value !== null) {
         if (event.target.value < 0) {
             event.target.value = 0;
         }
         additionalFilled = true;
         checkAndCalculateAffordability();
+        additionalIn.value = Number(additionalIn.value).toLocaleString('en-US')
     } else {
         additionalFilled = false;
     }

@@ -16,7 +16,7 @@
     <a href="index.html" class="hide_link">
         <h1 style="color: #D8315B" class="pageHeader">ooka Money</h1>
     </a>
-    <div class="flex [&>*]:no-underline"
+    <div class="flex [&>*]:no-underline px-[5px]"
         style="background-color: hsla(0, 0%, 70%); padding-top: 5px; padding-bottom: 5px;">
         <a href="mortgage.html" class="navlink">Mortgages</a>
         <a href="auto.html" class="navlink">Auto</a>
@@ -41,7 +41,7 @@
             <div class="graph_input">
                 <div>
                     <label for="initial" class="graph_input_label">Initial Loan:</label>
-                    <input class="wrapped" type="number" id="initial" name="initial" min="0" placeholder="300000"><br>
+                    <input class="wrapped" type="text" id="initial" name="initial" min="0" placeholder="300000"><br>
                 </div>
 
                 <div>
@@ -67,7 +67,7 @@
                                 -->
                 <div>
                     <label for="contribution" class="graph_input_label">Additional Contribution (Optional):</label>
-                    <input class="wrapped" type="number" id="contribution" name="contribution" min="0" max="1000000"
+                    <input class="wrapped" type="text" id="contribution" name="contribution" min="0" max="1000000"
                         placeholder="0">
                 </div>
 
@@ -188,7 +188,7 @@
             <div class="graph">
                 <div id="medianMortgageGraph" class="normal_graph"></div>
                 <a href="https://fred.stlouisfed.org/series/MSPUS" target="_blank" class="no-underline italic"><span
-                        class="source">Source: FRED</span></a>,
+                        class="source">Sources: FRED,</span></a>
                 <a href="https://fred.stlouisfed.org/series/MEHOINUSA646N" target="_blank"
                     class="no-underline italic"><span class="source">FRED</span></a>
             </div>
@@ -248,7 +248,7 @@
             <div class="graph_input">
                 <div>
                     <label for="income" class="graph_input_label">Yearly Gross Income:</label>
-                    <input class="wrapped" type="number" id="income" name="income" min="0" placeholder="70000"><br>
+                    <input class="wrapped" type="text" id="income" name="income" min="0" placeholder="70000"><br>
                 </div>
 
                 <div>
@@ -268,7 +268,7 @@
 
                 <div>
                     <label for="additional" class="graph_input_label">Property Taxes / Insurance (Optional):</label>
-                    <input class="wrapped" type="number" id="additional" name="additional" min="0" max="1000000"
+                    <input class="wrapped" type="text" id="additional" name="additional" min="0" max="1000000"
                         placeholder="0">
                 </div>
 

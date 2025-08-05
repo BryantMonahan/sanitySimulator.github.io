@@ -54,7 +54,7 @@ function checkAndCalculate() {
         interestDataPoints = [];
         totalPaidDataPoints = [];
 
-        let initial = Number(initialInput.value);
+        let initial = Number(initialInput.value.replace(/[a-zA-Z,]/g, ''));
         let interest = Number(interestInput.value);
         let length = Number(lengthInput.value);
         calculateAmortization(initial, interest, length, 0, principalDataPoints, interestDataPoints, totalPaidDataPoints);
@@ -66,12 +66,15 @@ function checkAndCalculate() {
 
 // These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function
 initialInput.addEventListener("input", function (event) {
+    const raw = event.target.value.replace(/[a-zA-Z,]/g, '')
+    initialInput.value = raw
     if (event.target.value !== "" && event.target.value !== null) {
         initialFilled = true;
         if (event.target.value < 0) {
             event.target.value = 0;
         }
         checkAndCalculate();
+        initialInput.value = Number(initialInput.value).toLocaleString('en-US')
     } else {
         initialFilled = false;
     }

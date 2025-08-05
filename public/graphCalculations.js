@@ -98,7 +98,6 @@ export function calculateAmortization(principal, rate, time, contributions, prin
             console.log("This should nver happen, but it might.");
             break;
         }
-        //console.log(principal);
     }
     // this goes through the saved values and only keeps the data points at the end of each year
     principalDataPoints.splice(0, principalDataPoints.length, ...principalDataPoints.filter(point => point.x % 12 === 0));
