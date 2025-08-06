@@ -37,6 +37,18 @@ async function getStLouisApiData(series_id, path) {
     }
 }
 
+async function fetchStandardAndPoors() {
+    try {
+        const url = 'https://www.slickcharts.com/sp500/returns/history.json'
+        const response = await fetch(url)
+        if (!response.ok) throw new Error('Something went wrong fetching the S&P500 data')
+        const data = await response.json()
+        fs.writeFileSync('./public/JSON_Data/SP500.json', JSON.stringify(data))
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
 function refreshFiles() {
     getHomeAff()
     getStLouisApiData('MSPNHSUS', './public/JSON_Data/homeSalePrice.json')
@@ -45,10 +57,11 @@ function refreshFiles() {
     getStLouisApiData('RIFLPBCIANM60NM', './public/JSON_Data/autoRates.json')
     getStLouisApiData('TERMCBCCALLNS', './public/JSON_Data/creditCardRates.json')
     getStLouisApiData('MORTGAGE30US', './public/JSON_Data/mortgageRates.json')
+    fetchStandardAndPoors()
     console.log('Data updated')
 }
 
-// refreshFiles()
+refreshFiles()
 
 // runs at midnight once a day
 cron.schedule('0 0 * * *', async (ctx) => {

@@ -95,7 +95,7 @@ export function calculateAmortization(principal, rate, time, contributions, prin
         }
         month++;
         if (month > (time + 1) * 12) {
-            console.log("This should nver happen, but it might.");
+            console.log("This should never happen, but it might.");
             break;
         }
     }
