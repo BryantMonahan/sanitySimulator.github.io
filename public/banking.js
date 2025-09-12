@@ -150,8 +150,7 @@ function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
 
 window.onload = function () {
     loadChart(realDataPoints, simpleDataPoints, contributedDataPoints);
-    graphSingleDataPoints("JSON_Data/inflation.json", "inflationGraph", "", "", "Inflation Rate");
-
+    graphSingleDataPoints("JSON_Data/inflation.json", "inflationGraph", "", "", "Inflation Rate", 'column');
 }
 
 // These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function

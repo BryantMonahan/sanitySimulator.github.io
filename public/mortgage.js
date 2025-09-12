@@ -169,8 +169,13 @@ window.onload = function () {
     //graphSingleDataPoints("JSON_Data/homeSalePrice.json", "medianMortgageGraph", "", "Years", "Median New Home Sale Price");
     graphDoubleDataPoints("JSON_Data/homeSalePrice.json", "JSON_Data/medianIncome.json", "medianMortgageGraph", "", "", "Median New Home Sale Price", "Median Household Income");
     graphSingleDataPoints("JSON_Data/mortgageRates.json", "mortgageRatesGraph", "", "", "30-Year Fixed Mortgage Rate");
-    graphSingleCSVDataPoints("", "homeAffordabilityGraph", "Income Gap");
+    const affordData = graphSingleCSVDataPoints("", "homeAffordabilityGraph", "Income Gap");
     lengthIn.value = 30;
+    let final = 0
+    affordData.then((value) => document.getElementById("addAnnualIncome").innerHTML = "$" + Math.round(value[value.length - 1].y).toLocaleString('en-US'))
+    console.log(final)
+    final = Math.round(final)
+    document.getElementById("addAnnualIncome").innerHTML = final.toLocaleString('en-US');
 }
 
 // These event listeners are used to check if the input fields are filled out and if they are, it will call the calculate function

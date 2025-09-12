@@ -1,6 +1,6 @@
 
 // this takes in a path name and a div id and loads the data from the path name into the div id
-export async function graphSingleDataPoints(pathName, divId, title, xAxisTitle, legendInfo) {
+export async function graphSingleDataPoints(pathName, divId, title, xAxisTitle, legendInfo, type = "line") {
     const response = await fetch(pathName);
     try {
         if (!response.ok) {
@@ -13,8 +13,17 @@ export async function graphSingleDataPoints(pathName, divId, title, xAxisTitle, 
         });
         // due to fred's API, some of the data points are null, so we need to remove them
         dataPoints = dataPoints.filter((entry) => !(isNaN(entry.y)));
-        const chart = loadSingleLineChart(dataPoints, divId, title, xAxisTitle, legendInfo);
+        console.log('this ran')
+        dataPoints = dataPoints.map((entry) => {
+            if (entry.y < 0) {
+                return { ...entry, color: '#D8315B' }
+            }
+            return { ...entry }
+        })
+        console.log(dataPoints)
+        const chart = loadSingleLineChart(dataPoints, divId, title, xAxisTitle, legendInfo, type);
         chart.render();
+        return chart
     } catch (error) {
         console.error(error);
     }
@@ -73,13 +82,14 @@ export async function graphSingleCSVDataPoints(pathName, divId, legendInfo) {
         // remove bad data points
         dataPoints.shift();
         loadDoubleAreaChart(dataPoints, divId, "", "", legendInfo);
+        return dataPoints;
     } catch (error) {
         console.error(error);
     }
 }
 
 // this function takes in the data points, div id, title, x axis title, and legend info and loads the chart into the div id
-export function loadSingleLineChart(plotPoints, divId, title, xAxisTitle, legendInfo) {
+export function loadSingleLineChart(plotPoints, divId, title, xAxisTitle, legendInfo, type = 'line') {
 
     let newChart = new CanvasJS.Chart(divId, {
         animationEnabled: true,
@@ -101,9 +111,10 @@ export function loadSingleLineChart(plotPoints, divId, title, xAxisTitle, legend
         axisY: {
             suffix: "%"
         },
+        dataPointWidth: 6,
         data: [{
             label: "Median",
-            type: "line",
+            type: type,
             color: "#2196F3",
             lineColor: "#2196F3",
             markerSize: 0,
@@ -116,8 +127,8 @@ export function loadSingleLineChart(plotPoints, divId, title, xAxisTitle, legend
         }
         ]
     });
+    newChart.render();
     return newChart;
-    // newChart.render();
 }
 
 // this function takes in two arrays of data points, div id, title, x axis title, and legend info and loads the chart into the div id
