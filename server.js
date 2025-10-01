@@ -10,6 +10,8 @@ const cron = require('node-cron')
 const { Scraper, Root, DownloadContent, OpenLinks, CollectContent } = require('nodejs-web-scraper');
 
 
+
+
 async function getHomeAff() {
     try {
         let response = await fetch('https://www.atlantafed.org/-/media/documents/research/housing-and-policy/hoam/HOAM_US_Affordability_Index.xlsx')
@@ -73,59 +75,32 @@ cron.schedule('0 0 * * *', async (ctx) => {
     console.log(`Scheduled for: ${ctx.dateLocalIso}`);
     refreshFiles()
 });
+getHistoricSP500Data()
 
 app.listen(10000, () => {
     console.log('app has started')
 })
 
-doStuff()
 
-async function doStuff() {
+async function getHistoricSP500Data() {
+    const response = await fetch('https://www.multpl.com/s-p-500-historical-prices/table/by-month')
+    const dom = await response.text()
+    let lines = dom.split('\n')
+    lines = lines.filter(line => (line.includes('<td>') && line.includes('</td>')) || (line.includes('.') && !Number.isNaN(Number(line.replace(',', '')))))
 
-    const config = {
-        baseSiteUrl: `https://www.multpl.com/s-p-500-historical-prices/table/by-month`,
-        startUrl: `https://www.multpl.com/s-p-500-historical-prices/table/by-month`,
-        filePath: './images/',
-        concurrency: 10,//Maximum concurrent jobs. More than 10 is not recommended.Default is 3.
-        maxRetries: 3,//The scraper will try to repeat a failed request few times(excluding 404). Default is 5.       
-        logPath: './logs/'//Highly recommended: Creates a friendly JSON for each operation object, with all the relevant data. 
+    const values = lines.map(line => {
+        if (line.includes('<td>') && line.includes('</td>')) {
+            return new Date(line.replace('<td>', '').replace('</td>', ''))
+        } else if (line.includes('.') && !Number.isNaN(Number(line.replace(',', '')))) {
+            return Number(line.replace(',', ''))
+        }
+    })
+    const objects = []
+    for (let i = 0; i < values.length - 2; i += 2) {
+        objects.push({ date: values[i], value: values[i + 1] })
     }
+    fs.writeFileSync('./public/JSON_Data/SP500Monthly.json', JSON.stringify(objects))
 
-
-    const scraper = new Scraper(config);//Create a new Scraper instance, and pass config to it.
-
-    //Now we create the "operations" we need:
-
-    const root = new Root();//The root object fetches the startUrl, and starts the process.  
-
-    //Any valid cheerio selector can be passed. For further reference: https://cheerio.js.org/
-    const category = new OpenLinks('.category', { name: 'category' });//Opens each category page.
-
-    const article = new OpenLinks('article a', { name: 'article' });//Opens each article page.
-
-    const td = new DownloadContent('td', { name: 'td' });//Downloads images.
-
-    const title = new CollectContent('h1', { name: 'title' });//"Collects" the text from each H1 element.
-
-    const story = new CollectContent('section.content', { name: 'story' });//"Collects" the the article body.
-
-    root.addOperation(category);//Then we create a scraping "tree":
-    category.addOperation(article);
-    article.addOperation(td);
-    article.addOperation(title);
-    article.addOperation(story);
-
-    await scraper.scrape(root);
-
-    const articles = article.getData()//Will return an array of all article objects(from all categories), each
-    //containing its "children"(titles,stories and the downloaded image urls) 
-
-    //If you just want to get the stories, do the same with the "story" variable:
-    const stories = story.getData();
-
-    fs.writeFile('./articles.json', JSON.stringify(articles), () => { })//Will produce a formatted JSON containing all article pages and their selected data.
-
-    fs.writeFile('./stories.json', JSON.stringify(stories), () => { })
-    console.log('This ran')
-
+    // console.log(objects)
+    // console.log(values.slice(0, 30))
 }    

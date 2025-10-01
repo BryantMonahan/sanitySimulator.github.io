@@ -1,11 +1,11 @@
 import { graphSingleDataPoints, loadSingleLineChart, amortizationGraph } from "./genericGraphs.js";
 
 let dataPoints;
-async function getDatapoints() {
+async function getDataPoints() {
     try {
-        const response = await fetch('/JSON_Data/SP500.json');
+        const response = await fetch('JSON_Data/SP500.json');
         if (!response.ok) {
-            throw new Error("Failed to load data from SP500.json");
+            throw new Error(`Failed to load data from SP500.json, ${response.status}`);
         }
         const data = await response.json();
         // this just parses the data we want into a format that the graphing library can use
@@ -58,17 +58,15 @@ async function graphSP500Returns() {
 
     newChart.render()
 }
-await getDatapoints()
+await getDataPoints()
 graphSP500Returns()
 
 
 let monthlyReturns = dataPoints.map((point) => {
-    console.log(typeof point, point)
     return { x: new Date(point.x).getFullYear(), y: (point.y) / 12 }
 })
 
 let calculatedPoints = []
-console.log(monthlyReturns)
 function calculateSP500(year, initial, monthlyContribution) {
     const requiredYears = monthlyReturns.filter((entry) => Number(entry.x) >= Number(year))
     requiredYears.reverse()
@@ -78,7 +76,6 @@ function calculateSP500(year, initial, monthlyContribution) {
         for (let i = 1; i <= 12; i++) {
             current *= 1 + (entry.y / 100)
             current += monthlyContribution
-            console.log(current, entry.x)
             calculatedPoints.unshift({ x: new Date(entry.x, i), y: current })
         }
     })
@@ -86,7 +83,11 @@ function calculateSP500(year, initial, monthlyContribution) {
 
 }
 calculateSP500(2005, 1000, 100)
-loadChart(calculatedPoints, [], [])
+const request = await fetch('JSON_Data/SP500Monthly.json')
+const rawValues = await request.json()
+const values = rawValues.map(entry => ({ x: new Date(entry.date), y: entry.value }))
+values.splice(-1044)
+loadChart(values, [], [])
 function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
 
     let chart = new CanvasJS.Chart("userSp500Graph", {
