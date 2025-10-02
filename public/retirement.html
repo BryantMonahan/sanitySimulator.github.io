@@ -48,10 +48,17 @@
     <br><br>
     <div class="center_elements">
         <div class="graph_holder">
+            <div style="font-style: italic; width: 100%;">
+                Starting in:
+                <select class="wrapped" id="startingYear" name="startingYear" value="1998"
+                    style="max-width: 60px; max-height: 50px; margin-top: 10px; padding-left: 2px; margin-left: 0px;">
+                </select> with a value of <span id="strtVl"></span> the S&P500 grew to <span id="endVl"></span>, a
+                <span id="percentIncr"></span>% increase!
+            </div>
             <div class="graph">
                 <div id="userSp500Graph" class="normal_graph"></div>
-                <a href="https://www.slickcharts.com/sp500/returns" target="_blank" class="no-underline italic"><span
-                        class="source">Source: slickcharts </span></a>
+                <a href="https://www.multpl.com/s-p-500-historical-prices/table/by-month" target="_blank"
+                    class="no-underline italic"><span class="source">Source: multpl </span></a>
             </div>
         </div>
     </div>

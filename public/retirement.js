@@ -79,16 +79,16 @@ function calculateSP500(year, initial, monthlyContribution) {
             calculatedPoints.unshift({ x: new Date(entry.x, i), y: current })
         }
     })
-    console.log(calculatedPoints)
-
 }
 calculateSP500(2005, 1000, 100)
 const request = await fetch('JSON_Data/SP500Monthly.json')
 const rawValues = await request.json()
 const values = rawValues.map(entry => ({ x: new Date(entry.date), y: entry.value }))
-values.splice(-1044)
-loadChart(values, [], [])
-function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
+values.splice(-1044) // this removes the data points we never want to display
+console.log(values)
+const displayValues = values.slice(0, 336)
+loadChart(displayValues, [], [])
+function loadChart(dataPoints) {
 
     let chart = new CanvasJS.Chart("userSp500Graph", {
         // set animation to false to prevent the graph from animating every time the user inputs a new value
@@ -107,10 +107,10 @@ function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
             title: "",
         },
         axisY: {
-            prefix: "$"
+            prefix: ""
         },
         data: [{
-            label: "Value",
+            label: "Index Value",
             type: "area",
             // the color fill from these lines bleed together so lowering the opacity makes it look better
             // I believe the colors #4CAF50 and #2196F3 are the best for this 
@@ -119,64 +119,29 @@ function loadChart(realDataPoints, simpleDataPoints, contributedDataPoints) {
             lineColor: "#4BC0C0",
             markerSize: 0,
             yValueFormatString: "#,###",
-            toolTipContent: "Year:{x}<br>Compound:${y}",
+            xValueFormatString: "MM/YYYY",
+            toolTipContent: "Index Value:{y}<br>{x}",
             showInLegend: true,
             legendText: "Compound",
             legendMarkerType: "circle",
-            dataPoints: realDataPoints,
-        },
-        {
-            label: "Simple",
-            type: "area",
-            fillOpacity: 0.5,
-            color: "#2196F3",
-            lineColor: "#065899",
-            markerSize: 6,
-            yValueFormatString: "#,###",
-            toolTipContent: "Simple:${y}",
-            showInLegend: true,
-            legendText: "Simple",
-            legendMarkerType: "circle",
-            dataPoints: simpleDataPoints,
-        },
-        {
-            label: "Principal",
-            type: "area",
-            color: "black",
-            fillOpacity: 0.5,
-            lineColor: "black",
-            markerSize: 6,
-            markerColor: "black",
-            yValueFormatString: "#,###",
-            toolTipContent: "Principal:${y}",
-            showInLegend: true,
-            legendText: "Principal",
-            legendMarkerType: "circle",
-            dataPoints: contributedDataPoints
+            dataPoints: dataPoints,
         }]
     });
-
-    // // this changes the text above the graph to display the total amount after the specified time period
-    // let time = realDataPoints.length - 1; // replace time with length once the create points function is made
-    // // these use innerHTML to allow the text to fade in, if I use innerText it will not fade in
-    // if (time != 1) {
-    //     if (inflation === 0) {
-    //         // `<p id="graph_header" class="graph_headers">With monthly payments of <span style="color:rgb(13, 143, 20)">$${monthlyPayment}</span> it will take <span style="color:rgb(0, 135, 245)">${time}</span> and <span style="color: #D8315B">$${grandTotal}</span> to pay off the initial loan</p>`
-    //         graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your total amount after <span style="color:rgb(0, 135, 245)">${time} years</span> is <span style="color:rgb(13, 143, 20)">$${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</span></p>`;
-    //     } else {
-    //         graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your <span style="color: #D8315B">inflation-adjusted</span> total after <span style="color:rgb(0, 135, 245)">${time} years</span> is <span style="color:rgb(13, 143, 20)">$${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</span></p>`;
-    //     }
-    // } else {
-    //     if (inflation === 0) {
-    //         graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your total amount after <span style="color:rgb(0, 135, 245)">${time} year</span> is <span style="color:rgb(13, 143, 20)">$${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</span></p>`;
-    //     } else {
-    //         graphHeader.innerHTML = `<p id="graph_header" class="graph_headers">Your <span style="color: #D8315B">inflation-adjusted</span> total after <span style="color:rgb(0, 135, 245)">${time} year</span> is <span style="color:rgb(13, 143, 20)">$${Math.round(realDataPoints[realDataPoints.length - 1].y).toLocaleString()}</span></p>`;
-    //     }
-    // }
-    // // this handles bad graph formatting at lower time intervals
-    // if (time < 20) {
-    //     chart.options.axisX.interval = 1;
-    // }
     chart.render();
 }
-
+const select = document.getElementById('startingYear')
+const today = new Date()
+console.log(today.getFullYear())
+for (let year = 1953; year <= today.getFullYear() - 1; year++) {
+    const option = document.createElement("option");
+    option.value = year;
+    option.textContent = year;
+    select.appendChild(option);
+}
+const strtVl = document.getElementById('strtVl')
+const endVl = document.getElementById('endVl')
+const percentIncr = document.getElementById('percentIncr')
+strtVl.innerText = displayValues[displayValues.length - 1].y
+endVl.innerText = displayValues[0].y
+percentIncr.innerText = (displayValues[0].y / displayValues[displayValues.length - 1].y * 100).toFixed(2)
+select.value = 1998
