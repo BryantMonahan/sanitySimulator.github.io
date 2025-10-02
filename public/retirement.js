@@ -83,13 +83,19 @@ function calculateSP500(year, initial, monthlyContribution) {
 calculateSP500(2005, 1000, 100)
 const request = await fetch('JSON_Data/SP500Monthly.json')
 const rawValues = await request.json()
-const values = rawValues.map(entry => ({ x: new Date(entry.date), y: entry.value }))
+let values = rawValues.map(entry => ({ x: new Date(entry.date), y: entry.value }))
 values.splice(-1044) // this removes the data points we never want to display
-console.log(values)
+let temp = []
+console.log(typeof values[1].y)
+temp.push({ ...values[0], growth: 0 })
+for (let i = 1; i < values.length - 1; i++) {
+    temp.push(({ ...values[i], growth: (values[i].y - values[i - 1].y) / values[i - 1].y + 1 }))
+}
+values = temp
 let displayValues = values.slice(0, 336)
-loadChart(displayValues, [], [])
-function loadChart(dataPoints) {
-    let chart = new CanvasJS.Chart("userSp500Graph", {
+loadChart(displayValues, "userSp500Graph")
+function loadChart(dataPoints, divId) {
+    let chart = new CanvasJS.Chart(divId, {
         // set animation to false to prevent the graph from animating every time the user inputs a new value
         animationEnabled: false,
         theme: "light2",
@@ -129,13 +135,15 @@ function loadChart(dataPoints) {
     chart.render();
 }
 const select = document.getElementById('startingYear')
+const select2 = document.getElementById('startingYearCalc')
 const today = new Date()
 console.log(today.getFullYear())
 for (let year = 1953; year <= today.getFullYear() - 1; year++) {
-    const option = document.createElement("option");
-    option.value = year;
-    option.textContent = year;
-    select.appendChild(option);
+    const option = document.createElement("option")
+    option.value = year
+    option.textContent = year
+    select.appendChild(option)
+    select2.appendChild(option)
 }
 select.value = 1998
 const strtVl = document.getElementById('strtVl')
@@ -151,13 +159,32 @@ updateSPText()
 select.addEventListener("input", (event) => {
     const year = event.target.value
     for (let i = values.length - 1; i >= 0; i--) {
-        console.log(new Date(values[i].x).getFullYear())
         if (new Date(values[i].x).getFullYear() == year) {
             displayValues = values.slice(0, i)
-            console.log(displayValues)
-            loadChart(displayValues, [], [])
+            loadChart(displayValues, "userSp500Graph")
             updateSPText()
             break
         }
     }
 })
+select2.addEventListener("input", (event) => {
+    doSomeMathDawg()
+})
+const mathPoints = values.reverse()
+let calculatedInvestmentPoints = []
+console.log(mathPoints)
+function doSomeMathDawg() {
+    const year = select2.value
+    console.log(year, mathPoints.length - 1)
+    let index = 0
+    for (let i = 0; i < mathPoints.length - 1; i++) {
+        console.log(i)
+        console.log(new Date(mathPoints[i].x).getFullYear(), i)
+        if (new Date(mathPoints[i].x).getFullYear() == year) {
+            index = i
+            break
+        }
+    }
+    loadChart(mathPoints.slice(index), "userSp500GraphCalc")
+}
+loadChart(displayValues, "userSp500GraphCalc")
