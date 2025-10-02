@@ -86,10 +86,9 @@ const rawValues = await request.json()
 const values = rawValues.map(entry => ({ x: new Date(entry.date), y: entry.value }))
 values.splice(-1044) // this removes the data points we never want to display
 console.log(values)
-const displayValues = values.slice(0, 336)
+let displayValues = values.slice(0, 336)
 loadChart(displayValues, [], [])
 function loadChart(dataPoints) {
-
     let chart = new CanvasJS.Chart("userSp500Graph", {
         // set animation to false to prevent the graph from animating every time the user inputs a new value
         animationEnabled: false,
@@ -122,8 +121,8 @@ function loadChart(dataPoints) {
             xValueFormatString: "MM/YYYY",
             toolTipContent: "Index Value:{y}<br>{x}",
             showInLegend: true,
-            legendText: "Compound",
-            legendMarkerType: "circle",
+            legendText: "Index Value",
+            legendMarkerType: "square",
             dataPoints: dataPoints,
         }]
     });
@@ -138,10 +137,27 @@ for (let year = 1953; year <= today.getFullYear() - 1; year++) {
     option.textContent = year;
     select.appendChild(option);
 }
+select.value = 1998
 const strtVl = document.getElementById('strtVl')
 const endVl = document.getElementById('endVl')
 const percentIncr = document.getElementById('percentIncr')
-strtVl.innerText = displayValues[displayValues.length - 1].y
-endVl.innerText = displayValues[0].y
-percentIncr.innerText = (displayValues[0].y / displayValues[displayValues.length - 1].y * 100).toFixed(2)
-select.value = 1998
+function updateSPText() {
+    strtVl.innerText = displayValues[displayValues.length - 1].y
+    endVl.innerText = displayValues[0].y
+    percentIncr.innerText = (displayValues[0].y / displayValues[displayValues.length - 1].y * 100).toFixed(2) + '%'
+}
+updateSPText()
+
+select.addEventListener("input", (event) => {
+    const year = event.target.value
+    for (let i = values.length - 1; i >= 0; i--) {
+        console.log(new Date(values[i].x).getFullYear())
+        if (new Date(values[i].x).getFullYear() == year) {
+            displayValues = values.slice(0, i)
+            console.log(displayValues)
+            loadChart(displayValues, [], [])
+            updateSPText()
+            break
+        }
+    }
+})
