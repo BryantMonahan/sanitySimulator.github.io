@@ -142,9 +142,9 @@ const strtVl = document.getElementById('strtVl')
 const endVl = document.getElementById('endVl')
 const percentIncr = document.getElementById('percentIncr')
 function updateSPText() {
-    strtVl.innerText = displayValues[displayValues.length - 1].y
-    endVl.innerText = displayValues[0].y
-    percentIncr.innerText = (displayValues[0].y / displayValues[displayValues.length - 1].y * 100).toFixed(2) + '%'
+    strtVl.innerText = Number(displayValues[displayValues.length - 1].y).toLocaleString()
+    endVl.innerText = Number(displayValues[0].y).toLocaleString()
+    percentIncr.innerText = ((displayValues[0].y - displayValues[displayValues.length - 1].y) / displayValues[displayValues.length - 1].y * 100).toFixed(2) + '%'
 }
 updateSPText()
 
