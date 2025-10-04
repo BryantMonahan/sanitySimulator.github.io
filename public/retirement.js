@@ -111,7 +111,7 @@ function loadChart(dataPoints, divId, contriPoints) {
             title: "",
         },
         axisY: {
-            prefix: ""
+            prefix: contriPoints ? "$" : "",
         },
         data: [{
             label: contriPoints ? "Investment Value" : "Index Value",
@@ -126,7 +126,7 @@ function loadChart(dataPoints, divId, contriPoints) {
             xValueFormatString: "MM/YYYY",
             toolTipContent: contriPoints ? "Investment Value:${y}" : "Index Value:{y}<br>{x}",
             showInLegend: true,
-            legendText: "Index Value",
+            legendText: contriPoints ? "Investment Value" : "Index Value",
             legendMarkerType: "square",
             dataPoints: dataPoints,
         },
@@ -142,8 +142,8 @@ function loadChart(dataPoints, divId, contriPoints) {
             xValueFormatString: "MM/YYYY",
             toolTipContent: "Invested:${y}<br>{x}",
             showInLegend: true,
-            legendText: "Principal",
-            legendMarkerType: "circle",
+            legendText: "Invested",
+            legendMarkerType: "triangle",
             dataPoints: contriPoints
         }]
     });
