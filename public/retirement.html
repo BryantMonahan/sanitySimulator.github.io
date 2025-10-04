@@ -52,7 +52,7 @@
                 Starting in:
                 <select class="wrapped" id="startingYear" name="startingYear" value="1998"
                     style="max-width: 60px; max-height: 50px; margin-top: 10px; padding-left: 2px; margin-left: 0px;">
-                </select> with a value of <span id="strtVl"></span> the S&P500 grew to
+                </select> with a value of <span id="strtVl"></span> the S&P 500 grew to
                 <span id="endVl"></span>, a
                 <span id="percentIncr" style="color:rgb(13, 143, 20)"></span> increase!
             </div>
@@ -67,14 +67,19 @@
     <div class="center_elements">
         <div class="graph_holder">
             <div style="width: 100%;">
-                Starting in:
+                Starting in
                 <select class="wrapped" id="startingYearCalc" name="startingYearCalc" value="2005"
                     style="max-width: 60px; max-height: 50px; margin-top: 10px; padding-left: 2px; margin-left: 0px;">
-                </select>
+                </select> with <input class="wrapped" type="text" id="initalIn" name="initalIn" min="0" max="1000000"
+                    value="0" style="max-width: 80px; margin: 1px;">
+                </select> and contributing <input class="wrapped" type="text" id="contriIn" name="contriIn" min="0"
+                    max="1000000" value="0" style="max-width: 80px; margin: 1px;"> will earn you <span id="finalValue"
+                    style="color:rgb(13, 143, 20)"></span>
             </div>
             <div class="graph">
                 <div id="userSp500GraphCalc" class="normal_graph"></div>
             </div>
+            &nbsp
         </div>
     </div>
 

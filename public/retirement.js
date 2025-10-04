@@ -86,15 +86,14 @@ const rawValues = await request.json()
 let values = rawValues.map(entry => ({ x: new Date(entry.date), y: entry.value }))
 values.splice(-1044) // this removes the data points we never want to display
 let temp = []
-console.log(typeof values[1].y)
 temp.push({ ...values[0], growth: 0 })
 for (let i = 1; i < values.length - 1; i++) {
-    temp.push(({ ...values[i], growth: (values[i].y - values[i - 1].y) / values[i - 1].y + 1 }))
+    temp.push(({ ...values[i], growth: (values[i - 1].y - values[i].y) / values[i].y + 1 }))
 }
 values = temp
 let displayValues = values.slice(0, 336)
 loadChart(displayValues, "userSp500Graph")
-function loadChart(dataPoints, divId) {
+function loadChart(dataPoints, divId, contriPoints) {
     let chart = new CanvasJS.Chart(divId, {
         // set animation to false to prevent the graph from animating every time the user inputs a new value
         animationEnabled: false,
@@ -115,7 +114,7 @@ function loadChart(dataPoints, divId) {
             prefix: ""
         },
         data: [{
-            label: "Index Value",
+            label: contriPoints ? "Investment Value" : "Index Value",
             type: "area",
             // the color fill from these lines bleed together so lowering the opacity makes it look better
             // I believe the colors #4CAF50 and #2196F3 are the best for this 
@@ -125,11 +124,27 @@ function loadChart(dataPoints, divId) {
             markerSize: 0,
             yValueFormatString: "#,###",
             xValueFormatString: "MM/YYYY",
-            toolTipContent: "Index Value:{y}<br>{x}",
+            toolTipContent: contriPoints ? "Investment Value:${y}" : "Index Value:{y}<br>{x}",
             showInLegend: true,
             legendText: "Index Value",
             legendMarkerType: "square",
             dataPoints: dataPoints,
+        },
+        {
+            label: "Invested",
+            type: "line",
+            color: "black",
+            fillOpacity: 0.3,
+            lineColor: "black",
+            markerSize: 0,
+            markerColor: "black",
+            yValueFormatString: "#,###",
+            xValueFormatString: "MM/YYYY",
+            toolTipContent: "Invested:${y}<br>{x}",
+            showInLegend: true,
+            legendText: "Principal",
+            legendMarkerType: "circle",
+            dataPoints: contriPoints
         }]
     });
     chart.render();
@@ -137,13 +152,15 @@ function loadChart(dataPoints, divId) {
 const select = document.getElementById('startingYear')
 const select2 = document.getElementById('startingYearCalc')
 const today = new Date()
-console.log(today.getFullYear())
 for (let year = 1953; year <= today.getFullYear() - 1; year++) {
     const option = document.createElement("option")
+    const option2 = document.createElement("option")
     option.value = year
     option.textContent = year
+    option2.value = year
+    option2.textContent = year
     select.appendChild(option)
-    select2.appendChild(option)
+    select2.appendChild(option2)
 }
 select.value = 1998
 const strtVl = document.getElementById('strtVl')
@@ -160,7 +177,7 @@ select.addEventListener("input", (event) => {
     const year = event.target.value
     for (let i = values.length - 1; i >= 0; i--) {
         if (new Date(values[i].x).getFullYear() == year) {
-            displayValues = values.slice(0, i)
+            displayValues = values.slice(0, i + 1)
             loadChart(displayValues, "userSp500Graph")
             updateSPText()
             break
@@ -170,21 +187,66 @@ select.addEventListener("input", (event) => {
 select2.addEventListener("input", (event) => {
     doSomeMathDawg()
 })
-const mathPoints = values.reverse()
+const mathPoints = values.slice().reverse()
 let calculatedInvestmentPoints = []
-console.log(mathPoints)
 function doSomeMathDawg() {
+    const initial = Number(initialIn.value.replaceAll(',', ''))
+    const contri = Number(contriIn.value.replaceAll(',', ''))
+    // do nothing
+    if (Number.isNaN(initial) || Number.isNaN(contri)) return
+    calculatedInvestmentPoints.splice(0)
     const year = select2.value
-    console.log(year, mathPoints.length - 1)
     let index = 0
     for (let i = 0; i < mathPoints.length - 1; i++) {
-        console.log(i)
-        console.log(new Date(mathPoints[i].x).getFullYear(), i)
         if (new Date(mathPoints[i].x).getFullYear() == year) {
             index = i
             break
         }
     }
-    loadChart(mathPoints.slice(index), "userSp500GraphCalc")
+    const temp = mathPoints.slice(index)
+
+    calculatedInvestmentPoints.push({
+        x: temp[0].x, y: initial, z: initial
+    })
+    const contr = 100
+    for (let i = 1; i <= temp.length - 1; i++) {
+        calculatedInvestmentPoints.push({ x: temp[i].x, y: calculatedInvestmentPoints[i - 1].y * temp[i - 1].growth + contri, z: calculatedInvestmentPoints[i - 1].z + contri })
+    }
+    finalValue.innerText = `$${Math.round(calculatedInvestmentPoints[calculatedInvestmentPoints.length - 1].y).toLocaleString('en-US')}`
+    loadChart(calculatedInvestmentPoints, "userSp500GraphCalc", calculatedInvestmentPoints.map(point => ({ x: point.x, y: point.z })))
 }
-loadChart(displayValues, "userSp500GraphCalc")
+
+const initialIn = document.getElementById('initalIn')
+const contriIn = document.getElementById('contriIn')
+initialIn.addEventListener("input", function (event) {
+    const raw = event.target.value.replace(/[a-zA-Z-,]/g, '');
+    initialIn.value = raw
+    if (event.target.value !== "" && event.target.value !== null) {
+        if (event.target.value < 0) {
+            event.target.value = 0
+        }
+        doSomeMathDawg()
+        initialIn.value = Number(initialIn.value).toLocaleString('en-US')
+    } else {
+        event.target.value = 0
+    }
+});
+contriIn.addEventListener("input", function (event) {
+    const raw = event.target.value.replace(/[a-zA-Z-,]/g, '');
+    contriIn.value = raw
+    if (event.target.value !== "" && event.target.value !== null) {
+        if (event.target.value < 0) {
+            event.target.value = 0
+        }
+        doSomeMathDawg()
+        contriIn.value = Number(contriIn.value).toLocaleString('en-US')
+    } else {
+        event.target.value = 0
+    }
+});
+// loadChart(displayValues, "userSp500GraphCalc")
+select2.value = 2005
+initialIn.value = '1,000'
+contriIn.value = 100
+const finalValue = document.getElementById('finalValue')
+doSomeMathDawg()
