@@ -64,6 +64,7 @@ function refreshFiles() {
     getStLouisApiData('TERMCBCCALLNS', './public/JSON_Data/creditCardRates.json')
     getStLouisApiData('MORTGAGE30US', './public/JSON_Data/mortgageRates.json')
     fetchStandardAndPoors()
+    getHistoricSP500Data()
     console.log('Data updated')
 }
 
@@ -75,9 +76,8 @@ cron.schedule('0 0 * * *', async (ctx) => {
     console.log(`Scheduled for: ${ctx.dateLocalIso}`);
     refreshFiles()
 });
-getHistoricSP500Data()
 
-app.listen(10000, () => {
+app.listen(8080, () => {
     console.log('app has started')
 })
 
