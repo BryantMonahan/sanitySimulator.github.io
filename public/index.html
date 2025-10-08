@@ -1,127 +1,80 @@
 <!DOCTYPE html>
+<link rel="icon" type="image/png" href="images/newLogoPng.png">
 <html lang="en">
-<link rel="icon" type="images/png" href="images/logo.png">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="images/webp" href="images/newLogPngo.png">
-    <script src="https://kit.fontawesome.com/ba51857e96.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="output.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mooka Money</title>
+
+    <script src="https://kit.fontawesome.com/ba51857e96.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link rel="icon" type="images/png" href="images/logo.png"> -->
+
+    <style>
+        body {
+            font-family: 'Work Sans', Verdana, Geneva, Tahoma, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fb 50%, #f1f2f6 100%);
+            color: #111;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
-
     <header>
-        <h1 style="color: #D8315B">Mooka Money</h1>
+        <h1>Mooka Money</h1>
+        <p class="text-gray-700 text-lg mt-2">Empowering your journey to financial freedom</p>
     </header>
 
-    <main>
-        <h3 id="home_header">Click whichever tile interests you the most and begin your journey to financial freedom!
-        </h3>
-        <!-- <p>Each tile will bring you to a new page to learn and plan for your financial freedom.</p> -->
+    <main class="max-w-6xl mx-auto px-6 py-14">
+        <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
 
-
-        <div class="options">
-            <a href="mortgage.html" style="text-decoration: none; color: inherit;">
-                <div class="windows" id="mortgage">
-                    <div class="icons">
-                        <br>
-                        <br>
-                        <i class="fa-solid fa-house fa-2xl" style="color: #d8315b;"></i>
-                        <div class="free_icons">
-                            <br>
-                            <br>
-                            <p class="label">Mortgages</p>
-                        </div>
-                    </div>
-
+            <a href="mortgage.html">
+                <div class="tile">
+                    <i class="fa-solid fa-house"></i>
+                    <p>Mortgages</p>
                 </div>
             </a>
 
-            <a href="auto.html" style="text-decoration: none; color: inherit;">
-                <div class="windows" id="cars">
-                    <div class="icons">
-                        <br>
-                        <br>
-                        <i class="fa-solid fa-car fa-2xl" style="color: #d8315b;"></i>
-                        <div class="free_icons">
-                            <br>
-                            <br>
-                            <p class="label">Auto Loans</p>
-                        </div>
-                    </div>
+            <a href="auto.html">
+                <div class="tile">
+                    <i class="fa-solid fa-car"></i>
+                    <p>Auto Loans</p>
                 </div>
             </a>
 
-            <a href="creditCard.html" style="text-decoration: none; color: inherit;">
-                <div class="windows" id="credit">
-                    <div class="icons">
-                        <br>
-                        <br>
-                        <i class="fa-solid fa-credit-card fa-2xl" style="color: #d8315b;"></i>
-                        <div class="free_icons">
-                            <br>
-                            <br>
-                            <p class="label">Credit Cards</p>
-                        </div>
-                    </div>
+            <a href="creditCard.html">
+                <div class="tile">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <p>Credit Cards</p>
                 </div>
             </a>
+
+            <a href="banking.html">
+                <div class="tile">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <p>Banking & Saving</p>
+                </div>
+            </a>
+
+            <a href="retirement.html">
+                <div class="tile">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                    <p>Retirement & Investment</p>
+                </div>
+            </a>
+
+            <a href="credit.html">
+                <div class="tile">
+                    <i class="fa-solid fa-calculator"></i>
+                    <p>Credit & Credit Score</p>
+                </div>
+            </a>
+
         </div>
-
-        <a href="banking.html" style="text-decoration: none; color: inherit;">
-            <div class="options">
-                <div class="windows" id="banking">
-                    <div class="icons">
-                        <br>
-                        <br>
-                        <i class="fa-solid fa-building-columns fa-2xl" style="color: #d8315b;"></i>
-                        <div class="free_icons">
-                            <br>
-                            <br>
-                            <p class="label">Banking & Saving</p>
-                        </div>
-                    </div>
-                </div>
-        </a>
-
-        <a href="retirement.html" style="text-decoration: none; color: inherit;">
-            <div class="windows" id="retirement">
-                <div class="icons">
-                    <br>
-                    <br>
-                    <i class="fa-solid fa-umbrella-beach fa-2xl" style="color: #d8315b;"></i>
-                    <div class="free_icons">
-                        <br>
-                        <br>
-                        <p class="label">Retirement & Investment</p>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        <a href="credit.html" style="text-decoration: none; color: inherit;">
-
-            <div class="windows" id="calculators">
-                <div class="icons">
-                    <br>
-                    <br>
-                    <i class="fa-solid fa-calculator fa-2xl" style="color: #d8315b;"></i>
-                    <div class="free_icons">
-                        <br>
-                        <br>
-                        <p class="label">Credit & Credit Score</p>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </a>
-
-        <br>
-        <br>
-
     </main>
 
     <footer style="color:black; text-align:center;">
