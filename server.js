@@ -7,8 +7,7 @@ const fs = require('fs')
 const { Buffer } = require('buffer')
 const XLSX = require('xlsx')
 const cron = require('node-cron')
-const { Scraper, Root, DownloadContent, OpenLinks, CollectContent } = require('nodejs-web-scraper');
-
+const path = require('path');
 
 
 
@@ -76,7 +75,7 @@ cron.schedule('0 0 * * *', async (ctx) => {
     console.log(`Scheduled for: ${ctx.dateLocalIso}`);
     refreshFiles()
 });
-
+app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }))
 app.listen(8080, () => {
     console.log('app has started')
 })
