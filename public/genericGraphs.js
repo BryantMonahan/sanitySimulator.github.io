@@ -13,14 +13,12 @@ export async function graphSingleDataPoints(pathName, divId, title, xAxisTitle, 
         });
         // due to fred's API, some of the data points are null, so we need to remove them
         dataPoints = dataPoints.filter((entry) => !(isNaN(entry.y)));
-        console.log('this ran')
         dataPoints = dataPoints.map((entry) => {
             if (entry.y < 0) {
                 return { ...entry, color: '#D8315B' }
             }
             return { ...entry }
         })
-        console.log(dataPoints)
         const chart = loadSingleLineChart(dataPoints, divId, title, xAxisTitle, legendInfo, type);
         chart.render();
         return chart
@@ -119,7 +117,7 @@ export function loadSingleLineChart(plotPoints, divId, title, xAxisTitle, legend
             lineColor: "#2196F3",
             markerSize: 0,
             yValueFormatString: "#,###.##",
-            xValueFormatString: "MM-YYYY",
+            xValueFormatString: divId === "inflationGraph" ? "YYYY" : "MM-YYYY",
             toolTipContent: "{x}<br>{y}%",
             showInLegend: true,
             legendText: legendInfo,
