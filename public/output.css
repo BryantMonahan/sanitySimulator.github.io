@@ -1,14 +1,23 @@
-/*! tailwindcss v4.1.11 | MIT License | https://tailwindcss.com */
+/*! tailwindcss v4.1.14 | MIT License | https://tailwindcss.com */
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
 @layer properties;
 .fixed {
   position: fixed;
+}
+.container {
+  width: 100%;
+}
+.mx-auto {
+  margin-inline: auto;
 }
 .block {
   display: block;
 }
 .flex {
   display: flex;
+}
+.grid {
+  display: grid;
 }
 .table {
   display: table;
@@ -18,9 +27,6 @@
 }
 .px-\[5px\] {
   padding-inline: 5px;
-}
-.px-\[10px\] {
-  padding-inline: 10px;
 }
 .italic {
   font-style: italic;
@@ -332,6 +338,49 @@ a:active {
   text-decoration: none;
   text-align: left;
   padding: 0px;
+}
+header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+header p {
+  text-align: center;
+}
+header h1 {
+  color: #D8315B;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.tile {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 3rem 1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.tile:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(216, 49, 91, 0.25);
+}
+.tile i {
+  color: #D8315B;
+  font-size: 3.2rem;
+  margin-bottom: 1.2rem;
+}
+.tile p {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #222;
+  margin-top: 0.5rem;
+  text-align: center;
 }
 @property --tw-blur {
   syntax: "*";
