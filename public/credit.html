@@ -116,6 +116,9 @@
         <p class="footer"> <span id="year"></p>
     </footer>
     <script>
+        console.log = function () { }
+        console.warn = function () { }
+        console.error = function () { }
         document.getElementById('year').textContent = new Date().getFullYear()
         window.onload = function () {
 
