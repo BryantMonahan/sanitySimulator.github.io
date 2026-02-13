@@ -5,36 +5,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="output.css">
-</head>
+    <title>Banking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
 
-<body>
-    <header>
-        <title>Compound Interest Calculator</title>
-        <a href="./">
-            <img src="images/logo.png" alt="Logo" class="logo">
-        </a>
-        <a href="./" class="hide_link">
-            <h1 style="color: #D8315B" class="pageHeader">ooka Money</h1>
-        </a>
-        <div class="flex [&>*]:no-underline px-[5px]"
-            style="background-color: hsla(0, 0%, 70%); padding-top: 5px; padding-bottom: 5px;">
-            <a href="mortgage" class="navlink">Mortgages</a>
-            <a href="auto" class="navlink">Auto</a>
-            <a href="creditCard" class="navlink">Credit Cards</a>
-            <a href="banking" class="navlink">Banking & Saving</a>
-            <a href="retirement" class="navlink">Investment & Retirement</a>
-            <a href="credit" class="navlink">Credit Score</a>
-        </div>
-    </header>
-    <title>Auto Loans</title>
-    </head>
     <script>
         console.log = function () { }
         console.warn = function () { }
         console.error = function () { }
     </script>
+</head>
 
+<header class="page-header">
+    <nav class="header-nav">
+        <a href="mortgage" class="nav-item">Mortgages</a>
+        <a href="auto" class="nav-item">Auto</a>
+        <a href="creditCard" class="nav-item">Credit Cards</a>
+        <a href="banking" class="nav-item">Banking & Saving</a>
+        <a href="retirement" class="nav-item">Investment & Retirement</a>
+        <a href="credit" class="nav-item">Credit Score</a>
+    </nav>
+</header>
+
+
+<body>
     <div class="center_elements">
         <h3>Saving</h3>
         <hr>

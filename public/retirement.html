@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<html>
-<link rel="icon" type="images/png" href="images/logo.png">
-<script>
-    console.log = function () { }
-    console.warn = function () { }
-    console.error = function () { }
-</script>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment & Retirement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <script>
+        console.log = function () { }
+        console.warn = function () { }
+        console.error = function () { }
+    </script>
+</head>
+
+<header class="page-header">
+    <nav class="header-nav">
+        <a href="mortgage" class="nav-item">Mortgages</a>
+        <a href="auto" class="nav-item">Auto</a>
+        <a href="creditCard" class="nav-item">Credit Cards</a>
+        <a href="banking" class="nav-item">Banking & Saving</a>
+        <a href="retirement" class="nav-item">Investment & Retirement</a>
+        <a href="credit" class="nav-item">Credit Score</a>
+    </nav>
+</header>
 
 <body>
-    <header>
-        <title>S&P 500 Calculator</title>
-        <a href="./">
-            <img src="images/logo.png" alt="Logo" class="logo">
-        </a>
-        <a href="./" class="hide_link">
-            <h1 style="color: #D8315B" class="pageHeader">ooka Money</h1>
-        </a>
-        <div class="flex [&>*]:no-underline px-[5px]"
-            style="background-color: hsla(0, 0%, 70%); padding-top: 5px; padding-bottom: 5px;">
-            <a href="mortgage" class="navlink">Mortgages</a>
-            <a href="auto" class="navlink">Auto</a>
-            <a href="creditCard" class="navlink">Credit Cards</a>
-            <a href="banking" class="navlink">Banking & Saving</a>
-            <a href="retirement" class="navlink">Investment & Retirement</a>
-            <a href="credit" class="navlink">Credit Score</a>
-        </div>
-    </header>
-    <title>Auto Loans</title>
-    <link rel="stylesheet" href="output.css">
-    </head>
 
-    <div class="center_elements">
+    <main class="center_elements">
         <h3>What is Retirement?</h3>
         <hr>
         <p>For many people in their mid to late career retirement is the end goal. Retirement is when you leave the
@@ -54,12 +56,14 @@
         <div class="graph_holder">
             <div class="graph">
                 <div id="sp500Graph" class="normal_graph"></div>
-                <a href="https://www.slickcharts.com/sp500/returns" target="_blank" class="no-underline italic"><span
-                        class="source">Source: slickcharts </span></a>
+                <a href="https://www.slickcharts.com/sp500/returns" target="_blank" class="source">Source: slickcharts
+                </a>
             </div>
         </div>
-    </div>
+    </main>
+
     <br><br>
+
     <div class="center_elements">
         <div class="graph_holder">
             <div style="width: 100%;">
@@ -73,11 +77,13 @@
             <div class="graph">
                 <div id="userSp500Graph" class="normal_graph"></div>
                 <a href="https://www.multpl.com/s-p-500-historical-prices/table/by-month" target="_blank"
-                    class="no-underline italic"><span class="source">Source: multpl </span></a>
+                    class="source">Source: multpl </a>
             </div>
         </div>
     </div>
+
     <br><br>
+
     <div class="center_elements">
         <div class="graph_holder">
             <div style="width: 100%;">
@@ -86,20 +92,19 @@
                     style="max-width: 60px; max-height: 50px; margin-top: 10px; padding-left: 2px; margin-left: 0px;">
                 </select> with <input class="wrapped" type="text" id="initalIn" name="initalIn" min="0" max="1000000"
                     value="0" style="max-width: 80px; margin: 1px;">
-                </select> and contributing <input class="wrapped" type="text" id="contriIn" name="contriIn" min="0"
-                    max="1000000" value="0" style="max-width: 80px; margin: 1px;"> a month would have earned you <span
-                    id="finalValue" style="color:rgb(13, 143, 20)"></span>
+                and contributing <input class="wrapped" type="text" id="contriIn" name="contriIn" min="0" max="1000000"
+                    value="0" style="max-width: 80px; margin: 1px;"> a month would have earned you <span id="finalValue"
+                    style="color:rgb(13, 143, 20)"></span>
             </div>
             <div class="graph">
                 <div id="userSp500GraphCalc" class="normal_graph"></div>
             </div>
-            &nbsp
+            &nbsp;
         </div>
     </div>
 
-    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-    <script type="module" src="retirement.js"></script>
     <br><br><br><br><br><br>
+
     <footer style="color:black; text-align:center;">
         <hr>
         <p class="footer">Bryant Monahan</p>
@@ -107,8 +112,10 @@
         <script>
             document.getElementById('year').textContent = new Date().getFullYear();
         </script>
-
     </footer>
+
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+    <script type="module" src="retirement.js"></script>
 </body>
 
 </html>

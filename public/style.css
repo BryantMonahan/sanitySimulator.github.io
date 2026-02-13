@@ -425,3 +425,121 @@ header h1 {
     margin-top: 0.5rem;
     text-align: center;
 }
+
+.header-nav {
+    background-color: #ffffff;
+    /* Clean white background */
+    /* Subtle separator line */
+    padding: 0;
+    /* Remove padding to let links fill the height */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    /* Generous spacing between links */
+}
+
+.nav-item {
+    font-family: 'Work Sans', sans-serif;
+    text-decoration: none;
+    color: #4b5563;
+    /* Dark gray text (softer than pure black) */
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 15px 5px;
+    /* Taller click area */
+    position: relative;
+    /* Needed for the underline effect */
+    transition: color 0.3s ease;
+}
+
+/* Hover State: Text turns pink */
+.nav-item:hover {
+    color: #D8315B;
+}
+
+/* The "Sliding Underline" Effect */
+.nav-item::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: #D8315B;
+    transition: width 0.3s ease;
+}
+
+.nav-item:hover::after {
+    width: 100%;
+    /* Line expands to full width on hover */
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 600px) {
+    .header-nav {
+        gap: 10px;
+        padding: 10px 0;
+    }
+
+    .nav-item {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        /* Pill shape for mobile */
+        border-radius: 20px;
+        background-color: #f3f4f6;
+        /* Light gray pill background */
+    }
+
+    /* Remove underline effect on mobile, switch to background color */
+    .nav-item::after {
+        display: none;
+    }
+
+    .nav-item:hover {
+        background-color: #D8315B;
+        color: white;
+    }
+}
+
+/* --- HEADER BRANDING --- */
+
+.page-header {
+    background-color: #ffffff;
+    width: 100%;
+    /* Optional: Sticky header */
+    /* position: sticky; */
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.header-branding {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.brand-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* Space between logo and text */
+}
+
+.brand-logo {
+    width: 50px;
+    height: auto;
+    display: block;
+}
+
+.brand-title {
+    font-family: 'Work Sans', sans-serif;
+    color: #D8315B;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
