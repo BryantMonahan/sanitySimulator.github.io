@@ -506,7 +506,7 @@ header h1 {
 
 .page-header {
     background-color: #ffffff;
-    width: 100%;
+    /* width: 100%; */
     /* Optional: Sticky header */
     /* position: sticky; */
     top: 0;
