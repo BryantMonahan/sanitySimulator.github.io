@@ -722,6 +722,16 @@
         function fmtDate(ts) {
             return new Date(ts).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
         }
+        function countWeekdays(startMs, endMs) {
+            var count = 0;
+            var d = new Date(startMs);
+            while (d.getTime() < endMs) {
+                var day = d.getDay();
+                if (day !== 0 && day !== 6) count++;
+                d.setDate(d.getDate() + 1);
+            }
+            return count;
+        }
         function fmtHrs(n) {
             var r = Math.round(n * 100) / 100;
             return r.toString();
@@ -800,6 +810,8 @@
             document.getElementById('resetIn').textContent =
                 daysLeft === 1 ? 'Resets tomorrow' : 'Resets in ' + daysLeft + ' days';
 
+            var workDaysLeft = Math.max(1, countWeekdays(startOfToday, pEnd));
+
             document.getElementById('barInner').style.width = percent + '%';
             document.getElementById('pctText').textContent = Math.floor(percent) + '%';
             document.getElementById('hrsText').textContent = fmtHrs(total) + ' / ' + GOAL_HOURS + ' hrs';
@@ -809,7 +821,7 @@
             var remaining = Math.max(0, GOAL_HOURS - total);
             document.getElementById('statLogged').textContent = fmtHrs(total);
             document.getElementById('statRemaining').textContent = fmtHrs(remaining);
-            document.getElementById('statPerDay').textContent = remaining > 0 ? fmtHrs(remaining / daysLeft) : '0';
+            document.getElementById('statPerDay').textContent = remaining > 0 ? fmtHrs(remaining / workDaysLeft) : '0';
 
             var stage = document.getElementById('garyStage');
             var msg = document.getElementById('goalMsg');
