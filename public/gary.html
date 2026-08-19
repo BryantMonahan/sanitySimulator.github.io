@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0b0620">
+    <title>Operation: Gary</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        console.log = function () { }
+        console.warn = function () { }
+        console.error = function () { }
+    </script>
+
+    <style>
+        :root {
+            --bg1: #0b0620;
+            --bg2: #1a0b3d;
+            --bg3: #2b0a4d;
+            --neon-pink: #ff3fd8;
+            --neon-cyan: #38f6ff;
+            --gary-gold: #ffb43d;
+            --gary-orange: #ff7a3d;
+            --card: rgba(255, 255, 255, 0.06);
+            --card-border: rgba(255, 255, 255, 0.14);
+            --text: #f4f1ff;
+            --text-dim: #b9aee0;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Nunito', system-ui, sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            background: linear-gradient(125deg, var(--bg1), var(--bg2), var(--bg3), var(--bg1));
+            background-size: 300% 300%;
+            animation: bgShift 18s ease infinite;
+            padding-bottom: calc(40px + env(safe-area-inset-bottom));
+            position: relative;
+        }
+
+        @keyframes bgShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .sparkle-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            border-radius: 50%;
+            background: #fff;
+            opacity: 0;
+            animation: twinkle linear infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0.6);
+            }
+
+            50% {
+                opacity: var(--peak, 0.8);
+                transform: scale(1.1);
+            }
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: max(14px, env(safe-area-inset-top)) 16px 0;
+        }
+
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px 2px 10px;
+        }
+
+        .top-nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            opacity: 0.85;
+        }
+
+        h1.title {
+            font-family: 'Baloo 2', 'Nunito', sans-serif;
+            text-align: center;
+            font-size: 1.9rem;
+            margin: 2px 0 2px;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--gary-gold));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: hueSlide 6s linear infinite;
+            text-shadow: 0 0 26px rgba(255, 63, 216, 0.25);
+        }
+
+        @keyframes hueSlide {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin: 0 0 18px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 22px;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 18px;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        /* ---- Progress bar ---- */
+        .period-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .period-line span.reset {
+            color: var(--neon-cyan);
+        }
+
+        .bar-outer {
+            height: 22px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--card-border);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-inner {
+            height: 100%;
+            width: 0%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--gary-orange), var(--gary-gold), var(--neon-pink));
+            background-size: 220% 100%;
+            animation: hueSlide 4s linear infinite;
+            box-shadow: 0 0 16px rgba(255, 164, 61, 0.7);
+            transition: width 0.7s cubic-bezier(.34, 1.56, .64, 1);
+            position: relative;
+        }
+
+        .bar-inner::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.25) 0 10px, transparent 10px 20px);
+            animation: stripes 1.4s linear infinite;
+        }
+
+        @keyframes stripes {
+            to {
+                background-position: 28px 0;
+            }
+        }
+
+        .bar-caption {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-top: 10px;
+        }
+
+        .bar-caption .pct {
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--gary-gold);
+            text-shadow: 0 0 14px rgba(255, 180, 61, 0.5);
+        }
+
+        .bar-caption .hrs {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-weight: 700;
+        }
+
+        /* ---- Gary tank ---- */
+        .gary-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 4px;
+        }
+
+        .gary-stage.celebrate .gary-svg {
+            animation: garyBounce 0.7s ease infinite;
+        }
+
+        @keyframes garyBounce {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-8px) scale(1.03);
+            }
+        }
+
+        .gary-svg {
+            width: min(72vw, 300px);
+            height: auto;
+            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.5));
+        }
+
+        #fillRect,
+        #fillWave {
+            transition: y 0.8s cubic-bezier(.34, 1.56, .64, 1), height 0.8s cubic-bezier(.34, 1.56, .64, 1);
+        }
+
+        .goal-msg {
+            text-align: center;
+            font-family: 'Baloo 2', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-top: 8px;
+            color: var(--gary-gold);
+            text-shadow: 0 0 16px rgba(255, 180, 61, 0.6);
+            min-height: 1.4em;
+        }
+
+        /* ---- Stats ---- */
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 10px 4px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
+        }
+
+        .stat .num {
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--neon-cyan);
+        }
+
+        .stat .lbl {
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-top: 2px;
+        }
+
+        /* ---- Form ---- */
+        .card h2 {
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 1.05rem;
+            margin: 0 0 12px;
+            font-weight: 700;
+        }
+
+        .field {
+            margin-bottom: 12px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            margin-bottom: 5px;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 13px 14px;
+            border-radius: 13px;
+            border: 1px solid var(--card-border);
+            background: rgba(0, 0, 0, 0.28);
+            color: var(--text);
+            font-size: 1rem;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        .field input::placeholder {
+            color: rgba(244, 241, 255, 0.35);
+            font-weight: 500;
+        }
+
+        .field input:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 0 3px rgba(56, 246, 255, 0.15);
+        }
+
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .chips {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            flex: 1;
+            min-width: 56px;
+            padding: 8px 0;
+            text-align: center;
+            border-radius: 10px;
+            background: rgba(56, 246, 255, 0.1);
+            border: 1px solid rgba(56, 246, 255, 0.3);
+            color: var(--neon-cyan);
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .chip:active {
+            transform: scale(0.92);
+            background: rgba(56, 246, 255, 0.25);
+        }
+
+        .error-msg {
+            color: #ff6b8b;
+            font-size: 0.78rem;
+            font-weight: 700;
+            min-height: 1.1em;
+            margin: -4px 0 8px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            color: #1a0b3d;
+            background: linear-gradient(90deg, var(--gary-gold), var(--gary-orange));
+            box-shadow: 0 6px 20px rgba(255, 122, 61, 0.4);
+            cursor: pointer;
+            transition: transform 0.12s ease;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* ---- Log list ---- */
+        .log-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .log-item:last-child {
+            border-bottom: none;
+        }
+
+        .log-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--gary-orange), var(--gary-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Baloo 2', sans-serif;
+            font-weight: 800;
+            font-size: 0.82rem;
+            color: #1a0b3d;
+            flex-shrink: 0;
+        }
+
+        .log-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .log-desc {
+            font-weight: 700;
+            font-size: 0.92rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .log-time {
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .log-del {
+            background: none;
+            border: none;
+            color: rgba(255, 107, 139, 0.75);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 8px;
+            line-height: 1;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 14px 0 4px;
+        }
+
+        details.past {
+            color: var(--text-dim);
+        }
+
+        details.past summary {
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text);
+            list-style: none;
+        }
+
+        details.past summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .past-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        footer.page-footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            padding: 6px 0 4px;
+        }
+
+        /* ---- Confetti ---- */
+        .confetti-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 50;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            top: -20px;
+            border-radius: 2px;
+            animation: confettiFall linear forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0.9;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sparkle-layer" id="sparkleLayer"></div>
+    <div class="confetti-layer" id="confettiLayer"></div>
+
+    <div class="wrap">
+        <div class="top-nav">
+            <a href="/">← Home</a>
+            <a href="#logForm">Add hours ↓</a>
+        </div>
+
+        <h1 class="title">Operation: Gary 🐌</h1>
+        <p class="subtitle">Grind those commission hours &mdash; the squad needs its Gary.</p>
+
+        <div class="card">
+            <div class="period-line">
+                <span id="periodRange">Pay period</span>
+                <span class="reset" id="resetIn">Resets in &mdash;</span>
+            </div>
+            <div class="bar-outer">
+                <div class="bar-inner" id="barInner"></div>
+            </div>
+            <div class="bar-caption">
+                <span class="pct" id="pctText">0%</span>
+                <span class="hrs" id="hrsText">0 / 85 hrs</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="gary-stage" id="garyStage">
+                <svg class="gary-svg" viewBox="0 0 320 380" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <g id="snailBase">
+                            <circle cx="150" cy="195" r="100" />
+                            <ellipse cx="150" cy="90" rx="16" ry="20" />
+                            <ellipse cx="170" cy="265" rx="85" ry="55" />
+                            <ellipse cx="160" cy="310" rx="130" ry="50" />
+                            <ellipse cx="270" cy="280" rx="42" ry="34" />
+                            <path d="M255,255 Q245,190 233,150" stroke-width="15" fill="none" stroke-linecap="round" />
+                            <path d="M285,255 Q298,185 302,145" stroke-width="15" fill="none" stroke-linecap="round" />
+                            <circle cx="233" cy="148" r="17" />
+                            <circle cx="302" cy="143" r="18" />
+                        </g>
+                        <mask id="snailMask">
+                            <use href="#snailBase" fill="#fff" stroke="#fff" />
+                        </mask>
+                        <linearGradient id="fillGradient" x1="0" y1="1" x2="0.15" y2="0">
+                            <stop offset="0%" stop-color="#ff7a3d" />
+                            <stop offset="55%" stop-color="#ffb43d" />
+                            <stop offset="100%" stop-color="#ffe66b" />
+                        </linearGradient>
+                    </defs>
+
+                    <use href="#snailBase" fill="#3a2a63" stroke="none" opacity="0.55" />
+
+                    <g mask="url(#snailMask)">
+                        <rect id="fillRect" x="0" y="360" width="320" height="0" fill="url(#fillGradient)" />
+                        <rect id="fillWave" x="0" y="360" width="320" height="6" fill="#fff" opacity="0.35" />
+                    </g>
+
+                    <use href="#snailBase" fill="none" stroke="#f4f1ff" stroke-width="4" opacity="0.85" />
+
+                    <g fill="none" stroke="#f4f1ff" stroke-width="2.5" opacity="0.5">
+                        <path d="M150,120 a75,75 0 0 1 60,55" />
+                        <path d="M150,145 a50,50 0 0 1 40,38" />
+                        <path d="M150,168 a26,26 0 0 1 22,20" />
+                    </g>
+
+                    <circle cx="233" cy="148" r="6" fill="#1a0b3d" />
+                    <circle cx="302" cy="143" r="6.5" fill="#1a0b3d" />
+                    <circle cx="230" cy="145" r="2" fill="#fff" />
+                    <circle cx="299" cy="140" r="2" fill="#fff" />
+                    <path d="M262,300 q10,10 22,0" stroke="#1a0b3d" stroke-width="4" fill="none" stroke-linecap="round" />
+                </svg>
+                <p class="goal-msg" id="goalMsg"></p>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat">
+                    <div class="num" id="statLogged">0</div>
+                    <div class="lbl">Logged</div>
+                </div>
+                <div class="stat">
+                    <div class="num" id="statRemaining">85</div>
+                    <div class="lbl">To go</div>
+                </div>
+                <div class="stat">
+                    <div class="num" id="statPerDay">0</div>
+                    <div class="lbl">Hrs/day</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="logForm">
+            <h2>Log a job 💼</h2>
+            <form id="jobForm" novalidate>
+                <div class="field">
+                    <label for="jobDesc">Description (optional)</label>
+                    <input type="text" id="jobDesc" maxlength="60" placeholder="e.g. Johnson kitchen remodel">
+                </div>
+                <div class="field">
+                    <label for="jobHours">Hours (required)</label>
+                    <input type="number" id="jobHours" inputmode="decimal" step="0.25" min="0.25" max="24"
+                        placeholder="0">
+                    <div class="chips">
+                        <div class="chip" data-val="2">+2</div>
+                        <div class="chip" data-val="4">+4</div>
+                        <div class="chip" data-val="6">+6</div>
+                        <div class="chip" data-val="8">+8</div>
+                    </div>
+                </div>
+                <p class="error-msg" id="formError"></p>
+                <button type="submit" class="submit-btn">🐌 Log Hours</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>This period's log</h2>
+            <div id="logList"></div>
+            <p class="empty-state" id="emptyState" style="display:none;">No hours logged yet this period &mdash; get
+                out there!</p>
+        </div>
+
+        <div class="card">
+            <details class="past">
+                <summary>📜 Past pay periods</summary>
+                <div id="pastList" style="margin-top:10px;"></div>
+            </details>
+        </div>
+
+        <footer class="page-footer">Built for the Gary fund &middot; goal: 85 hrs / pay period</footer>
+    </div>
+
+    <script>
+        // ---------- Config ----------
+        var GOAL_HOURS = 85;
+        // Anchor reset date: Aug 25, 2026 00:00 local time. Periods are 14 days,
+        // tiled forward/backward from this anchor, so the period always ends the
+        // 24th and resets the 25th, then every two weeks after.
+        var PERIOD_ANCHOR = new Date(2026, 7, 25, 0, 0, 0, 0).getTime();
+        var PERIOD_MS = 14 * 24 * 60 * 60 * 1000;
+        var API_BASE = '/api/gary/log';
+        var POLL_MS = 8000; // everyone sees everyone else's entries roughly this often
+
+        // ---------- Server storage (shared by everyone) ----------
+        var entries = [];
+
+        function fetchEntries() {
+            return fetch(API_BASE)
+                .then(function (r) { return r.json(); })
+                .then(function (data) { entries = data; })
+                .catch(function () { /* keep showing last known entries on a blip */ });
+        }
+        function postEntry(description, hours) {
+            return fetch(API_BASE, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ description: description, hours: hours })
+            }).then(function (r) {
+                if (!r.ok) throw new Error('failed to save');
+                return r.json();
+            });
+        }
+        function deleteEntry(id) {
+            return fetch(API_BASE + '/' + encodeURIComponent(id), { method: 'DELETE' });
+        }
+
+        // ---------- Period math ----------
+        function periodStart(ts) {
+            var n = Math.floor((ts - PERIOD_ANCHOR) / PERIOD_MS);
+            return PERIOD_ANCHOR + n * PERIOD_MS;
+        }
+        function fmtDate(ts) {
+            return new Date(ts).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+        }
+        function fmtHrs(n) {
+            var r = Math.round(n * 100) / 100;
+            return r.toString();
+        }
+
+        // ---------- Sparkles ----------
+        (function makeSparkles() {
+            var layer = document.getElementById('sparkleLayer');
+            var n = 22;
+            for (var i = 0; i < n; i++) {
+                var s = document.createElement('div');
+                s.className = 'sparkle';
+                var size = 2 + Math.random() * 3;
+                s.style.width = size + 'px';
+                s.style.height = size + 'px';
+                s.style.left = Math.random() * 100 + 'vw';
+                s.style.top = Math.random() * 100 + 'vh';
+                s.style.setProperty('--peak', (0.4 + Math.random() * 0.5).toFixed(2));
+                s.style.animationDuration = (2.5 + Math.random() * 4) + 's';
+                s.style.animationDelay = (Math.random() * 5) + 's';
+                layer.appendChild(s);
+            }
+        })();
+
+        // ---------- Confetti ----------
+        function burstConfetti(count) {
+            var layer = document.getElementById('confettiLayer');
+            var colors = ['#ff7a3d', '#ffb43d', '#ff3fd8', '#38f6ff', '#ffe66b'];
+            for (var i = 0; i < count; i++) {
+                var p = document.createElement('div');
+                p.className = 'confetti-piece';
+                var w = 6 + Math.random() * 6;
+                p.style.width = w + 'px';
+                p.style.height = (w * 0.4) + 'px';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.background = colors[Math.floor(Math.random() * colors.length)];
+                var dur = 2.2 + Math.random() * 1.6;
+                p.style.animationDuration = dur + 's';
+                p.style.animationDelay = (Math.random() * 0.4) + 's';
+                layer.appendChild(p);
+                (function (el, ms) {
+                    setTimeout(function () { el.remove(); }, ms);
+                })(p, (dur + 0.5) * 1000);
+            }
+        }
+
+        // ---------- Gary fill ----------
+        var FILL_TOP = 70, FILL_BOTTOM = 360;
+        var FILL_RANGE = FILL_BOTTOM - FILL_TOP;
+        function setFill(percent) {
+            var filledHeight = FILL_RANGE * (percent / 100);
+            var y = FILL_BOTTOM - filledHeight;
+            document.getElementById('fillRect').setAttribute('y', y);
+            document.getElementById('fillRect').setAttribute('height', filledHeight);
+            document.getElementById('fillWave').setAttribute('y', y - 3);
+        }
+
+        // ---------- Render ----------
+        var wasComplete = false;
+        function render() {
+            var now = Date.now();
+            var pStart = periodStart(now);
+            var pEnd = pStart + PERIOD_MS;
+
+            var current = entries.filter(function (e) { return e.ts >= pStart && e.ts < pEnd; });
+            current.sort(function (a, b) { return b.ts - a.ts; });
+
+            var total = current.reduce(function (sum, e) { return sum + e.hours; }, 0);
+            var percent = Math.min(100, (total / GOAL_HOURS) * 100);
+
+            document.getElementById('periodRange').textContent =
+                fmtDate(pStart) + ' – ' + fmtDate(pEnd - 1);
+
+            var startOfToday = new Date(new Date(now).getFullYear(), new Date(now).getMonth(), new Date(now).getDate()).getTime();
+            var daysLeft = Math.max(1, Math.round((pEnd - startOfToday) / 86400000));
+            document.getElementById('resetIn').textContent =
+                daysLeft === 1 ? 'Resets tomorrow' : 'Resets in ' + daysLeft + ' days';
+
+            document.getElementById('barInner').style.width = percent + '%';
+            document.getElementById('pctText').textContent = Math.floor(percent) + '%';
+            document.getElementById('hrsText').textContent = fmtHrs(total) + ' / ' + GOAL_HOURS + ' hrs';
+
+            setFill(percent);
+
+            var remaining = Math.max(0, GOAL_HOURS - total);
+            document.getElementById('statLogged').textContent = fmtHrs(total);
+            document.getElementById('statRemaining').textContent = fmtHrs(remaining);
+            document.getElementById('statPerDay').textContent = remaining > 0 ? fmtHrs(remaining / daysLeft) : '0';
+
+            var stage = document.getElementById('garyStage');
+            var msg = document.getElementById('goalMsg');
+            if (percent >= 100) {
+                stage.classList.add('celebrate');
+                msg.textContent = 'GARY IS OURS! 🎉🐌';
+                if (!wasComplete) {
+                    burstConfetti(90);
+                }
+                wasComplete = true;
+            } else {
+                stage.classList.remove('celebrate');
+                wasComplete = false;
+                if (percent >= 75) msg.textContent = 'So close — keep grinding!';
+                else if (percent >= 40) msg.textContent = 'Gary’s taking shape!';
+                else if (percent > 0) msg.textContent = 'Every hour counts.';
+                else msg.textContent = 'Log your first job of the period!';
+            }
+
+            renderLogList(current);
+            renderPastPeriods(pStart);
+        }
+
+        function renderLogList(current) {
+            var list = document.getElementById('logList');
+            var empty = document.getElementById('emptyState');
+            list.innerHTML = '';
+            if (current.length === 0) {
+                empty.style.display = 'block';
+                return;
+            }
+            empty.style.display = 'none';
+            current.forEach(function (e) {
+                var row = document.createElement('div');
+                row.className = 'log-item';
+
+                var badge = document.createElement('div');
+                badge.className = 'log-badge';
+                badge.textContent = fmtHrs(e.hours);
+
+                var info = document.createElement('div');
+                info.className = 'log-info';
+                var desc = document.createElement('div');
+                desc.className = 'log-desc';
+                desc.textContent = e.description && e.description.trim() ? e.description.trim() : 'Job';
+                var time = document.createElement('div');
+                time.className = 'log-time';
+                time.textContent = new Date(e.ts).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+                info.appendChild(desc);
+                info.appendChild(time);
+
+                var del = document.createElement('button');
+                del.className = 'log-del';
+                del.type = 'button';
+                del.setAttribute('aria-label', 'Delete entry');
+                del.textContent = '✖';
+                del.addEventListener('click', function () {
+                    if (confirm('Delete this ' + fmtHrs(e.hours) + ' hr entry?')) {
+                        entries = entries.filter(function (x) { return x.id !== e.id; });
+                        render();
+                        deleteEntry(e.id).then(fetchEntries).then(render);
+                    }
+                });
+
+                row.appendChild(badge);
+                row.appendChild(info);
+                row.appendChild(del);
+                list.appendChild(row);
+            });
+        }
+
+        function renderPastPeriods(currentStart) {
+            var groups = {};
+            entries.forEach(function (e) {
+                var s = periodStart(e.ts);
+                if (s === currentStart) return;
+                groups[s] = (groups[s] || 0) + e.hours;
+            });
+            var keys = Object.keys(groups).map(Number).sort(function (a, b) { return b - a; });
+            var container = document.getElementById('pastList');
+            container.innerHTML = '';
+            if (keys.length === 0) {
+                var p = document.createElement('p');
+                p.className = 'empty-state';
+                p.style.padding = '4px 0 0';
+                p.textContent = 'No past periods yet.';
+                container.appendChild(p);
+                return;
+            }
+            keys.forEach(function (s) {
+                var row = document.createElement('div');
+                row.className = 'past-row';
+                var label = document.createElement('span');
+                label.textContent = fmtDate(s) + ' – ' + fmtDate(s + PERIOD_MS - 1);
+                var hrs = document.createElement('span');
+                hrs.textContent = fmtHrs(groups[s]) + ' hrs' + (groups[s] >= GOAL_HOURS ? ' ✅' : '');
+                row.appendChild(label);
+                row.appendChild(hrs);
+                container.appendChild(row);
+            });
+        }
+
+        // ---------- Form ----------
+        document.getElementById('jobForm').addEventListener('submit', function (ev) {
+            ev.preventDefault();
+            var descEl = document.getElementById('jobDesc');
+            var hoursEl = document.getElementById('jobHours');
+            var errEl = document.getElementById('formError');
+            var hours = parseFloat(hoursEl.value);
+
+            if (!hours || hours <= 0) {
+                errEl.textContent = 'Enter a valid number of hours to log.';
+                hoursEl.focus();
+                return;
+            }
+            errEl.textContent = '';
+
+            var submitBtn = ev.target.querySelector('.submit-btn');
+            submitBtn.disabled = true;
+            postEntry(descEl.value, hours)
+                .then(function () { return fetchEntries(); })
+                .then(function () {
+                    descEl.value = '';
+                    hoursEl.value = '';
+                    if (navigator.vibrate) navigator.vibrate(30);
+                    burstConfetti(24);
+                    render();
+                })
+                .catch(function () {
+                    errEl.textContent = 'Could not save that — check your connection and try again.';
+                })
+                .finally(function () {
+                    submitBtn.disabled = false;
+                });
+        });
+
+        document.querySelectorAll('.chip').forEach(function (chip) {
+            chip.addEventListener('click', function () {
+                document.getElementById('jobHours').value = chip.getAttribute('data-val');
+                document.getElementById('jobHours').focus();
+            });
+        });
+
+        fetchEntries().then(render);
+        setInterval(function () { fetchEntries().then(render); }, POLL_MS);
+    </script>
+</body>
+
+</html>

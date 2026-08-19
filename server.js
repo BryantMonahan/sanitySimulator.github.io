@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
+app.use(express.json())
 require('dotenv').config();
 const fs = require('fs')
 const { Buffer } = require('buffer')
@@ -9,7 +10,48 @@ const XLSX = require('xlsx')
 const cron = require('node-cron')
 const path = require('path');
 
+// ---- Gary fund log: shared, server-side, no-frills JSON store ----
+const GARY_LOG_FILE = path.join(__dirname, 'garyLog.json')
 
+function readGaryLog() {
+    try {
+        return JSON.parse(fs.readFileSync(GARY_LOG_FILE, 'utf8'))
+    } catch (err) {
+        return []
+    }
+}
+
+function writeGaryLog(entries) {
+    fs.writeFileSync(GARY_LOG_FILE, JSON.stringify(entries))
+}
+
+app.get('/api/gary/log', (req, res) => {
+    res.json(readGaryLog())
+})
+
+app.post('/api/gary/log', (req, res) => {
+    const hours = Number(req.body && req.body.hours)
+    if (!hours || hours <= 0) {
+        return res.status(400).json({ error: 'hours must be a positive number' })
+    }
+    const description = typeof (req.body && req.body.description) === 'string' ? req.body.description.slice(0, 60) : ''
+    const entry = {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+        description,
+        hours,
+        ts: Date.now()
+    }
+    const entries = readGaryLog()
+    entries.push(entry)
+    writeGaryLog(entries)
+    res.json(entry)
+})
+
+app.delete('/api/gary/log/:id', (req, res) => {
+    const entries = readGaryLog().filter(e => e.id !== req.params.id)
+    writeGaryLog(entries)
+    res.json({ ok: true })
+})
 
 async function getHomeAff() {
     try {
