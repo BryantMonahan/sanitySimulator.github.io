@@ -19,11 +19,22 @@
     <!-- <link rel="icon" type="images/png" href="images/logo.png"> -->
 
     <style>
+        html {
+            min-height: 100%;
+        }
+
         body {
             font-family: 'Work Sans', Verdana, Geneva, Tahoma, sans-serif;
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fb 50%, #f1f2f6 100%);
             color: #111;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             margin: 0;
+        }
+
+        main {
+            flex: 1 0 auto;
         }
     </style>
 </head>
@@ -34,7 +45,7 @@
         <p class="text-gray-700 text-lg mt-2">Empowering your journey to financial freedom</p>
     </header>
 
-    <main class="max-w-6xl mx-auto px-6 py-14">
+    <main class="w-full max-w-6xl mx-auto px-6 py-14">
         <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
 
             <a href="mortgage">
